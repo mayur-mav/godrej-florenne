@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 520" fill="none">
+  <rect width="760" height="520" rx="8" fill="#F7F6F1"/>
+  <path d="M92 70h576v378H92z" fill="#fffefa" stroke="#314C3D" stroke-width="8"/>
+  <path d="M92 260h205v188H92zM297 70v378M297 260h185v188M482 70v378M482 260h186" stroke="#314C3D" stroke-width="6"/>
+  <path d="M92 70h205v190H92zM482 70h186v190H482z" fill="#E9EBE3" stroke="#314C3D" stroke-width="6"/>
+  <path d="M297 70h185v190H297zM482 260h186v188H482z" fill="#DFE5DA" stroke="#314C3D" stroke-width="6"/>
+  <path d="M195 70v190M390 260v188M575 70v190" stroke="#314C3D" stroke-width="4"/>
+  <path d="M92 356h102M389 70v82M575 354h93M297 165h76M510 260h75" stroke="#B9AE8B" stroke-width="5"/>
+  <g fill="#314C3D" font-family="Arial,sans-serif" font-size="16" letter-spacing="2">
+    <text x="125" y="168">BEDROOM</text><text x="510" y="168">BEDROOM</text>
+    <text x="330" y="177">LIVING</text><text x="130" y="362">KITCHEN</text>
+    <text x="335" y="355">DINING</text><text x="520" y="365">FLEX SPACE</text>
+  </g>
+  <text x="380" y="490" text-anchor="middle" fill="#777E74" font-family="Arial,sans-serif" font-size="12" letter-spacing="2">ILLUSTRATIVE LAYOUT · NOT TO SCALE</text>
+</svg>
