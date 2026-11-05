@@ -3,16 +3,16 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#263a31">
-    <meta name="description" content="Explore Godrej Florenne, a considered collection of homes in Bengaluru. Request current project details, plans, pricing and availability.">
+    <meta name="theme-color" content="#0e325a">
+    <meta name="description" content="Explore Godrej Florenne, luxury French-inspired four-level row houses off Soukya Road, Whitefield by Hafeez Contractor. Request current price list, floor plans and site visit.">
     <title>Godrej Florenne Bengaluru | Homes, Plans &amp; Amenities</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="preload" as="image" href="assets/hero-apartments.webp">
-    <link rel="stylesheet" href="styles.css?v=2.4">
+    <link rel="preload" as="image" href="assets/villa-hero.webp">
+    <link rel="stylesheet" href="styles.css?v=3.5">
     <script src="data.js" defer></script>
-    <script src="script.js" defer></script>
+    <script src="script.js?v=3.5" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -24,9 +24,6 @@
             <span class="brand-subtitle">OFF SOUKYA ROAD · WHITEFIELD, BENGALURU</span>
           </div>
         </a>
-        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">
-          <span class="sr-only">Open menu</span><span></span><span></span>
-        </button>
         <nav class="primary-nav" id="primary-nav" aria-label="Main navigation">
           <a href="#pricing">Price</a>
           <a href="#residences">Floor Plans</a>
@@ -37,17 +34,22 @@
             <svg class="phone-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
             <span>+91 93423 33197</span>
           </a>
-          <a class="button button-gold-pill nav-cta" href="#hero-enquiry">
+        </nav>
+        <div class="nav-actions">
+          <a class="button button-gold-pill nav-cta" href="#hero-enquiry" data-scroll-enquire>
             <span>Get Price List</span>
             <span class="nav-arrow-circle" aria-hidden="true">&rarr;</span>
           </a>
-        </nav>
+          <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Toggle navigation">
+            <span class="sr-only">Open menu</span><span></span><span></span>
+          </button>
+        </div>
       </div>
     </header>
 
     <main id="main">
       <section class="hero" aria-labelledby="hero-title">
-        <img class="hero-image" src="assets/godrej-florenne-hero.jpg" alt="Godrej Florenne luxury residences in Bengaluru" fetchpriority="high">
+        <img class="hero-image" src="assets/villa-hero.webp" alt="Godrej Florenne luxury French row house residences in Bengaluru" fetchpriority="high">
         <div class="hero-shade"></div>
         <div class="hero-content page-width">
           <div class="hero-copy">
@@ -178,7 +180,7 @@
           <div class="stat-col"><span class="stat-val">62%</span><span class="stat-lbl">OPEN &amp; GREEN</span></div>
           <div class="stat-col stat-col-brand">
             <span class="stat-val stat-val-brand">Godrej<br>Properties</span>
-            <span class="stat-lbl">DEVELOPER · SINCE 1990</span>
+            <span class="stat-lbl">DEVELOPER &middot; SINCE 1897</span>
           </div>
         </div>
       </section>
@@ -189,13 +191,7 @@
           <div class="project-intro-grid">
             <div class="project-intro-copy">
               <h2 class="project-intro-headline">
-                Godrej Florenne is a new residential<br class="desktop-br">
-                community by <strong>Godrej Properties</strong> off<br class="desktop-br">
-                <strong>Soukya Road, Whitefield</strong>, in the<br class="desktop-br">
-                high-growth corridor of East Bengaluru:<br class="desktop-br">
-                4 and 5 BHK four-level row houses<br class="desktop-br">
-                across 242 private residences, planned<br class="desktop-br">
-                around a central landscape.
+                Godrej Florenne is a new residential community by <strong>Godrej Properties</strong> off <strong>Soukya Road, Whitefield</strong>, in the high-growth corridor of East Bengaluru: 4 and 5 BHK four-level row houses across 242 private residences, planned around a central landscape.
               </h2>
               <p>
                 The developer describes it as a garden sanctuary away from the city. Of the 20 acres, about <strong>three-fifths stays green (62% dedicated open landscape)</strong>, with a grand central landscape as the community's green lung, a centrally placed resort swimming pool, pocket gardens, celebration lawns, sports courts, walking trails and an outdoor gym around it.
@@ -203,24 +199,61 @@
               <p>
                 These are efficiently planned homes from 3,725 sq ft to 5,524 sq ft, made for young leaders, CXOs and multi-generational families who want a <strong>smart, well-connected base near Whitefield's tech corridor</strong>, inside a gated community with the privacy and amenities of a Godrej address.
               </p>
-              <a class="button button-gold-pill overview-cta" href="#pricing">
-                <span>Find Your Home Here</span>
-                <span class="nav-arrow-circle" aria-hidden="true">&rarr;</span>
-              </a>
+
+              <!-- Luxury Château Highlights Badges -->
+              <div class="intro-chateau-badges">
+                <span class="intro-badge">✦ 20-Acre Private Enclave</span>
+                <span class="intro-badge">✦ Only 242 Row Houses</span>
+                <span class="intro-badge">✦ In-Home Private Elevators</span>
+                <span class="intro-badge">✦ 62% Open Garden Landscape</span>
+              </div>
+
+              <!-- High-Converting Lead Box -->
+              <div class="intro-lead-box">
+                <div class="intro-lead-pill">
+                  <span class="pill-sparkle">✦</span>
+                  <span>EXCLUSIVE LAUNCH ALLOCATION</span>
+                </div>
+                <h3 class="intro-lead-title">Request Official Cost Sheet &amp; Unit Plans</h3>
+                <p class="intro-lead-sub">Direct developer allocation with bank-approved payment plans and floor-by-floor Hafeez Contractor architectural drawings.</p>
+                <form class="intro-lead-form" id="intro-lead-form" data-enquiry-form="intro">
+                  <div class="intro-input-row">
+                    <div class="intro-tel-group">
+                      <span class="intro-tel-prefix">+91</span>
+                      <input type="tel" name="phone" class="intro-tel-input" placeholder="Enter WhatsApp Number" pattern="[0-9]{10}" maxlength="10" required aria-label="Enter 10-digit WhatsApp Number">
+                    </div>
+                    <button class="button-intro-lead" type="submit">
+                      <span>Get on WhatsApp</span>
+                      <span class="nav-arrow-circle" aria-hidden="true">&rarr;</span>
+                    </button>
+                  </div>
+                  <div class="intro-lead-actions-row">
+                    <button type="button" class="intro-pdf-download-btn" data-scroll-enquire>
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                      <span>Download Brochure PDF</span>
+                    </button>
+                    <span class="intro-lead-trust">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#c59b4e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                      Direct Developer Pricing &middot; Zero Brokerage
+                    </span>
+                  </div>
+                  <div class="form-feedback" aria-live="polite"></div>
+                </form>
+              </div>
             </div>
 
             <div class="project-specs-card">
-              <div class="specs-card-topbar">
-                <span class="specs-card-heading">PROJECT SPECIFICATIONS &amp; SCALE</span>
-                <span class="specs-rera-tag">KARNATAKA RERA REGISTERED</span>
+              <div class="specs-card-header">
+                <span class="specs-header-title">KEY PROJECT SPECIFICATIONS</span>
+                <span class="specs-header-badge">RERA ON RECORD</span>
               </div>
               <div class="spec-row">
                 <div class="spec-label">PROJECT</div>
-                <div class="spec-value">Godrej Florenne, Muddenahalli / Hemmandahalli, Off Soukya Road, Whitefield, Bangalore, Karnataka 560067</div>
+                <div class="spec-value">Godrej Florenne, Muddenahalli / Hemmandahalli, Off Soukya Road, Whitefield, Bangalore 560067</div>
               </div>
               <div class="spec-row">
                 <div class="spec-label">DEVELOPER</div>
-                <div class="spec-value">Godrej Properties (promoter on record: Godrej Properties Limited · Master Architect: Hafeez Contractor)</div>
+                <div class="spec-value">Godrej Properties Limited &middot; Master Architect: Hafeez Contractor</div>
               </div>
               <div class="spec-row">
                 <div class="spec-label">CONFIGURATIONS</div>
@@ -228,33 +261,34 @@
               </div>
               <div class="spec-row">
                 <div class="spec-label">LAND &amp; SCALE</div>
-                <div class="spec-value">20 acres · 242 elite row houses · G + 3 · 62% green</div>
+                <div class="spec-value">20 acres &middot; 242 elite row houses &middot; G + 3 &middot; 62% green landscape</div>
               </div>
               <div class="spec-row">
                 <div class="spec-label">SALEABLE AREA</div>
                 <div class="spec-value">3,725 to 5,524 sq ft (RERA Carpet: 2,417 to 3,656 sq ft)</div>
               </div>
-              <div class="spec-row">
+              <div class="spec-row spec-row-price">
                 <div class="spec-label">PRICE</div>
-                <div class="spec-value"><strong class="price-highlight-gold">From ₹5.40 Cr*</strong> · configuration-wise on request</div>
+                <div class="spec-value">
+                  <span class="spec-price-strong">From ₹5.40 Cr*</span>
+                  <button class="spec-quote-btn" type="button" data-scroll-enquire>Get Price List &rarr;</button>
+                </div>
               </div>
               <div class="spec-row">
                 <div class="spec-label">STATUS</div>
-                <div class="spec-value">New launch · possession timeline on enquiry</div>
+                <div class="spec-value">New Launch &middot; Phase 1 (Sep 2030) / Phase 2 (Sep 2031)</div>
               </div>
               <div class="spec-row spec-row-rera">
                 <div class="spec-label">K-RERA NO.</div>
                 <div class="spec-value rera-value">
-                  <span class="rera-pill">Phase 1: PRM/KA/RERA/1250/304/PR/150926/008942</span>
-                  <span class="rera-pill">Phase 2: PRM/KA/RERA/1250/304/PR/150926/008943</span>
+                  <span>Phase 1: PRM/KA/RERA/1250/304/PR/150926/008942</span><br>
+                  <span>Phase 2: PRM/KA/RERA/1250/304/PR/150926/008943</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </section>
-
-      <div class="section-divider-wrap" aria-hidden="true"><hr class="section-divider"></div>
 
       <!-- Section 3: Detailed Project Overview with Highlights & Interactive Carousel (Exact match to Reference) -->
       <section class="section project-detail-section" id="the-project">
@@ -308,7 +342,7 @@
             <div class="overview-showcase">
               <figure class="overview-image-frame reveal">
                 <div class="showcase-stage">
-                  <img id="gallery-image" src="assets/godrej-florenne-hero.jpg" alt="Four-level European French Renaissance row house architecture by Hafeez Contractor at Godrej Florenne" loading="lazy" decoding="async">
+                  <img id="gallery-image" src="assets/rowhouses-front.webp" alt="Four-level European French Renaissance row house architecture by Hafeez Contractor at Godrej Florenne" loading="lazy" decoding="async">
                   <button class="circle-button showcase-nav showcase-prev" id="gallery-prev" type="button" aria-label="Previous image">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
                   </button>
@@ -322,8 +356,6 @@
           </div>
         </div>
       </section>
-
-      <div class="section-divider-wrap" aria-hidden="true"><hr class="section-divider"></div>
 
       <!-- Section 4: E-Brochure Download (Exact match to Reference) -->
       <section class="section brochure-section" id="brochure">
@@ -343,13 +375,13 @@
           </div>
           <div class="brochure-art reveal" aria-label="Official Godrej Florenne brochure and master plan presentation">
             <div class="brochure-stage-wrapper">
-              <img class="brochure-stage-bg" src="assets/garden.webp" alt="Godrej Florenne landscaped campus background" loading="lazy" decoding="async">
+              <img class="brochure-stage-bg" src="assets/brochure-map.webp" alt="Godrej Florenne landscaped campus background" loading="lazy" decoding="async">
               <div class="brochure-stage-overlay"></div>
 
               <!-- Master Plan Sheet Underlay (angled bottom-right) -->
               <div class="brochure-sheet-underlay">
                 <div class="sheet-plan-graphic">
-                  <img src="assets/master-plan.svg" alt="Godrej Florenne master layout plan" loading="lazy" decoding="async">
+                  <img src="assets/site-layout.webp" alt="Godrej Florenne master layout plan" loading="lazy" decoding="async">
                 </div>
                 <div class="sheet-legend-col">
                   <div class="sheet-legend-title">LEGEND</div>
@@ -385,236 +417,458 @@
         </div>
       </section>
 
-      <div class="section-divider-wrap" aria-hidden="true"><hr class="section-divider"></div>
-
+      <!-- Section 5: Pricing Matrix (Exact match to Reference) -->
       <section class="section pricing-section" id="pricing">
         <div class="page-width">
-          <div class="section-heading section-heading-row reveal">
-            <div>
-              <div class="section-kicker"><span>— OFFICIAL LAUNCH PRICING —</span></div>
-              <p class="eyebrow">Direct Developer Allocation</p>
-              <h2>Indicative Pricing &amp;<br><em>Row House Configurations</em></h2>
-            </div>
-            <p class="section-intro">Official pre-launch release for 242 elite French-inspired row houses across 20 acres. Transparent pricing with comprehensive cost sheet breakdown and bespoke milestone payment plans available upon request.</p>
+          <div class="pricing-header-block reveal">
+            <div class="section-kicker"><span>— INVESTMENT —</span></div>
+            <h2 class="pricing-heading-title">Godrej Florenne <em>Price List 2026</em></h2>
+            <p class="pricing-lead-text">
+              Godrej Florenne row house prices start from ₹5.40 Cr* for the 4 BHK Optima. Four luxury configurations from 3,725 to 5,524 sq ft saleable; configuration-wise pricing depends on plot size, typology (Optima, Premia, Luxe) and corner orientation and is shared on request. Ask for today's cost sheet and the launch availability.
+            </p>
           </div>
-          <div class="price-table-wrap">
-            <div class="price-table-heading">
-              <span>Typology &amp; Architecture</span>
-              <span>Super Built-Up Area</span>
-              <span>RERA Carpet Area</span>
-              <span>Indicative Price</span>
-              <span>Official Cost Sheet</span>
+
+          <div class="pricing-table-card reveal">
+            <div class="pricing-table-header">
+              <span class="col-head col-config">CONFIGURATION</span>
+              <span class="col-head col-area">SALEABLE AREA</span>
+              <span class="col-head col-price">STARTING PRICE*</span>
+              <span class="col-head col-cta">LAUNCH PRICE</span>
             </div>
-            <div id="price-rows"></div>
+            <div class="pricing-table-body" id="price-rows"></div>
           </div>
-          <div class="pricing-foot">
-            <p>✦ All prices are indicative pre-launch figures. Karnataka RERA registered. Stamp duty, registration &amp; GST applicable as per norms.</p>
-            <button class="button button-gold-pill" type="button" data-scroll-enquire>
-              <span>Download Complete Cost Sheet</span>
-              <span class="nav-arrow-circle" aria-hidden="true">&rarr;</span>
+
+          <p class="pricing-disclaimer reveal">
+            *Starting price as per the developer's price sheet. Subject to change and availability. Saleable areas are from the developer's unit plan set; the RERA carpet area of each unit is smaller and is shown on the plans below. Areas remain subject to receipt of approvals and NOCs.
+          </p>
+
+          <div class="payment-plan-strip reveal">
+            <span class="payment-plan-badge">PAYMENT PLAN</span>
+            <span class="payment-plan-text">Ask for the current payment schedule and the approved-bank list. Home loan assistance is arranged with leading lenders.</span>
+          </div>
+
+          <div class="pricing-cta-wrap reveal">
+            <button class="button-complete-costing" type="button" data-scroll-enquire>
+              <span>Request Complete Costing Details</span>
+              <span class="cta-arrow-circle" aria-hidden="true">&rarr;</span>
             </button>
           </div>
         </div>
       </section>
 
-      <div class="section-divider-wrap" aria-hidden="true"><hr class="section-divider"></div>
-
-      <section class="section homes-section" id="residences">
+      <!-- Section 6: Location & Connectivity (Exact match to Reference Images 7 & 8) -->
+      <section class="section neighbourhood-section" id="location">
         <div class="page-width">
-          <div class="section-heading section-heading-row reveal">
-            <div><div class="section-kicker"><span>04</span> Homes</div><p class="eyebrow">Find your fit</p><h2>Room for the life<br><em>you’re building.</em></h2></div>
-            <p class="section-intro">Explore a collection of homes designed to make the everyday feel considered. Ask the team for approved floor plans and specifications.</p>
+          <div class="neighbourhood-header-block reveal">
+            <div class="section-kicker"><span>— NEIGHBOURHOOD —</span></div>
+            <h2 class="neighbourhood-heading-title">Location &amp; Connectivity,<br><em>Soukya Road, Whitefield</em></h2>
+            <p class="neighbourhood-lead-text">
+              Godrej Florenne is at Muddenahalli / Hemmandahalli, off Soukya Road, just 1 km from the Satellite Town Ring Road (NH 648) in East Bengaluru. It is the airport and tech side of East Bangalore: Kempegowda International Airport is smoothly accessible via STRR, Whitefield Railway Station and Kadugodi Tree Park Metro are a short 10-minute drive, and the ITPL and EPIP tech corridors are next door.
+            </p>
           </div>
-          <div class="residence-grid" id="residence-cards"></div>
-          <p class="disclaimer">Layouts and home details shown here are illustrative. Request official plans for the current options.</p>
-          <div class="floorplan-explorer">
-            <div class="floorplan-heading"><div><p class="eyebrow">Floor plans</p><h3>Choose a configuration <em>to explore.</em></h3></div><p>Tap a home type to explore an illustrative layout and request current official plans.</p></div>
-            <div class="floorplan-tabs" id="floorplan-tabs" role="tablist" aria-label="Home configurations"></div>
-            <div class="floorplan-panel" id="floorplan-panel" role="tabpanel"></div>
-          </div>
-        </div>
-      </section>
 
-      <section class="section amenities-section" id="life">
-        <div class="page-width">
-          <div class="section-heading reveal">
-            <div class="section-kicker"><span>05</span> Life at Florenne</div>
-            <p class="eyebrow">Space for your everyday</p>
-            <h2>More room to live.<br><em>More ways to unwind.</em></h2>
-            <p class="lead">Explore community spaces designed for time together, movement and a little breathing room. Confirm current amenities with the project team.</p>
-          </div>
-          <div class="amenity-hero reveal">
-            <img id="amenity-image" src="assets/pool.webp" alt="A calm poolside retreat framed by landscaped greenery" loading="lazy" decoding="async">
-            <span id="amenity-caption">The poolside · illustrative</span>
-            <div class="amenity-controls">
-              <button class="circle-button" id="amenity-prev" type="button" aria-label="Previous amenity image">←</button>
-              <span class="gallery-count" id="amenity-count">02 / 04</span>
-              <button class="circle-button" id="amenity-next" type="button" aria-label="Next amenity image">→</button>
+          <div class="neighbourhood-grid">
+            <div class="location-cards-col reveal" id="location-cards"></div>
+
+            <div class="location-visual-col reveal">
+              <div class="location-map-frame">
+                <img src="assets/location-map.webp" alt="Godrej Florenne Soukya Road Whitefield location map" loading="lazy" decoding="async">
+                <div class="map-caption">LOCATION MAP FROM THE DEVELOPER'S BROCHURE · NOT TO SCALE</div>
+              </div>
+
+              <div class="location-highlights-list" id="location-highlights"></div>
+
+              <div class="location-gmap-wrap">
+                <iframe class="location-gmap" src="https://maps.google.com/maps?q=Soukya+Road,+Whitefield,+Bengaluru&t=&z=13&ie=UTF8&iwloc=&output=embed" loading="lazy" title="Godrej Florenne Location Map" allowfullscreen></iframe>
+              </div>
             </div>
           </div>
-          <div class="amenity-grid" id="amenity-grid"></div>
-          <div class="amenity-groups" id="amenity-groups"></div>
+
+          <p class="location-disclaimer reveal">
+            DISTANCES WITH KILOMETRES WERE VERIFIED ON THE MAP IN SEPTEMBER 2026; THE OTHERS ARE APPROXIMATE DRIVE TIMES FROM THE PROJECT ENTRANCE IN NORMAL TRAFFIC.
+          </p>
         </div>
       </section>
 
-      <section class="section project-gallery-section" id="gallery">
-        <div class="page-width">
-          <div class="section-heading section-heading-row reveal">
-            <div><div class="section-kicker"><span>06</span> The project in pictures</div><p class="eyebrow">A glimpse of Florenne</p><h2>Imagine your<br><em>everyday here.</em></h2></div>
-            <p class="section-intro">Original lifestyle and architecture imagery, offered as inspiration. These are not official renders of Godrej Florenne.</p>
-          </div>
-          <div class="project-gallery-grid" id="project-gallery-grid"></div>
-          <p class="disclaimer">All images are illustrative and are not project-specific architectural renderings.</p>
+      <!-- Full-Width Landscape Photographic Banner (Exact match to Reference Image 9) -->
+      <section class="landscape-band" aria-label="Campus Greenery Feature">
+        <img class="landscape-banner-img" src="assets/tree-driveway.webp" alt="Godrej Florenne landscaped French row houses" loading="lazy" decoding="async">
+        <div class="landscape-shade"></div>
+        <div class="page-width landscape-copy reveal">
+          <h2>Three-fifths of it <em>stays green.</em></h2>
+          <p>A grand central landscape conceived as the community's green lung: the resort swimming pool at its heart, French parterre gardens, celebration lawns, sports courts, walking trails and an outdoor gym around it, with every private row house looking in on the view.</p>
         </div>
+        <span class="landscape-art-credit">ARTIST'S IMPRESSION</span>
       </section>
 
-      <section class="section neighbourhood-section" id="location">
-        <div class="page-width neighbourhood-grid">
-          <div class="neighbourhood-copy reveal">
-            <div class="section-kicker"><span>07</span> The neighbourhood</div>
-            <p class="eyebrow">Bengaluru, connected</p><h2>Close to the<br><em>things that matter.</em></h2>
-            <p class="section-intro">Explore Soukya Road, Whitefield and the wider city from a well-connected East Bengaluru address. Request the official location map and current connectivity details.</p>
-            <div class="location-list" id="location-list"></div>
-            <p class="disclaimer">Travel times vary by route and traffic. Location references are indicative.</p>
-          </div>
-          <div class="map-card reveal">
-            <img src="assets/neighbourhood.webp" alt="Tree-lined urban landscape" loading="lazy" decoding="async">
-            <div class="map-marker"><span>F</span><b>GODREJ<br>FLORENNE</b></div>
-            <span class="map-label map-label-one">Soukya Road</span><span class="map-label map-label-two">Whitefield</span>
-            <span class="image-credit">Illustrative neighbourhood image · not a map</span>
-          </div>
-        </div>
-      </section>
-
-      <section class="landscape-band">
-        <img src="assets/garden.webp" alt="Green landscaped garden" loading="lazy" decoding="async"><div class="landscape-shade"></div>
-        <div class="page-width landscape-copy"><p class="eyebrow eyebrow-light">A little more room to breathe</p><h2>Make space for<br><em>the everyday.</em></h2><p>Discover landscaped community spaces and a quieter rhythm close to the city.</p><span class="image-credit">Illustrative image</span></div>
-      </section>
-
+      <!-- Section 7: Launch Status & Approvals (Exact match to Reference Image 9) -->
       <section class="section approvals-section" id="construction">
         <div class="page-width">
-          <div class="section-heading centered reveal"><div class="section-kicker"><span>08</span> Project updates</div><p class="eyebrow">Details matter</p><h2>Current information,<br><em>straight from the team.</em></h2><p class="section-intro">Ask about current project status, approvals, construction updates and timelines. Verify all details with the developer.</p></div>
-          <div class="approval-grid" id="approval-grid"></div>
-          <div class="approval-note"><span aria-hidden="true">i</span><p>Project status, approvals and timelines are subject to change. Please verify current information with the developer.</p></div>
-          <button class="button button-primary approval-cta" type="button" data-scroll-enquire>Ask about project updates <span aria-hidden="true">↗</span></button>
+          <div class="approvals-header-block reveal">
+            <div class="section-kicker"><span>— ON RECORD —</span></div>
+            <h2 class="approvals-heading-title">Launch Status &amp;<br><em>Approvals</em></h2>
+            <p class="approvals-lead-text">
+              Godrej Florenne is a new launch. The facts below are taken from the Karnataka RERA record and official project sanctions, not from marketing material.
+            </p>
+          </div>
+
+          <div class="approval-grid reveal" id="approval-grid"></div>
+
+          <div class="approval-status-banner reveal">
+            <span class="status-info-icon" aria-hidden="true">&#9432;</span>
+            <p class="status-banner-text"><strong>Current status:</strong> enquire now for launch availability, the live construction stage and the possession timeline.</p>
+          </div>
+
+          <div class="approvals-cta-wrap reveal">
+            <button class="button-launch-details" type="button" data-scroll-enquire>
+              <span>Get Launch Details</span>
+              <span class="cta-arrow-circle" aria-hidden="true">&rarr;</span>
+            </button>
+          </div>
         </div>
       </section>
 
+      <!-- Section 8: Floor Plans & Unit Sizes (Exact match to Reference Images 1 & 2) -->
+      <section class="section floorplans-section" id="residences">
+        <div class="page-width">
+          <div class="floorplans-header-block reveal">
+            <div class="section-kicker"><span>— HOMES —</span></div>
+            <h2 class="floorplans-heading-title">Floor Plans &amp;<br class="mobile-br"><em>Unit Sizes</em></h2>
+            <p class="floorplans-lead-text">
+              Four four-level luxury row house configurations, all taken from the developer's official unit plan set: 4 BHK Optima at 3,725 sq ft, 4 BHK Premia at 4,061 sq ft, 4 BHK Luxe at 4,515 sq ft and 5 BHK Luxe at 5,524 sq ft. Figures are saleable areas for each typology; the RERA carpet area is shown alongside.
+            </p>
+          </div>
+
+          <div class="floorplans-tap-guide reveal">
+            <span>&rarr; TAP A CONFIGURATION TO SEE ITS PLAN &amp; SIZES</span>
+          </div>
+
+          <div class="floorplans-tabs-wrap reveal" id="floorplan-tabs" role="tablist" aria-label="Row house configurations"></div>
+
+          <div class="floorplan-showcase-panel reveal" id="floorplan-panel" role="tabpanel"></div>
+        </div>
+      </section>
+
+      <!-- Section 9: Amenities & Central Landscape (Exact match to Reference Images 1, 2 & 3) -->
+      <section class="section amenities-section" id="life">
+        <div class="page-width">
+          <div class="amenities-header-block reveal">
+            <div class="section-kicker"><span>— LIFE AT FLORENNE —</span></div>
+            <h2 class="amenities-heading-title">
+              Amenities, a central landscape and a<br><em>clubhouse of about 22,000 sq ft</em>
+            </h2>
+            <p class="amenities-lead-text">
+              The developer's master plan marks 20+ French-inspired landscape and wellness zones across the 20-acre enclave, from the resort swimming pool and parterre greens to a tennis court, badminton court and children's play arena. The central clubhouse of about 22,000 sq ft carries indoor sports, a gymnasium, spa and private screening lounge.
+            </p>
+          </div>
+
+          <!-- Photographic Carousel Frame (Image 2) -->
+          <div class="amenities-showcase-frame reveal">
+            <img class="amenities-carousel-img" id="amenity-image" src="assets/curved-clubhouse.webp" alt="Resort-style infinity pool framed by landscaped greenery at dusk" loading="lazy" decoding="async">
+            <button class="circle-button amenity-nav amenity-prev" id="amenity-prev" type="button" aria-label="Previous amenity image">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <button class="circle-button amenity-nav amenity-next" id="amenity-next" type="button" aria-label="Next amenity image">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+            <div class="amenity-slide-pill" id="amenity-caption">The Pool At Dusk</div>
+            <span class="amenity-art-credit">ARTIST'S IMPRESSION</span>
+          </div>
+
+          <!-- 3-Column Pill Cards Grid (Image 3) -->
+          <div class="amenities-groups-grid reveal" id="amenities-groups-grid"></div>
+        </div>
+      </section>
+
+      <!-- Section 10: The Project in Pictures (Exact match to Reference Images 1 & 2) -->
+      <section class="section project-gallery-section" id="gallery">
+        <div class="page-width">
+          <div class="gallery-header-block reveal">
+            <div class="section-kicker"><span>THE PROJECT IN PICTURES</span></div>
+            <h2 class="gallery-heading-title">Godrej Florenne <em>Gallery</em></h2>
+          </div>
+          <div class="project-gallery-grid reveal" id="project-gallery-grid"></div>
+        </div>
+      </section>
+
+      <!-- Section 11: Virtual Tour / Walkthrough (Exact match to Reference Images 1, 2 & 3) -->
       <section class="section virtual-tour-section" id="virtual-tour">
-        <div class="page-width virtual-tour-grid">
-          <div class="virtual-tour-copy reveal">
-            <div class="section-kicker"><span>09</span> Walk through</div>
-            <p class="eyebrow">A glimpse of the lifestyle</p>
-            <h2>Take a moment<br><em>to picture home.</em></h2>
-            <p class="section-intro">Watch an illustrative lifestyle film and imagine the little moments that make a place feel like yours.</p>
-            <button class="button button-primary" type="button" data-scroll-enquire>Ask about a project visit <span aria-hidden="true">↗</span></button>
+        <div class="page-width">
+          <div class="virtual-tour-header-block reveal">
+            <div class="section-kicker"><span>— WALKTHROUGH —</span></div>
+            <h2 class="virtual-tour-heading-title">Take a <em>Virtual Tour</em> of Godrej Florenne</h2>
+            <p class="virtual-tour-lead-text">
+              Tap play and share your name and number, and our Bengaluru sales desk takes you through the project on a live video call: the 242 row houses around the central park, the clubhouse and the landscape between them. The price list and floor plans reach you on WhatsApp in the same minute.
+            </p>
           </div>
-          <div class="virtual-tour-card reveal">
-            <img src="assets/pool.webp" alt="A calm poolside retreat framed by landscaped greenery" loading="lazy" decoding="async">
-            <button class="play-button" id="open-tour" type="button" aria-label="Play the illustrative lifestyle film"><span aria-hidden="true">▶</span></button>
-            <span>Illustrative lifestyle film</span>
+
+          <!-- Video Walkthrough Showcase Frame (Images 1 & 2) -->
+          <div class="virtual-tour-frame reveal" id="tour-frame">
+            <video class="virtual-tour-video" id="virtual-tour-video" playsinline preload="metadata" poster="assets/rowhouses-street.webp">
+              <source src="assets/property-tour.mp4" type="video/mp4">
+              Your browser does not support HTML5 video playback.
+            </video>
+            <div class="virtual-tour-overlay" id="tour-overlay"></div>
+            <button class="tour-play-button" id="open-tour" type="button" aria-label="Play Godrej Florenne project walkthrough video">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <polygon points="7 4 19 12 7 20 7 4"/>
+              </svg>
+            </button>
+            <div class="tour-slide-pill" id="tour-pill">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
+              </svg>
+              <span>PROJECT WALKTHROUGH</span>
+            </div>
+            <span class="tour-art-credit" id="tour-credit">PROJECT WALKTHROUGH</span>
+          </div>
+
+          <!-- 3 Feature Cards (Image 3) -->
+          <div class="tour-features-grid reveal">
+            <div class="tour-feature-card">
+              <span class="tour-feature-check" aria-hidden="true">&#10003;</span>
+              <p class="tour-feature-text">The 242 row houses, the clubhouse and the central park, as they will look when done</p>
+            </div>
+            <div class="tour-feature-card">
+              <span class="tour-feature-check" aria-hidden="true">&#10003;</span>
+              <p class="tour-feature-text">Price list and floor plans on WhatsApp within minutes of your enquiry</p>
+            </div>
+            <div class="tour-feature-card">
+              <span class="tour-feature-check" aria-hidden="true">&#10003;</span>
+              <p class="tour-feature-text">A live video walk of the site with our sales desk, on request</p>
+            </div>
           </div>
         </div>
       </section>
 
+      <!-- Section 12: Master Plan Blueprint (Exact match to Reference Images 1 & 2) -->
       <section class="section masterplan-section" id="master-plan">
         <div class="page-width">
-          <div class="section-heading section-heading-row reveal"><div><div class="section-kicker"><span>10</span> The blueprint</div><p class="eyebrow">A sense of the whole</p><h2>Community plan<br><em>&amp; shared spaces.</em></h2></div><p class="section-intro">Explore an original illustrative plan graphic. Request the official master plan and full legend from the developer.</p></div>
-          <div class="masterplan-grid"><div class="masterplan-image reveal"><img src="assets/master-plan.svg" alt="Illustrative community plan, not to scale" loading="lazy" decoding="async"><span>Illustrative · not to scale</span></div><div class="masterplan-points" id="masterplan-points"></div></div>
+          <div class="masterplan-header-block reveal">
+            <div class="section-kicker"><span>— THE BLUEPRINT —</span></div>
+            <h2 class="masterplan-heading-title">Master <em>Plan</em></h2>
+            <p class="masterplan-lead-text">
+              242 luxury four-level row houses arranged across 20 lush acres, with the grand central swimming pool and Hafeez Contractor clubhouse at its heart, French parterre gardens along the avenues and private courtyards for every home. Dedicated internal pedestrian walkways and periphery access ensure the central grounds remain serene and protected.
+            </p>
+          </div>
+
+          <div class="masterplan-grid">
+            <!-- Left Column: Master Plan Card with Lock Overlay (Image 1 & 2) -->
+            <div class="masterplan-card reveal">
+              <div class="masterplan-card-sheet">
+                <div class="sheet-header">
+                  <span class="sheet-title">MASTER PLAN</span>
+                  <span class="sheet-compass">
+                    <span class="compass-n">N</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <circle cx="12" cy="12" r="10"/>
+                      <polyline points="12 6 12 12 14 14"/>
+                      <line x1="12" y1="6" x2="12" y2="18"/>
+                    </svg>
+                  </span>
+                </div>
+
+                <div class="sheet-body">
+                  <div class="sheet-map-col">
+                    <img class="masterplan-graphic-img" src="assets/master-plan.webp" alt="Godrej Florenne master layout plan showing central greens and row houses" loading="lazy" decoding="async">
+                  </div>
+                  <div class="sheet-legend-col">
+                    <div class="legend-heading">LEGEND</div>
+                    <ol class="legend-items">
+                      <li><span>1.</span> Main Entry Portal</li>
+                      <li><span>2.</span> French Parterre Greens</li>
+                      <li><span>3.</span> Resort Swimming Pool</li>
+                      <li><span>4.</span> Kids Pool</li>
+                      <li><span>5.</span> Children's Play Area</li>
+                      <li><span>6.</span> Outdoor Fitness Gym</li>
+                      <li><span>7.</span> Gathering Arena</li>
+                      <li><span>8.</span> Party Lawn</li>
+                      <li><span>9.</span> Vegetable Garden</li>
+                      <li><span>10.</span> Central Clubhouse</li>
+                    </ol>
+                  </div>
+                </div>
+
+                <!-- Frosted Blur Overlay with Lock & Download Button -->
+                <div class="sheet-lock-overlay">
+                  <div class="lock-icon-circle" aria-hidden="true">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                      <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                    </svg>
+                  </div>
+                  <button class="button-download-masterplan" type="button" data-scroll-enquire>
+                    <span>Download Master Plan</span>
+                  </button>
+                  <p class="sheet-lock-note">Sent on WhatsApp within minutes</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Column: Checkmark Points -->
+            <div class="masterplan-points-col reveal" id="masterplan-points"></div>
+          </div>
         </div>
       </section>
 
+      <!-- Section 13: Specifications (Exact match to Reference Screenshot) -->
       <section class="section specifications-section" id="specifications">
         <div class="page-width">
-          <div class="section-heading section-heading-row reveal"><div><div class="section-kicker"><span>11</span> Inside the home</div><p class="eyebrow">Materials &amp; finishes</p><h2>Specifications,<br><em>thoughtfully considered.</em></h2></div><p class="section-intro">Details vary by configuration. Please request the latest developer-issued specification sheet.</p></div>
-          <div class="detail-grid" id="detail-grid"></div>
-          <div class="specification-grid" id="specification-grid"></div>
+          <div class="specifications-header-block reveal">
+            <div class="section-kicker"><span>— INSIDE THE HOME —</span></div>
+            <h2 class="specifications-heading-title">Specifications, as per the developer's<br><em>brochure</em></h2>
+          </div>
+          <div class="specification-grid reveal" id="specification-grid"></div>
         </div>
       </section>
 
+      <!-- Section 14: The Developer (Exact match to Reference Screenshot) -->
       <section class="section developer-section" id="developer">
-        <div class="page-width developer-grid"><div class="developer-copy reveal"><div class="section-kicker"><span>12</span> The developer</div><p class="eyebrow">A name with a legacy</p><h2>About<br><em>Godrej Properties.</em></h2><p id="developer-description"></p></div><div class="developer-stats" id="developer-stats"></div></div>
+        <div class="page-width developer-grid">
+          <div class="developer-copy reveal">
+            <div class="section-kicker"><span>— THE DEVELOPER —</span></div>
+            <h2 class="developer-heading-title">About Godrej <em>Properties</em></h2>
+            <div class="developer-copy-text" id="developer-description"></div>
+          </div>
+          <div class="developer-stats-grid reveal" id="developer-stats"></div>
+        </div>
       </section>
 
+      <!-- Section 15: Private Site Experience (Exact match to Reference Screenshot) -->
       <section class="section visit-section" id="site-visit">
         <div class="page-width visit-grid">
           <div class="visit-copy reveal">
-            <div class="section-kicker"><span>— PRIVATE SITE EXPERIENCE —</span></div>
-            <p class="eyebrow">Visit Godrej Florenne</p>
-            <h2>Take the next step<br><em>at your own pace.</em></h2>
-            <p class="section-intro">Experience the 20-acre French-inspired landscape firsthand. Schedule a curated private walkthrough with our senior project advisor to inspect model residences, orientation, and cost structures.</p>
-            <div class="visit-benefits">
-              <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#dfb76c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Private row house walkthrough &amp; sample finish inspection</span>
-              <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#dfb76c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Architectural drawings, master plan &amp; clubhouse brief</span>
-              <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#dfb76c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Direct developer inventory &amp; customized payment schedules</span>
+            <div class="section-kicker"><span>✦ SEE IT YOURSELF</span></div>
+            <h2 class="visit-heading-title">Book a Site Visit at<br><em>Godrej Florenne</em></h2>
+            <p class="visit-lead-text">
+              Share your name and number and our Bengaluru sales desk will call you back to fix a time. We will walk you through the master plan, the row house positions and the units open in the launch.
+            </p>
+            <div class="visit-checklist">
+              <div class="visit-check-item">
+                <span class="visit-check-tick" aria-hidden="true">&#10003;</span>
+                <span class="visit-check-text">Free site visit · pickup on request</span>
+              </div>
+              <div class="visit-check-item">
+                <span class="visit-check-tick" aria-hidden="true">&#10003;</span>
+                <span class="visit-check-text">You pay the developer price, with zero brokerage</span>
+              </div>
+              <div class="visit-check-item">
+                <span class="visit-check-tick" aria-hidden="true">&#10003;</span>
+                <span class="visit-check-text">Price list &amp; floor plans shared on WhatsApp</span>
+              </div>
+              <div class="visit-check-item">
+                <span class="visit-check-tick" aria-hidden="true">&#10003;</span>
+                <span class="visit-check-text">Home loan assistance with leading banks</span>
+              </div>
             </div>
+            <button class="button-schedule-tour" type="button" data-scroll-virtual-tour>
+              <span>Schedule a Virtual Tour</span>
+              <span class="tour-btn-arrow" aria-hidden="true">&rarr;</span>
+            </button>
           </div>
-          <form class="closing-form reveal" id="visit-form" data-enquiry-form>
-            <div class="card-exclusive-badge">
-              <span class="badge-gold-sparkle">✦</span>
-              <span>CURATED SITE VISIT PREVIEW</span>
-            </div>
-            <h3 class="closing-form-title">Book a Private Site Tour</h3>
-            <p class="closing-form-subtitle">Complimentary private site visit &amp; personalised cost consultation.</p>
 
-            <div class="form-field">
-              <label class="form-label" for="closing-name">NAME</label>
-              <input id="closing-name" name="name" type="text" autocomplete="name" placeholder="Your name" required>
+          <form class="visit-form-card reveal" id="visit-form" data-enquiry-form>
+            <h3 class="visit-form-title">Plan my visit</h3>
+            <p class="visit-form-subtitle">Or ask anything: price, availability, launch status.</p>
+
+            <div class="visit-form-group">
+              <label class="visit-label" for="visit-name">NAME</label>
+              <input class="visit-input" id="visit-name" name="name" type="text" autocomplete="name" placeholder="Your name" required>
             </div>
 
-            <div class="form-field">
-              <label class="form-label" for="closing-phone">PHONE</label>
-              <div class="phone-field-group">
-                <select name="countryCode" aria-label="Country calling code" class="phone-country-select">
-                  <option value="+91" selected>IN +91</option>
-                  <option value="+971">AE +971</option>
-                  <option value="+1">US +1</option>
-                  <option value="+44">UK +44</option>
-                  <option value="+65">SG +65</option>
-                </select>
-                <input id="closing-phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="10-digit mobile number" pattern="[0-9]{10}" required>
+            <div class="visit-form-group">
+              <label class="visit-label" for="visit-phone">PHONE</label>
+              <div class="visit-phone-row">
+                <div class="visit-country-box">
+                  <select name="countryCode" aria-label="Country calling code" class="visit-country-select">
+                    <option value="+91" selected>IN +91</option>
+                    <option value="+971">AE +971</option>
+                    <option value="+1">US +1</option>
+                    <option value="+44">UK +44</option>
+                    <option value="+65">SG +65</option>
+                  </select>
+                  <span class="country-arrow-icon" aria-hidden="true">&#9662;</span>
+                </div>
+                <input class="visit-input visit-phone-input" id="visit-phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="10-digit mobile number" pattern="[0-9]{10}" required>
               </div>
             </div>
 
-            <div class="form-field">
-              <label class="form-label" for="closing-home">CONFIGURATION OF INTEREST</label>
-              <div class="custom-select-wrap">
-                <select class="full-select" id="closing-home" name="homeType">
-                  <option value="4 BHK Optima (3,725 sq. ft.)" selected>4 BHK Optima (3,725 sq. ft.)</option>
-                  <option value="4 BHK Premia (4,061 sq. ft.)">4 BHK Premia (4,061 sq. ft.)</option>
-                  <option value="4 BHK Luxe (4,515 sq. ft.)">4 BHK Luxe (4,515 sq. ft.)</option>
-                  <option value="5 BHK Luxe (5,524 sq. ft.)">5 BHK Luxe (5,524 sq. ft.)</option>
+            <div class="visit-form-group">
+              <label class="visit-label" for="visit-config">LOOKING FOR</label>
+              <div class="visit-select-box">
+                <select class="visit-select" id="visit-config" name="homeType">
+                  <option value="4 BHK Optima">4 BHK Optima</option>
+                  <option value="4 BHK Premia">4 BHK Premia</option>
+                  <option value="4 BHK Luxe">4 BHK Luxe</option>
+                  <option value="5 BHK Luxe">5 BHK Luxe</option>
                 </select>
+                <span class="select-arrow-icon" aria-hidden="true">&#9662;</span>
               </div>
             </div>
 
-            <button class="hero-form-btn" type="submit">
-              <span>Confirm Site Visit Request</span>
-              <span class="btn-arrow-circle" aria-hidden="true">&rarr;</span>
+            <button class="button-visit-submit" type="submit">
+              <span>Book a Site Visit</span>
+              <span class="submit-arrow" aria-hidden="true">&rarr;</span>
             </button>
 
-            <div class="form-trust-row">
-              <span class="trust-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#c59b4e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Dedicated Senior Manager</span>
-              <span class="trust-dot">•</span>
-              <span class="trust-item">Cab Facility Available</span>
-            </div>
-
-            <p class="form-disclaimer">
-              By submitting, you authorise Godrej Properties &amp; its authorized channel partners to contact you via Call/WhatsApp. <a href="#privacy">Privacy notice</a>.
+            <p class="visit-legal-note">
+              I authorise the Authorised Channel Partner and its representatives to contact me with updates and notifications via Email/SMS/WhatsApp/Call. This will override DND/NDNC. <a href="#privacy">Privacy policy</a>.
             </p>
             <p class="form-feedback" aria-live="polite"></p>
           </form>
         </div>
       </section>
 
+      <!-- Section 16: Frequently Asked Questions (Exact match to Reference Screenshot) -->
       <section class="section faq-section" id="faq">
-        <div class="page-width faq-grid"><div class="faq-intro reveal"><div class="section-kicker"><span>14</span> Good questions</div><p class="eyebrow">Here to help</p><h2>Frequently<br><em>asked questions.</em></h2><p>Find a quick answer or get in touch with the project team for more detail.</p><a class="text-link" href="#site-visit">Ask a question <span aria-hidden="true">↗</span></a></div><div class="faq-list" id="faq-list"></div></div>
+        <div class="page-width">
+          <div class="faq-header-block reveal">
+            <div class="section-kicker"><span>— GOOD QUESTIONS —</span></div>
+            <h2 class="faq-heading-title">Godrej Florenne Bangalore,<br>Frequently Asked <em>Questions</em></h2>
+            <span class="faq-guide-note">&rarr; TAP A QUESTION TO READ ITS ANSWER</span>
+          </div>
+
+          <div class="faq-accordion-list reveal" id="faq-list"></div>
+        </div>
       </section>
     </main>
 
     <footer class="site-footer" id="privacy">
-      <div class="page-width footer-top"><a class="wordmark wordmark-footer" href="#top" aria-label="Godrej Florenne, back to top"><span class="wordmark-mark" aria-hidden="true">F</span><span class="wordmark-text">GODREJ <em>FLORENNE</em><small>OFF SOUKYA ROAD · WHITEFIELD, BENGALURU</small></span></a><p>A considered address.<br><em>A more thoughtful way to live.</em></p><a class="back-to-top" href="#top">Back to top ↑</a></div>
-      <div class="page-width footer-bottom"><p>Godrej Florenne · Bengaluru</p><p>Concept landing page. Imagery and layouts are illustrative. Project information, approvals and pricing should be confirmed with the developer.</p><p>© <span id="current-year"></span> Florenne</p></div>
+      <div class="page-width">
+        <div class="footer-top-grid">
+          <div class="footer-brand-col">
+            <h3 class="footer-brand-title">GODREJ FLORENNE</h3>
+            <p class="footer-brand-sub">OFF SOUKYA ROAD &middot; WHITEFIELD &middot; BENGALURU</p>
+            <p class="footer-partner-note">
+              This page is published and maintained by <strong>M&amp;A Ventures, an Authorised Channel Partner</strong>. It is not the developer's official website.
+            </p>
+          </div>
+
+          <div class="footer-rera-col">
+            <span class="footer-rera-eyebrow">K-RERA REGISTRATION</span>
+            <p class="footer-rera-number">PRM/KA/RERA/1250/304/PR/150926/008942 &amp; PRM/KA/RERA/1250/304/PR/150926/008943</p>
+            <p class="footer-project-detail">Project: Godrej Florenne, Hemmandahalli Village, off Soukya Road, Whitefield, Bengaluru</p>
+            <p class="footer-project-detail">Promoter: Godrej Properties Limited</p>
+            <a href="https://rera.karnataka.gov.in/" target="_blank" rel="noopener noreferrer" class="footer-rera-link">
+              <span>Verify on the Karnataka RERA portal</span>
+              <span aria-hidden="true">&rarr;</span>
+            </a>
+          </div>
+        </div>
+
+        <hr class="footer-divider">
+
+        <p class="footer-disclaimer">
+          Disclaimer: this website is operated by an Authorised Channel Partner and is not the developer's official website. All images are artistic impressions and representative imagery, indicative only. Floor plans, layouts, furniture, fixtures and fittings shown are for illustrative purposes only and do not form part of the offering. Plans, specifications, areas and amenities are subject to change basis receipt of approvals and NOCs; dimensions and areas may change. Drive times are approximate. Nothing on this page constitutes an offer or a contract. Project information on this page is taken from the developer's brochure and the Karnataka RERA record.
+        </p>
+
+        <div class="footer-bottom-bar">
+          <span class="footer-copy-text">
+            &copy; <span id="current-year">2026</span> &middot; M&amp;A Ventures &middot; Authorised Channel Partner &middot; <a href="#privacy" class="footer-privacy-link">Privacy Policy</a>
+          </span>
+          <span class="footer-brand-tag">Godrej Florenne &middot; by Godrej Properties</span>
+        </div>
+      </div>
     </footer>
 
     <!-- Floating WhatsApp Button -->
@@ -628,11 +882,96 @@
     <a href="#hero-enquiry" class="floating-enquire-tab" aria-label="Enquire Now">
       <span>ENQUIRE NOW</span>
     </a>
-    <div class="mobile-action-bar" aria-label="Quick actions"><a href="#site-visit">Request details <span aria-hidden="true">↗</span></a><button type="button" data-scroll-enquire>Book a visit</button></div>
+    <!-- Mobile Fixed Lead Action Bar (Call, WhatsApp, Enquire) -->
+    <div class="mobile-action-bar" aria-label="Quick actions">
+      <a href="tel:+919342333197" class="mobile-bar-btn mobile-bar-call" aria-label="Call Sales Desk">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <span>Call</span>
+      </a>
+      <a href="https://wa.me/919342333197?text=Hi%2C%20I%20am%20interested%20in%20Godrej%20Florenne" target="_blank" rel="noopener noreferrer" class="mobile-bar-btn mobile-bar-whatsapp" aria-label="Chat on WhatsApp">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.63C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67M9.53 7.35C9.37 7.35 9.1 7.41 8.88 7.65C8.65 7.89 8.02 8.49 8.02 9.71C8.02 10.93 8.91 12.11 9.03 12.27C9.15 12.44 10.74 14.9 13.21 15.96C15.26 16.84 15.68 16.67 16.12 16.63C16.57 16.59 17.56 16.04 17.77 15.46C17.97 14.88 17.97 14.38 17.91 14.28C17.85 14.18 17.7 14.12 17.47 14.01C17.25 13.89 16.15 13.35 15.94 13.27C15.74 13.2 15.59 13.16 15.44 13.39C15.29 13.62 14.87 14.12 14.74 14.26C14.61 14.41 14.49 14.43 14.26 14.32C14.04 14.2 13.08 13.89 11.95 12.88C11.07 12.09 10.47 11.12 10.3 10.83C10.13 10.54 10.28 10.38 10.4 10.26C10.5 10.16 10.63 10.01 10.74 9.87C10.86 9.73 10.9 9.63 10.98 9.47C11.05 9.3 11.01 9.16 10.95 9.04C10.89 8.93 10.4 7.73 10.19 7.23C9.99 6.74 9.78 6.81 9.63 6.8C9.48 6.8 9.31 6.8 9.14 6.8L9.53 7.35Z"/></svg>
+        <span>WhatsApp</span>
+      </a>
+      <button type="button" class="mobile-bar-btn mobile-bar-enquire" data-scroll-enquire aria-label="Enquire Now">
+        <span>Enquire Now</span>
+      </button>
+    </div>
+
+    <!-- Global Lead Capture Popup Modal (Matches Prestige Parklane Reference) -->
+    <div class="modal enquiry-popup-modal" id="enquiry-modal" role="dialog" aria-modal="true" aria-labelledby="popup-modal-title" hidden>
+      <div class="modal-backdrop" data-close-enquiry-modal></div>
+      <div class="popup-modal-card">
+        <button class="popup-close-btn" type="button" data-close-enquiry-modal aria-label="Close dialog">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+
+        <div class="popup-header">
+          <h2 class="popup-title" id="popup-modal-title">Get The Full Master Plan</h2>
+          <p class="popup-subtitle" id="popup-modal-subtitle">The full master plan and tower numbering on WhatsApp within minutes.</p>
+        </div>
+
+        <form class="popup-form" id="popup-enquiry-form" data-enquiry-form="popup">
+          <input type="hidden" name="sourceContext" id="popup-source-context" value="General Enquiry">
+
+          <div class="popup-field">
+            <label class="popup-label" for="popup-name">NAME</label>
+            <input class="popup-input" id="popup-name" name="name" type="text" autocomplete="name" placeholder="Your name" required>
+          </div>
+
+          <div class="popup-field">
+            <label class="popup-label" for="popup-phone">PHONE</label>
+            <div class="popup-phone-row">
+              <div class="popup-country-box">
+                <select class="popup-country-select" name="countryCode" aria-label="Country calling code">
+                  <option value="+91" selected>IN +91</option>
+                  <option value="+971">AE +971</option>
+                  <option value="+1">US +1</option>
+                  <option value="+44">UK +44</option>
+                  <option value="+65">SG +65</option>
+                </select>
+                <span class="popup-select-arrow" aria-hidden="true">&#9662;</span>
+              </div>
+              <input class="popup-input popup-phone-input" id="popup-phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="10-digit mobile number" pattern="[0-9]{10}" maxlength="10" required>
+            </div>
+          </div>
+
+          <div class="popup-field">
+            <label class="popup-label" for="popup-email">EMAIL (optional)</label>
+            <input class="popup-input" id="popup-email" name="email" type="email" autocomplete="email" placeholder="Email ID">
+          </div>
+
+          <div class="popup-field">
+            <label class="popup-label" for="popup-config">LOOKING FOR</label>
+            <div class="popup-select-box">
+              <select class="popup-select" id="popup-config" name="homeType">
+                <option value="4 BHK Optima">4 BHK Optima (3,725 sq ft)</option>
+                <option value="4 BHK Premia">4 BHK Premia (4,250 sq ft)</option>
+                <option value="4 BHK Luxe">4 BHK Luxe (4,860 sq ft)</option>
+                <option value="5 BHK Luxe">5 BHK Luxe (5,524 sq ft)</option>
+              </select>
+              <span class="popup-select-arrow" aria-hidden="true">&#9662;</span>
+            </div>
+          </div>
+
+          <button class="button-popup-submit" id="popup-submit-btn" type="submit">
+            <span id="popup-submit-label">Download Master Plan</span>
+            <span class="popup-btn-arrow" aria-hidden="true">&rarr;</span>
+          </button>
+
+          <p class="popup-legal-note">
+            I authorise the Authorised Channel Partner and its representatives to contact me with updates and notifications via Email/SMS/WhatsApp/Call. This will override DND/NDNC. <a href="#privacy">Privacy policy</a>.
+          </p>
+          <div class="form-feedback" aria-live="polite"></div>
+        </form>
+      </div>
+    </div>
 
     <div class="modal" id="tour-modal" role="dialog" aria-modal="true" aria-labelledby="tour-title" hidden>
       <div class="modal-backdrop" data-close-modal></div>
-      <div class="modal-panel"><button class="modal-close" type="button" data-close-modal aria-label="Close video">×</button><p class="eyebrow">A glimpse of home</p><h2 id="tour-title">The Florenne lifestyle film</h2><video id="tour-video" controls preload="none" poster="assets/pool.webp"><source src="assets/lifestyle-film.mp4" type="video/mp4">Your browser does not support embedded video.</video><p class="video-note">Illustrative lifestyle footage. Replace with an official project film when available.</p></div>
+      <div class="modal-panel"><button class="modal-close" type="button" data-close-modal aria-label="Close video">×</button><p class="eyebrow">A glimpse of home</p><h2 id="tour-title">The Florenne lifestyle film</h2><video id="tour-video" controls preload="none" poster="assets/curved-clubhouse.webp"><source src="assets/lifestyle-film.mp4" type="video/mp4">Your browser does not support embedded video.</video><p class="video-note">Illustrative lifestyle footage. Replace with an official project film when available.</p></div>
     </div>
     <div class="toast" id="site-toast" role="status" aria-live="polite"></div>
   </body>
