@@ -104,6 +104,7 @@ window.florenneData = {
       carpet: "2,417",
       price: "₹5.40 Cr*",
       image: "assets/4bhk-floor-plan-01-ground-first.webp",
+      secondImage: "assets/4bhk-floor-plan-01-second-third.webp",
       bullets: [
         "Bedroom of 12'0\" × 13'6\" and a grand living room of 18'4\" × 15'0\"",
         "Dedicated private in-home elevator serving Ground, First, Second and Rooftop Terrace",
@@ -119,6 +120,7 @@ window.florenneData = {
       carpet: "2,645",
       price: "₹5.85 Cr*",
       image: "assets/4bhk-floor-plan-02-ground-first.webp",
+      secondImage: "assets/4bhk-floor-plan-02-second-third.webp",
       bullets: [
         "Expanded 1,350 sq ft plot with double-height central skylight courtyard void",
         "Master bedroom retreat of 14'0\" × 16'0\" with walk-in wardrobe and private viewing balcony",
@@ -134,6 +136,7 @@ window.florenneData = {
       carpet: "2,933",
       price: "₹6.55 Cr*",
       image: "assets/4bhk-floor-plan-03-ground-first.webp",
+      secondImage: "assets/4bhk-floor-plan-03-second-third.webp",
       bullets: [
         "1,500 sq ft plot expanse with grand 21'0\" × 16'6\" formal living and banquet dining",
         "Four opulent ensuite bedroom suites with dedicated dressing vestibules and spa bathrooms",
@@ -149,6 +152,7 @@ window.florenneData = {
       carpet: "3,656",
       price: "₹8.00 Cr*",
       image: "assets/5bhk-floor-plan-ground-first.webp",
+      secondImage: "assets/5bhk-floor-plan-second-third.webp",
       bullets: [
         "Flagship 1,650 sq ft plot with five private ensuite bedrooms and dual family lounges",
         "Palatial French Renaissance architecture by Hafeez Contractor overlooking 62% green core",

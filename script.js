@@ -97,15 +97,30 @@
         floorplanPanel.innerHTML = `
           <div class="floorplan-stage-col">
             <div class="floorplan-stage-card">
-              <img class="floorplan-stage-img" src="${escapeHtml(plan.image)}" alt="${escapeHtml(plan.headline || plan.name)} architectural plan" loading="lazy" decoding="async" draggable="false">
-              <div class="floorplan-lock-shade">
-                <div class="lock-circle-badge" aria-hidden="true">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              <div class="floorplan-plans-grid">
+                <figure class="floorplan-plan-preview">
+                  <figcaption class="floorplan-plan-label">Ground &amp; First Floor</figcaption>
+                  <div class="floorplan-image-wrap">
+                    <img class="floorplan-stage-img" src="${escapeHtml(plan.image)}" alt="${escapeHtml(plan.tabName || plan.name)} ground and first floor plan" loading="lazy" decoding="async" draggable="false">
+                    <span class="floorplan-image-fade" aria-hidden="true"></span>
+                  </div>
+                </figure>
+                <figure class="floorplan-plan-preview">
+                  <figcaption class="floorplan-plan-label">Second &amp; Third Floor</figcaption>
+                  <div class="floorplan-image-wrap">
+                    <img class="floorplan-stage-img" src="${escapeHtml(plan.secondImage)}" alt="${escapeHtml(plan.tabName || plan.name)} second and third floor plan" loading="lazy" decoding="async" draggable="false">
+                    <span class="floorplan-image-fade" aria-hidden="true"></span>
+                  </div>
+                </figure>
+                <div class="floorplan-lock-shade">
+                  <div class="lock-circle-badge" aria-hidden="true">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                  </div>
+                  <button class="button-download-plan-card" type="button" data-scroll-enquire>
+                    Download ${escapeHtml(plan.tabName || plan.name)} Plan
+                  </button>
+                  <span class="lock-subnote">Full plan on WhatsApp within minutes</span>
                 </div>
-                <button class="button-download-plan-card" type="button" data-scroll-enquire>
-                  Download ${escapeHtml(plan.tabName || plan.name)} Plan
-                </button>
-                <span class="lock-subnote">Full plan on WhatsApp within minutes</span>
               </div>
             </div>
           </div>
@@ -687,7 +702,7 @@
 
     // 3. CTA Buttons triggering the Popup Modal
     const btn = event.target.closest(
-      "[data-scroll-enquire], [data-open-modal], .nav-cta, .mobile-bar-enquire, .floating-enquire-tab, .spec-quote-btn, .button-brochure-download, .button-complete-costing, .button-download-masterplan, .button-download-plan-card, .button-download-plan-main, .intro-pdf-download-btn, .button-get-price, .button-schedule-tour, .button-launch-details, .hero-site-visit-link"
+      "[data-scroll-enquire], [data-open-modal], .nav-cta, .mobile-bar-enquire, .floating-enquire-tab, .spec-quote-btn, .button-brochure-download, .button-complete-costing, .button-download-masterplan, .button-download-plan-card, .button-download-plan-main, .intro-pdf-download-btn, .button-get-price, .button-schedule-tour, .button-launch-details"
     );
 
     if (btn) {

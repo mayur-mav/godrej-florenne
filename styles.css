@@ -1525,56 +1525,118 @@ figcaption#gallery-caption {
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.03);
 }
 
-/* Left Column: Floor Plan Stage Card with Lock Overlay */
+/* Floor-plan previews with the download action beneath both drawings */
 .floorplan-stage-col {
   width: 100%;
+  align-self: stretch;
 }
 .floorplan-stage-card {
   position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
   background: #ffffff;
   border: 1px solid #e7e5df;
   border-radius: 16px;
-  padding: 24px 20px;
+  padding: 16px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
   overflow: hidden;
-  min-height: 440px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  gap: 14px;
+}
+.floorplan-plans-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  flex: 1;
+  min-height: 0;
+  gap: 12px;
+}
+.floorplan-plan-preview {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: #faf8f5;
+  border: 1px solid #ede7dc;
+  border-radius: 10px;
+}
+.floorplan-plan-label {
+  position: absolute;
+  z-index: 1;
+  top: 8px;
+  right: 8px;
+  left: 8px;
+  margin: 0;
+  padding: 3px 4px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.88);
+  color: #64748b;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.4;
+  text-align: center;
+  text-transform: uppercase;
 }
 .floorplan-stage-img {
   width: 100%;
-  max-height: 420px;
-  object-fit: contain;
+  height: 100%;
+  object-fit: fill;
   filter: none;
   opacity: 1;
   display: block;
 }
+.floorplan-image-wrap {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 4px;
+}
+.floorplan-image-fade {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 50%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.72) 58%, #ffffff 100%);
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+  pointer-events: none;
+}
 .floorplan-lock-shade {
   position: absolute;
-  inset: auto 0 0 0;
-  height: 140px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.92) 38%, #ffffff 95%);
-  backdrop-filter: blur(2px);
+  z-index: 3;
+  inset: 50% 0 0;
+  box-sizing: border-box;
+  padding: 10px 8px 8px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.88) 45%, #ffffff 100%);
   -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-end;
-  padding: 14px 20px 20px;
-  z-index: 3;
+  justify-content: center;
+  gap: 6px;
+  pointer-events: none;
+}
+.floorplan-lock-shade > * {
+  pointer-events: auto;
 }
 .lock-circle-badge {
   width: 40px;
   height: 40px;
+  flex: 0 0 auto;
   border-radius: 50%;
   background: #0e325a;
   color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 14px;
+  margin-bottom: 0;
   box-shadow: 0 4px 12px rgba(11, 20, 32, 0.3);
 }
 .button-download-plan-card {
@@ -1594,8 +1656,10 @@ figcaption#gallery-caption {
   box-shadow: 0 6px 18px rgba(197, 155, 78, 0.45);
 }
 .lock-subnote {
-  margin-top: 8px;
+  width: 100%;
+  margin-top: 0;
   font-size: 11px;
+  line-height: 1.3;
   color: #6b7280;
   text-align: center;
 }
@@ -3178,19 +3242,6 @@ figcaption#gallery-caption {
   margin-bottom: 14px;
 }
 
-.developer-copy .section-kicker span {
-  display: inline-block;
-  padding: 6px 14px;
-  border-radius: 9999px;
-  font-size: 10.5px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: #dfb76c;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(223, 183, 108, 0.32);
-}
-
 .developer-heading-title,
 .developer-copy h2 {
   font-family: var(--serif) !important;
@@ -3909,19 +3960,6 @@ figcaption#gallery-caption {
 
 .visit-copy .section-kicker {
   margin-bottom: 16px;
-}
-
-.visit-copy .section-kicker span {
-  display: inline-block;
-  padding: 6px 14px;
-  border-radius: 9999px;
-  font-size: 10.5px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: #dfb76c;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(223, 183, 108, 0.32);
 }
 
 .visit-heading-title,
@@ -4814,7 +4852,7 @@ figcaption#gallery-caption {
   .brochure-copy .section-intro { max-width: 100% !important; }
   .brochure-art { width: 100% !important; max-width: 100% !important; }
   .brochure-stage-wrapper {
-    height: 300px !important;
+    height: clamp(300px, 84vw, 340px) !important;
     width: 100% !important;
     max-width: 100% !important;
     border-radius: 16px !important;
@@ -4824,7 +4862,7 @@ figcaption#gallery-caption {
     max-width: 290px !important;
     right: 14px !important;
     bottom: 18px !important;
-    height: auto !important;
+    height: clamp(155px, 48vw, 180px) !important;
     padding: 10px !important;
     grid-template-columns: 1.25fr 1fr !important;
     transform: rotate(1.5deg) !important;
@@ -5053,8 +5091,17 @@ figcaption#gallery-caption {
     width: 100% !important;
     box-sizing: border-box !important;
   }
-  .floorplan-stage-card { min-height: 300px !important; padding: 14px 10px !important; width: 100% !important; }
-  .floorplan-stage-img { max-height: 260px !important; }
+  .floorplan-stage-card { box-sizing: border-box !important; min-height: 0 !important; padding: 14px !important; gap: 12px !important; width: 100% !important; }
+  .floorplan-stage-col { align-self: auto !important; }
+  .floorplan-stage-card { height: auto !important; }
+  .floorplan-lock-shade { inset: 33% 0 0 !important; padding: 4px !important; gap: 3px !important; }
+  .floorplan-lock-shade .lock-circle-badge { width: 24px !important; height: 24px !important; }
+  .floorplan-lock-shade .button-download-plan-card { padding: 5px 6px !important; font-size: 9px !important; }
+  .floorplan-lock-shade .lock-subnote { font-size: 7px !important; line-height: 1.15 !important; }
+  .floorplan-plan-preview { aspect-ratio: 1 / 1 !important; }
+  .floorplan-plan-label { font-size: 8px !important; }
+  .floorplan-plans-grid { flex: initial !important; }
+  .floorplan-stage-img { max-height: none !important; object-fit: contain !important; }
   .plan-metrics-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 8px !important; margin-bottom: 20px !important; }
   .metric-box { padding: 10px 4px !important; }
   .metric-val { font-size: 17px !important; }
@@ -5235,6 +5282,13 @@ figcaption#gallery-caption {
   body {
     padding-bottom: calc(66px + env(safe-area-inset-bottom));
   }
+}
+@media (min-width: 761px) and (max-width: 1040px) {
+  .floorplan-showcase-panel { grid-template-columns: 1fr !important; }
+  .floorplan-stage-card { height: auto; }
+  .floorplan-plans-grid { flex: initial; }
+  .floorplan-plan-preview { aspect-ratio: 4 / 3; }
+  .floorplan-stage-img { object-fit: contain; }
 }
 @media (max-width: 440px) {
   .approval-grid {
