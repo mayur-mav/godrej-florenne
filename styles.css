@@ -1922,8 +1922,8 @@ figcaption#gallery-caption {
 }
 .location-map-frame > img {
   width: 100%;
-  height: 380px;
-  object-fit: cover;
+  height: 320px;
+  object-fit: contain;
   object-position: center;
   display: block;
 }
@@ -4993,9 +4993,9 @@ figcaption#gallery-caption {
   }
   .location-map-frame > img {
     width: 100% !important;
-    height: clamp(320px, 88vw, 360px) !important;
-    object-fit: cover !important;
-    object-position: 85% center !important;
+    height: clamp(240px, 68vw, 300px) !important;
+    object-fit: contain !important;
+    object-position: center !important;
   }
   .location-leaflet-map {
     height: clamp(220px, 70vw, 280px);
