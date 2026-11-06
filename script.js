@@ -256,6 +256,61 @@
     `).join(""));
   }
 
+  const locationMapElement = document.querySelector("#location-leaflet-map");
+  if (locationMapElement) {
+    let locationMapInitialized = false;
+    let locationMapObserver = null;
+
+    const initializeLocationMap = () => {
+      if (locationMapInitialized) return;
+      locationMapInitialized = true;
+
+      if (!window.L) {
+        locationMapElement.innerHTML = '<p class="location-map-error" role="alert">The interactive map could not be loaded. Please refresh the page to try again.</p>';
+        console.error("Leaflet failed to load; the interactive location map is unavailable.");
+        return;
+      }
+
+      const location = [12.9924594, 77.8068603];
+      const map = window.L.map(locationMapElement, { scrollWheelZoom: false }).setView(location, 15);
+
+      window.L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(map);
+
+      window.L.marker(location, {
+        title: "Godrej Florenne",
+        alt: "Godrej Florenne, Hemmandahalli, Bengaluru"
+      }).addTo(map).bindPopup("<strong>Godrej Florenne</strong><br>Hemmandahalli, Bengaluru").openPopup();
+    };
+
+    const initializeMapWhenNearViewport = () => {
+      if (locationMapElement.getBoundingClientRect().top > window.innerHeight + 200) return;
+
+      locationMapObserver?.disconnect();
+      window.removeEventListener("scroll", initializeMapWhenNearViewport);
+      window.removeEventListener("resize", initializeMapWhenNearViewport);
+      initializeLocationMap();
+    };
+
+    if ("IntersectionObserver" in window) {
+      locationMapObserver = new IntersectionObserver((entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          window.removeEventListener("scroll", initializeMapWhenNearViewport);
+          window.removeEventListener("resize", initializeMapWhenNearViewport);
+          initializeLocationMap();
+          locationMapObserver.disconnect();
+        }
+      }, { rootMargin: "200px" });
+      locationMapObserver.observe(locationMapElement);
+    }
+
+    window.addEventListener("scroll", initializeMapWhenNearViewport, { passive: true });
+    window.addEventListener("resize", initializeMapWhenNearViewport, { passive: true });
+    initializeMapWhenNearViewport();
+  }
+
   if (Array.isArray(data.locations)) {
     render("#location-list", data.locations.map((location, index) => `
       <div class="location-row">

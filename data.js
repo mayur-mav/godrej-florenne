@@ -388,40 +388,64 @@ window.florenneData = {
   },
   faqs: [
     {
-      question: "What are the Godrej Florenne prices for a row house?",
-      answer: "Godrej Florenne row house prices start from ₹5.40 Cr* onwards for the 4 BHK Optima configuration. Configuration-wise pricing depends on plot size, built-up area (3,725 to 5,524 sq ft), and corner orientation, with complete cost sheets and payment schedules shared upon request."
-    },
-    {
-      question: "What is the Godrej Florenne 4 BHK row house price?",
-      answer: "The 4 BHK luxury row houses start from ₹5.40 Cr* for the 4 BHK Optima (3,725 sq ft), with Premia (4,061 sq ft) and Luxe (4,515 sq ft) typologies priced progressively based on personal garden size, lightwell specifications, and corner placement."
-    },
-    {
-      question: "What is the Godrej Florenne 5 BHK row house price?",
-      answer: "The flagship 5 BHK Luxe row houses span 5,524 sq ft saleable with expansive double-height living areas, private rooftop sky terrace, and private gearless elevator access across all 4 levels. Pricing details are provided upon confidential enquiry."
-    },
-    {
-      question: "What configurations and sizes are available at Godrej Florenne?",
-      answer: "Godrej Florenne features exclusive French-inspired four-level (G+3) luxury row houses available in four configurations: 4 BHK Optima (3,725 sq ft), 4 BHK Premia (4,061 sq ft), 4 BHK Luxe (4,515 sq ft), and flagship 5 BHK Luxe (5,524 sq ft)."
+      question: "What is the overall concept and theme of Godrej Florenne?",
+      answer: "Godrej Florenne is an ultra-luxury residential community inspired by a touch of French elegance, designed to offer warm, spacious, and sophisticated independent row-house living."
     },
     {
       question: "Where is Godrej Florenne located?",
-      answer: "Godrej Florenne is situated off Soukya Road, Hemmandahalli, Whitefield, Bengaluru (East Bengaluru), just 1 km from NH 648 (Satellite Town Ring Road - STRR), offering direct connectivity to Kempegowda International Airport, Kadugodi Tree Park Metro, and ITPL."
+      answer: "The project is located at Whitefield, East Bengaluru, Karnataka, 560117 on the outskirts of Soukya road, which is part of a rapidly developing but quiet residential and IT area."
     },
     {
-      question: "What are the nearby locations around Godrej Florenne?",
-      answer: "Key landmarks include Whitefield Railway Station (10 min), Kadugodi Tree Park Metro (12 min), ITPL / EPIP Corridor (15-20 min), DPS Whitefield, Chrysalis High, Manipal Hospital Whitefield, and Nexus Shantiniketan Mall."
+      question: "What type of housing configurations are offered in this project?",
+      answer: "The project offers high end 4 BHK and 5 BHK Independent Row House Villas built in G+3 floor configurations."
     },
     {
-      question: "Is Godrej Florenne RERA registered?",
-      answer: "Yes, Godrej Florenne is fully approved and registered under Karnataka RERA with Phase 1 registration number PRM/KA/RERA/1250/304/PR/150926/008942 and Phase 2 under PRM/KA/RERA/1250/304/PR/150926/008943."
+      question: "What is the size range of the villas at Godrej Florenne?",
+      answer: "The residences offer spacious built-up areas ranging from approximately 3,725 sq. ft. to 5,524 sq. ft., ideal for large and multi-generational families."
     },
     {
-      question: "How do I book a private site visit at Godrej Florenne?",
-      answer: "You can book a private site visit by filling in the 'Plan my visit' form on this page or calling our Bengaluru sales desk at +91 93423 33197. Complimentary chauffeur pickup is available across Bengaluru on request."
+      question: "What is the starting price range for homes in this project?",
+      answer: "Prices for the luxury row houses start from roughly ₹5.40 Crore onwards, depending on the precise configuration, layout orientation, and plot size selected."
     },
     {
-      question: "Is this the official Godrej Florenne website?",
-      answer: "This website is published and maintained by M&A Ventures, an Authorised Channel Partner for Godrej Properties. It provides verified launch information, RERA credentials, floor plans, and pricing for prospective homeowners. It is not the developer's official corporate website."
+      question: "What is the total land area and scale of the development?",
+      answer: "Godrej Florenne is built across a massive land parcel spanning roughly 20 acres as an integrated master plan, housing a limited, exclusive collection of low-density luxury row houses to ensure privacy."
+    },
+    {
+      question: "What is the expected possession timeline for Godrej Florenne?",
+      answer: "The project is currently under construction, with scheduled completion and possession date around September 2031."
+    },
+    {
+      question: "What lifestyle and recreational amenities are provided within the community?",
+      answer: "The gated enclave is planned with open courtyards, landscaped surroundings, natural walking trails, gazebos, a dedicated kids' play zone, and a high-end clubhouse designed for recreation and social gatherings."
+    },
+    {
+      question: "Are the villas designed to maximize natural light and ventilation?",
+      answer: "Yes. Every row house is crafted with high ceilings, large private balconies, terraces, and smart structural orientations to optimize sunlight penetration and cross-ventilation."
+    },
+    {
+      question: "Are the residences compliant with Vaastu principles?",
+      answer: "Yes, the layout designs for the individual villas are thoughtfully planned in alignment with traditional Vaastu guidelines."
+    },
+    {
+      question: "Is Godrej Florenne a RERA-registered project?",
+      answer: "Yes, the project is officially registered under RERA registed number PRM/KA/RERA/1250/304/PR/150926/008942."
+    },
+    {
+      question: "What provisions are made for vehicle parking?",
+      answer: "The project features dedicated covered parking slots and well-planned driveways to accommodate multiple vehicles securely for villa owners and their guests."
+    },
+    {
+      question: "What makes Godrej Florenne different from other luxury residential projects in Whitefield?",
+      answer: "Godrej Florenne stands out for its exclusive row-house concept, spacious private living spaces, premium amenities and thoughtfully designed homes that offer a blend of privacy, comfort and luxury."
+    },
+    {
+      question: "Does each row house come equipped with a provision for private elevators and internal courtyards?",
+      answer: "Yes, the architectural layouts for these row houses integrate built-in space for a private vertical elevator shaft serving all levels. Additionally, they feature private internal courtyards and open ground-floor car porches."
+    },
+    {
+      question: "What distinctive internal features and amenities come standard with each home?",
+      answer: "Each Vastu-compliant G+3 rowhouse features a private garden, 22,000 sq.ft clubhouse, rooftop terrace, sunlit courtyard, internal lift, and premium marble and wooden flooring, complemented by two covered EV-ready parking spaces and full access to a clubhouse with a pool, gym, and recreational facilities."
     }
   ]
 };

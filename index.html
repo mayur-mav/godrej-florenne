@@ -10,9 +10,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="preload" as="image" href="assets/villa-hero.webp" type="image/webp" fetchpriority="high">
-    <link rel="stylesheet" href="styles.css?v=4.9">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+    <link rel="stylesheet" href="styles.css?v=5.0">
     <script src="data.js" defer></script>
-    <script src="script.js?v=4.9" defer></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="" defer></script>
+    <script src="script.js?v=5.0" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -480,21 +482,20 @@
 
             <div class="location-visual-col reveal">
               <div class="location-map-frame">
-                <img src="assets/location-map.webp" alt="Godrej Florenne Soukya Road Whitefield location map" loading="lazy" decoding="async" draggable="false">
+                <img src="assets/location-map.webp" alt="Location map highlighting Godrej Florenne on Soukya Road, Whitefield" width="1200" height="800" loading="lazy" decoding="async" fetchpriority="low" draggable="false">
                 <div class="map-caption">LOCATION MAP FROM THE DEVELOPER'S BROCHURE · NOT TO SCALE</div>
               </div>
 
               <div class="location-highlights-list" id="location-highlights"></div>
 
-              <div class="location-gmap-wrap">
-                <iframe class="location-gmap" src="https://maps.google.com/maps?q=Soukya+Road,+Whitefield,+Bengaluru&t=&z=13&ie=UTF8&iwloc=&output=embed" loading="lazy" title="Godrej Florenne Location Map" allowfullscreen></iframe>
+              <div class="location-leaflet-frame location-map-frame">
+                <div id="location-leaflet-map" class="location-leaflet-map" role="region" aria-label="Interactive map showing Godrej Florenne in Hemmandahalli, Bengaluru">
+                  <span class="sr-only">Interactive map loading.</span>
+                </div>
+                <div class="map-caption">INTERACTIVE MAP &middot; GODREJ FLORENNE, HEMMANDAHALLI</div>
               </div>
             </div>
           </div>
-
-          <p class="location-disclaimer reveal">
-            DISTANCES WITH KILOMETRES WERE VERIFIED ON THE MAP IN SEPTEMBER 2026; THE OTHERS ARE APPROXIMATE DRIVE TIMES FROM THE PROJECT ENTRANCE IN NORMAL TRAFFIC.
-          </p>
         </div>
       </section>
 
