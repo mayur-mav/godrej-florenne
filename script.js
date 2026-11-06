@@ -655,21 +655,11 @@
     }, 100);
   }
 
-  let videoPausedByCheckpoint = false;
-
   function closeEnquiryModal() {
     if (!enquiryModal) return;
     enquiryModal.hidden = true;
     document.body.style.overflow = "";
 
-    // If playback was paused by a timed video checkpoint, resume automatically
-    if (videoPausedByCheckpoint) {
-      videoPausedByCheckpoint = false;
-      const vTourVideo = document.querySelector("#virtual-tour-video");
-      if (vTourVideo && !vTourVideo.ended) {
-        vTourVideo.play().catch(() => {});
-      }
-    }
     if (popupForm) {
       const fb = popupForm.querySelector(".form-feedback");
       if (fb) {
@@ -838,86 +828,167 @@
   }
 
   // ==========================================================================
-  // Direct In-Place Walkthrough Video Player with Timed Popups (0:15, 0:50, 1:52)
+  // Direct In-Place Walkthrough Video Player
   // ==========================================================================
   const virtualTourVideo = document.querySelector("#virtual-tour-video");
   const tourFrame = document.querySelector("#tour-frame");
   const openTourBtn = document.querySelector("#open-tour");
-
-  let videoTriggered15 = false;
-  let videoTriggered50 = false;
-  let videoTriggered112 = false;
+  const videoLeadCard = document.querySelector("#videoLeadCard");
+  const videoLeadClose = document.querySelector("#video-lead-close");
+  const videoLeadPill = document.querySelector("#video-lead-pill");
+  const videoPlayerActions = document.querySelector("#video-player-actions");
+  const videoControls = document.querySelector("#video-controls");
+  const videoToggleButton = document.querySelector("#video-toggle");
+  const videoProgress = document.querySelector("#video-progress");
+  const videoCurrentTime = document.querySelector("#video-current-time");
+  const videoDuration = document.querySelector("#video-duration");
+  const videoLeadForm = document.querySelector("#video-lead-form");
+  const videoLeadPhone = document.querySelector("#video-lead-phone");
+  let hasTriggeredVideoLead = false;
 
   const startInlineTour = () => {
     if (!virtualTourVideo || !tourFrame) return;
     tourFrame.classList.add("is-playing");
-    virtualTourVideo.controls = true;
+    if (videoControls) videoControls.hidden = false;
     virtualTourVideo.play().catch(() => {});
+  };
+
+  const formatVideoTime = (time) => {
+    if (!Number.isFinite(time) || time < 0) return "0:00";
+    const totalSeconds = Math.floor(time);
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = String(totalSeconds % 60).padStart(2, "0");
+    return hours ? `${hours}:${String(minutes).padStart(2, "0")}:${seconds}` : `${minutes}:${seconds}`;
+  };
+
+  const updateVideoControls = () => {
+    if (!virtualTourVideo) return;
+    const duration = virtualTourVideo.duration;
+    const currentTime = virtualTourVideo.currentTime;
+    if (videoCurrentTime) videoCurrentTime.textContent = formatVideoTime(currentTime);
+    if (videoDuration) videoDuration.textContent = formatVideoTime(duration);
+    if (videoProgress && Number.isFinite(duration) && duration > 0) {
+      const progress = Math.round((currentTime / duration) * Number(videoProgress.max));
+      videoProgress.value = String(progress);
+      videoProgress.style.setProperty("--progress", `${(currentTime / duration) * 100}%`);
+    }
+    if (videoToggleButton) {
+      const paused = virtualTourVideo.paused || virtualTourVideo.ended;
+      videoToggleButton.setAttribute("aria-label", paused ? "Play video" : "Pause video");
+      videoToggleButton.innerHTML = paused
+        ? '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>'
+        : '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zM15 5h4v14h-4z"/></svg>';
+      if (tourFrame) tourFrame.classList.toggle("is-paused", paused && tourFrame.classList.contains("is-playing"));
+    }
+  };
+
+  const toggleVideoPlayback = () => {
+    if (!virtualTourVideo) return;
+    if (virtualTourVideo.paused || virtualTourVideo.ended) {
+      startInlineTour();
+    } else {
+      virtualTourVideo.pause();
+    }
   };
 
   if (openTourBtn) {
     openTourBtn.addEventListener("click", (e) => {
       e.stopPropagation();
-      startInlineTour();
+      toggleVideoPlayback();
     });
   }
 
   if (tourFrame) {
     tourFrame.addEventListener("click", (e) => {
-      if (!tourFrame.classList.contains("is-playing")) {
-        startInlineTour();
-      }
+      if (e.target.closest("button, input, .video-lead-card")) return;
+      toggleVideoPlayback();
+    });
+  }
+
+  if (videoToggleButton) {
+    videoToggleButton.addEventListener("click", (event) => {
+      event.stopPropagation();
+      toggleVideoPlayback();
+    });
+  }
+
+  if (videoProgress && virtualTourVideo) {
+    videoProgress.addEventListener("input", () => {
+      if (!Number.isFinite(virtualTourVideo.duration) || virtualTourVideo.duration <= 0) return;
+      virtualTourVideo.currentTime = (Number(videoProgress.value) / Number(videoProgress.max)) * virtualTourVideo.duration;
     });
   }
 
   if (virtualTourVideo) {
+    ["loadedmetadata", "durationchange", "timeupdate", "play", "pause", "ended", "seeked"].forEach((eventName) => {
+      virtualTourVideo.addEventListener(eventName, updateVideoControls);
+    });
+
+    virtualTourVideo.addEventListener("ended", () => {
+      hasTriggeredVideoLead = true;
+      showVideoLeadCard();
+    });
+  }
+
+  const showVideoLeadCard = () => {
+    if (!videoLeadCard) return;
+    videoLeadCard.hidden = false;
+    videoLeadCard.setAttribute("aria-hidden", "false");
+    if (videoLeadPill) videoLeadPill.hidden = true;
+    if (videoPlayerActions) videoPlayerActions.hidden = true;
+    requestAnimationFrame(() => videoLeadCard.classList.add("is-visible"));
+  };
+
+  const collapseVideoLeadCard = () => {
+    if (!videoLeadCard) return;
+    videoLeadCard.classList.remove("is-visible");
+    videoLeadCard.setAttribute("aria-hidden", "true");
+    if (videoLeadPill) videoLeadPill.hidden = false;
+    if (videoPlayerActions) videoPlayerActions.hidden = false;
+    window.setTimeout(() => {
+      if (!videoLeadCard.classList.contains("is-visible")) {
+        videoLeadCard.hidden = true;
+      }
+    }, 450);
+  };
+
+  if (virtualTourVideo && videoLeadCard) {
     virtualTourVideo.addEventListener("timeupdate", () => {
-      const ct = virtualTourVideo.currentTime;
+      if (!hasTriggeredVideoLead && Number.isFinite(virtualTourVideo.duration) &&
+          virtualTourVideo.duration > 0 &&
+          (virtualTourVideo.currentTime / virtualTourVideo.duration) * 100 >= 35) {
+        hasTriggeredVideoLead = true;
+        showVideoLeadCard();
+      }
+    });
+  }
 
-      // Reset triggers if user rewinds/scrubs back before checkpoints
-      if (ct < 14) videoTriggered15 = false;
-      if (ct < 49) videoTriggered50 = false;
-      if (ct < 111) videoTriggered112 = false;
+  if (videoLeadClose) {
+    videoLeadClose.addEventListener("click", (event) => {
+      event.stopPropagation();
+      collapseVideoLeadCard();
+    });
+  }
 
-      // Checkpoint 1: at 00:15 sec -> "Download Floor Plan" Popup
-      if (ct >= 15 && !videoTriggered15) {
-        videoTriggered15 = true;
-        videoPausedByCheckpoint = true;
-        virtualTourVideo.pause();
-        openEnquiryModal({
-          title: "Download Unit Floor Plans",
-          subtitle: "Floor-by-floor blueprints, carpet areas and private elevator specs on WhatsApp within minutes.",
-          submitText: "Download Floor Plan",
-          source: "Video Checkpoint (00:15 - Floor Plans)",
-          config: "4 BHK Optima"
-        });
-      }
-      // Checkpoint 2: at 00:50 sec -> "Wanting Pricing Sheet / Price List" Popup
-      else if (ct >= 50 && !videoTriggered50) {
-        videoTriggered50 = true;
-        videoPausedByCheckpoint = true;
-        virtualTourVideo.pause();
-        openEnquiryModal({
-          title: "Get The Complete Price List",
-          subtitle: "All-inclusive pricing sheet, payment plans and launch allocation on WhatsApp within minutes.",
-          submitText: "Get Price List",
-          source: "Video Checkpoint (00:50 - Pricing Sheet)",
-          config: "4 BHK Premia"
-        });
-      }
-      // Checkpoint 3: at 01:52 sec (112s) -> "Book Site Visit & Get Detailed Costing" Popup
-      else if (ct >= 112 && !videoTriggered112) {
-        videoTriggered112 = true;
-        videoPausedByCheckpoint = true;
-        virtualTourVideo.pause();
-        openEnquiryModal({
-          title: "Book a Private Site Visit",
-          subtitle: "Schedule a personalized appointment with complimentary pickup option and direct developer pricing.",
-          submitText: "Book Site Visit",
-          source: "Video Checkpoint (01:52 - Site Visit)",
-          config: "4 BHK Luxe"
-        });
-      }
+  if (videoLeadPill) {
+    videoLeadPill.addEventListener("click", (event) => {
+      event.stopPropagation();
+      showVideoLeadCard();
+      videoLeadPhone?.focus();
+    });
+  }
+
+  if (videoLeadForm && videoLeadPhone) {
+    videoLeadForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      if (!videoLeadForm.reportValidity()) return;
+
+      const phone = videoLeadPhone.value.trim();
+      const message = `Hi, I was watching the Godrej Florenne walkthrough video. My phone number is ${phone}. Please share the official cost sheet & 4/5 BHK layouts.`;
+      const whatsappUrl = `https://wa.me/917411662228?text=${encodeURIComponent(message)}`;
+      window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+      collapseVideoLeadCard();
     });
   }
 

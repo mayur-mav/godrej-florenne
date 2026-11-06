@@ -11,10 +11,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="preload" as="image" href="assets/villa-hero.webp" type="image/webp" fetchpriority="high">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
-    <link rel="stylesheet" href="styles.css?v=5.0">
+    <link rel="stylesheet" href="styles.css?v=5.2">
     <script src="data.js" defer></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="" defer></script>
-    <script src="script.js?v=5.0" defer></script>
+    <script src="script.js?v=5.2" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -607,22 +607,47 @@
             <div class="section-kicker"><span>— WALKTHROUGH —</span></div>
             <h2 class="virtual-tour-heading-title">Take a <em>Virtual Tour</em> of Godrej Florenne</h2>
             <p class="virtual-tour-lead-text">
-              Tap play and share your name and number, and our Bengaluru sales desk takes you through the project on a live video call: the 242 row houses around the central park, the clubhouse and the landscape between them. The price list and floor plans reach you on WhatsApp in the same minute.
+              Explore the 242 row houses around the central park, the clubhouse and the landscape between them in this project walkthrough. Contact our Bengaluru sales desk for the latest price list and floor plans.
             </p>
           </div>
 
           <!-- Video Walkthrough Showcase Frame (Images 1 & 2) -->
-          <div class="virtual-tour-frame reveal" id="tour-frame">
+          <div class="virtual-tour-frame video-container reveal" id="tour-frame">
             <video class="virtual-tour-video" id="virtual-tour-video" playsinline preload="metadata" poster="assets/rowhouses-street.webp" draggable="false">
               <source src="assets/property-tour.mp4" type="video/mp4">
               Your browser does not support HTML5 video playback.
             </video>
             <div class="virtual-tour-overlay" id="tour-overlay"></div>
+            <div class="video-lead-card" id="videoLeadCard" aria-labelledby="video-lead-title" aria-hidden="true" hidden>
+              <button class="video-lead-close" id="video-lead-close" type="button" aria-label="Close pricing prompt">&times;</button>
+              <span class="video-lead-eyebrow">GODREJ FLORENNE</span>
+              <h3 id="video-lead-title">Falling in love with this Godrej Florenne property?</h3>
+              <p class="video-lead-copy">Unlock the official cost sheet &amp; 4/5 BHK layouts.</p>
+              <form class="video-lead-form" id="video-lead-form">
+                <label class="sr-only" for="video-lead-phone">Phone number</label>
+                <div class="video-lead-phone-field">
+                  <span aria-hidden="true">+91</span>
+                  <input id="video-lead-phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="Phone Number" pattern="[0-9]{10}" maxlength="10" required>
+                </div>
+                <button class="video-lead-submit" type="submit">Send on WhatsApp <span aria-hidden="true">&rarr;</span></button>
+              </form>
+            </div>
+            <div class="video-player-actions" id="video-player-actions" hidden>
+              <button class="video-lead-pill" id="video-lead-pill" type="button" aria-label="Get pricing on WhatsApp">Get Pricing</button>
+            </div>
             <button class="tour-play-button" id="open-tour" type="button" aria-label="Play Godrej Florenne project walkthrough video">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <polygon points="7 4 19 12 7 20 7 4"/>
               </svg>
             </button>
+            <div class="video-controls" id="video-controls" aria-label="Video controls" hidden>
+              <button class="video-toggle-button" id="video-toggle" type="button" aria-label="Pause video">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zM15 5h4v14h-4z"/></svg>
+              </button>
+              <span class="video-current-time" id="video-current-time">0:00</span>
+              <input class="video-progress" id="video-progress" type="range" min="0" max="1000" value="0" step="1" aria-label="Seek video">
+              <span class="video-duration" id="video-duration">0:00</span>
+            </div>
             <div class="tour-slide-pill" id="tour-pill">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
