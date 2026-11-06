@@ -97,7 +97,7 @@
         floorplanPanel.innerHTML = `
           <div class="floorplan-stage-col">
             <div class="floorplan-stage-card">
-              <img class="floorplan-stage-img" src="${escapeHtml(plan.image)}" alt="${escapeHtml(plan.headline || plan.name)} architectural plan" loading="lazy" decoding="async">
+              <img class="floorplan-stage-img" src="${escapeHtml(plan.image)}" alt="${escapeHtml(plan.headline || plan.name)} architectural plan" loading="lazy" decoding="async" draggable="false">
               <div class="floorplan-lock-shade">
                 <div class="lock-circle-badge" aria-hidden="true">
                   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
@@ -172,7 +172,7 @@
     render("#residence-cards", data.residences.map((home, index) => `
       <article class="residence-card reveal">
         <div class="residence-image">
-          <img src="${escapeHtml(home.image)}" alt="${escapeHtml(home.imageAlt)}" loading="lazy" decoding="async">
+          <img src="${escapeHtml(home.image)}" alt="${escapeHtml(home.imageAlt)}" loading="lazy" decoding="async" draggable="false">
           <span>${escapeHtml(home.tag)}</span>
           <span class="residence-index">0${index + 1}</span>
         </div>
@@ -213,7 +213,7 @@
   if (Array.isArray(data.projectGallery)) {
     render("#project-gallery-grid", data.projectGallery.map((photo) => `
       <div class="gallery-card reveal">
-        <img src="${escapeHtml(photo.src)}" alt="${escapeHtml(photo.alt || photo.tag)}" loading="lazy" decoding="async">
+        <img src="${escapeHtml(photo.src)}" alt="${escapeHtml(photo.alt || photo.tag)}" loading="lazy" decoding="async" draggable="false">
         <div class="gallery-card-overlay"></div>
         <span class="gallery-card-tag">${escapeHtml(photo.tag)}</span>
         <span class="gallery-card-credit">${escapeHtml(photo.credit || "ARTIST'S IMPRESSION")}</span>
@@ -938,4 +938,36 @@
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
   }
+
+  // ==========================================================================
+  // Image & Media Preservation Protection
+  // Prevents image dragging, right-click saving / copying image address, and mobile long-press menus
+  // ==========================================================================
+  const isProtectedMedia = (el) => {
+    if (!el) return false;
+    const tag = el.tagName ? el.tagName.toUpperCase() : "";
+    if (tag === "IMG" || tag === "VIDEO") return true;
+    if (el.closest && el.closest("img, video, .hero-image, .showcase-stage, .amenity-stage, .amenities-showcase-frame, .brochure-stage-wrapper, .location-map-frame, .masterplan-card-sheet, .landscape-band, .virtual-tour-frame, .gallery-card, .floorplan-stage-card, .residence-image")) {
+      return true;
+    }
+    return false;
+  };
+
+  document.addEventListener("contextmenu", (e) => {
+    if (isProtectedMedia(e.target)) {
+      e.preventDefault();
+      return false;
+    }
+  }, { capture: true });
+
+  document.addEventListener("dragstart", (e) => {
+    if (isProtectedMedia(e.target)) {
+      e.preventDefault();
+      return false;
+    }
+  }, { capture: true });
+
+  document.querySelectorAll("img, video").forEach((media) => {
+    media.setAttribute("draggable", "false");
+  });
 })();

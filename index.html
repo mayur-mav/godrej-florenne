@@ -9,10 +9,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="preload" as="image" href="assets/villa-hero.webp">
-    <link rel="stylesheet" href="styles.css?v=3.5">
+    <link rel="preload" as="image" href="assets/villa-hero.webp" type="image/webp" fetchpriority="high">
+    <link rel="stylesheet" href="styles.css?v=4.0">
     <script src="data.js" defer></script>
-    <script src="script.js?v=3.5" defer></script>
+    <script src="script.js?v=4.0" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -49,7 +49,7 @@
 
     <main id="main">
       <section class="hero" aria-labelledby="hero-title">
-        <img class="hero-image" src="assets/villa-hero.webp" alt="Godrej Florenne luxury French row house residences in Bengaluru" fetchpriority="high">
+        <img class="hero-image" src="assets/villa-hero.webp" alt="Godrej Florenne luxury French row house residences in Bengaluru" fetchpriority="high" loading="eager" decoding="async" draggable="false">
         <div class="hero-shade"></div>
         <div class="hero-content page-width">
           <div class="hero-copy">
@@ -342,7 +342,7 @@
             <div class="overview-showcase">
               <figure class="overview-image-frame reveal">
                 <div class="showcase-stage">
-                  <img id="gallery-image" src="assets/rowhouses-front.webp" alt="Four-level European French Renaissance row house architecture by Hafeez Contractor at Godrej Florenne" loading="lazy" decoding="async">
+                  <img id="gallery-image" src="assets/rowhouses-front.webp" alt="Four-level European French Renaissance row house architecture by Hafeez Contractor at Godrej Florenne" loading="lazy" decoding="async" draggable="false">
                   <button class="circle-button showcase-nav showcase-prev" id="gallery-prev" type="button" aria-label="Previous image">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
                   </button>
@@ -359,58 +359,60 @@
 
       <!-- Section 4: E-Brochure Download (Exact match to Reference) -->
       <section class="section brochure-section" id="brochure">
-        <div class="page-width brochure-grid">
-          <div class="brochure-copy reveal">
-            <div class="section-kicker"><span>— E-BROCHURE —</span></div>
-            <h2>Download the Godrej<br>Florenne <em>Brochure</em></h2>
-            <p class="section-intro">
-              The developer's 30 page brochure, sent on WhatsApp: the master plan and row house unit numbering, the typical floor plans of all four typologies (4 BHK Optima, Premia, Luxe &amp; 5 BHK Luxe), every residence with its saleable and carpet area, the location map and the specifications. Everything on this page, plus the drawings that do not fit on a phone screen.
-            </p>
-            <div class="brochure-items-list" id="brochure-items"></div>
-            <button class="button-brochure-download" type="button" data-scroll-enquire>
-              <span>Download Brochure</span>
-              <span class="btn-download-arrow" aria-hidden="true">&darr;</span>
-            </button>
-            <p class="brochure-subnote">PDF on WhatsApp within minutes, and a call the same day if you want it.</p>
-          </div>
-          <div class="brochure-art reveal" aria-label="Official Godrej Florenne brochure and master plan presentation">
-            <div class="brochure-stage-wrapper">
-              <img class="brochure-stage-bg" src="assets/brochure-map.webp" alt="Godrej Florenne landscaped campus background" loading="lazy" decoding="async">
-              <div class="brochure-stage-overlay"></div>
+        <div class="page-width">
+          <div class="brochure-grid">
+            <div class="brochure-copy reveal">
+              <div class="section-kicker"><span>— E-BROCHURE —</span></div>
+              <h2>Download the Godrej<br>Florenne <em>Brochure</em></h2>
+              <p class="section-intro">
+                The developer's 30 page brochure, sent on WhatsApp: the master plan and row house unit numbering, the typical floor plans of all four typologies (4 BHK Optima, Premia, Luxe &amp; 5 BHK Luxe), every residence with its saleable and carpet area, the location map and the specifications. Everything on this page, plus the drawings that do not fit on a phone screen.
+              </p>
+              <div class="brochure-items-list" id="brochure-items"></div>
+              <button class="button-brochure-download" type="button" data-scroll-enquire>
+                <span>Download Brochure</span>
+                <span class="btn-download-arrow" aria-hidden="true">&darr;</span>
+              </button>
+              <p class="brochure-subnote">PDF on WhatsApp within minutes, and a call the same day if you want it.</p>
+            </div>
+            <div class="brochure-art reveal" aria-label="Official Godrej Florenne brochure and master plan presentation">
+              <div class="brochure-stage-wrapper">
+                <img class="brochure-stage-bg" src="assets/brochure-map.webp" alt="Godrej Florenne landscaped campus background" loading="lazy" decoding="async" draggable="false">
+                <div class="brochure-stage-overlay"></div>
 
-              <!-- Master Plan Sheet Underlay (angled bottom-right) -->
-              <div class="brochure-sheet-underlay">
-                <div class="sheet-plan-graphic">
-                  <img src="assets/site-layout.webp" alt="Godrej Florenne master layout plan" loading="lazy" decoding="async">
+                <!-- Master Plan Sheet Underlay (angled bottom-right) -->
+                <div class="brochure-sheet-underlay">
+                  <div class="sheet-plan-graphic">
+                    <img src="assets/site-layout.webp" alt="Godrej Florenne master layout plan" loading="lazy" decoding="async" draggable="false">
+                  </div>
+                  <div class="sheet-legend-col">
+                    <div class="sheet-legend-title">LEGEND</div>
+                    <ol class="sheet-legend-list">
+                      <li>Main Entry Portal</li>
+                      <li>Central Clubhouse (22k sq ft)</li>
+                      <li>Resort Swimming Pool</li>
+                      <li>French Parterre Greens</li>
+                      <li>Tree-Lined Avenues</li>
+                      <li>4 &amp; 5 BHK Row Houses</li>
+                      <li>Central Courtyards</li>
+                      <li>Multipurpose Courts</li>
+                      <li>Sky Pergola Terraces</li>
+                      <li>Perimeter Green Buffer</li>
+                    </ol>
+                  </div>
                 </div>
-                <div class="sheet-legend-col">
-                  <div class="sheet-legend-title">LEGEND</div>
-                  <ol class="sheet-legend-list">
-                    <li>Main Entry Portal</li>
-                    <li>Central Clubhouse (22k sq ft)</li>
-                    <li>Resort Swimming Pool</li>
-                    <li>French Parterre Greens</li>
-                    <li>Tree-Lined Avenues</li>
-                    <li>4 &amp; 5 BHK Row Houses</li>
-                    <li>Central Courtyards</li>
-                    <li>Multipurpose Courts</li>
-                    <li>Sky Pergola Terraces</li>
-                    <li>Perimeter Green Buffer</li>
-                  </ol>
-                </div>
-              </div>
 
-              <!-- Brochure Cover Card (floating angled top-left) -->
-              <div class="brochure-book-cover">
-                <div class="cover-frame-inner">
-                  <div class="cover-brand-title">GODREJ<br>FLORENNE</div>
-                  <div class="cover-brand-sub">OFF SOUKYA ROAD · WHITEFIELD</div>
+                <!-- Brochure Cover Card (floating angled top-left) -->
+                <div class="brochure-book-cover">
+                  <div class="cover-frame-inner">
+                    <div class="cover-brand-title">GODREJ<br>FLORENNE</div>
+                    <div class="cover-brand-sub">OFF SOUKYA ROAD · WHITEFIELD</div>
+                  </div>
                 </div>
-              </div>
 
-              <!-- Bottom Badge Pill -->
-              <div class="brochure-bottom-pill">
-                <span>30 PAGES · MASTER PLAN + UNIT PLANS</span>
+                <!-- Bottom Badge Pill -->
+                <div class="brochure-bottom-pill">
+                  <span>30 PAGES · MASTER PLAN + UNIT PLANS</span>
+                </div>
               </div>
             </div>
           </div>
@@ -472,7 +474,7 @@
 
             <div class="location-visual-col reveal">
               <div class="location-map-frame">
-                <img src="assets/location-map.webp" alt="Godrej Florenne Soukya Road Whitefield location map" loading="lazy" decoding="async">
+                <img src="assets/location-map.webp" alt="Godrej Florenne Soukya Road Whitefield location map" loading="lazy" decoding="async" draggable="false">
                 <div class="map-caption">LOCATION MAP FROM THE DEVELOPER'S BROCHURE · NOT TO SCALE</div>
               </div>
 
@@ -492,7 +494,7 @@
 
       <!-- Full-Width Landscape Photographic Banner (Exact match to Reference Image 9) -->
       <section class="landscape-band" aria-label="Campus Greenery Feature">
-        <img class="landscape-banner-img" src="assets/tree-driveway.webp" alt="Godrej Florenne landscaped French row houses" loading="lazy" decoding="async">
+        <img class="landscape-banner-img" src="assets/tree-driveway.webp" alt="Godrej Florenne landscaped French row houses" loading="lazy" decoding="async" draggable="false">
         <div class="landscape-shade"></div>
         <div class="page-width landscape-copy reveal">
           <h2>Three-fifths of it <em>stays green.</em></h2>
@@ -564,7 +566,7 @@
 
           <!-- Photographic Carousel Frame (Image 2) -->
           <div class="amenities-showcase-frame reveal">
-            <img class="amenities-carousel-img" id="amenity-image" src="assets/curved-clubhouse.webp" alt="Resort-style infinity pool framed by landscaped greenery at dusk" loading="lazy" decoding="async">
+            <img class="amenities-carousel-img" id="amenity-image" src="assets/curved-clubhouse.webp" alt="Resort-style infinity pool framed by landscaped greenery at dusk" loading="lazy" decoding="async" draggable="false">
             <button class="circle-button amenity-nav amenity-prev" id="amenity-prev" type="button" aria-label="Previous amenity image">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
             </button>
@@ -604,7 +606,7 @@
 
           <!-- Video Walkthrough Showcase Frame (Images 1 & 2) -->
           <div class="virtual-tour-frame reveal" id="tour-frame">
-            <video class="virtual-tour-video" id="virtual-tour-video" playsinline preload="metadata" poster="assets/rowhouses-street.webp">
+            <video class="virtual-tour-video" id="virtual-tour-video" playsinline preload="metadata" poster="assets/rowhouses-street.webp" draggable="false">
               <source src="assets/property-tour.mp4" type="video/mp4">
               Your browser does not support HTML5 video playback.
             </video>
@@ -670,7 +672,7 @@
 
                 <div class="sheet-body">
                   <div class="sheet-map-col">
-                    <img class="masterplan-graphic-img" src="assets/master-plan.webp" alt="Godrej Florenne master layout plan showing central greens and row houses" loading="lazy" decoding="async">
+                    <img class="masterplan-graphic-img" src="assets/master-plan.webp" alt="Godrej Florenne master layout plan showing central greens and row houses" loading="lazy" decoding="async" draggable="false">
                   </div>
                   <div class="sheet-legend-col">
                     <div class="legend-heading">LEGEND</div>
@@ -724,20 +726,23 @@
 
       <!-- Section 14: The Developer (Exact match to Reference Screenshot) -->
       <section class="section developer-section" id="developer">
-        <div class="page-width developer-grid">
-          <div class="developer-copy reveal">
-            <div class="section-kicker"><span>— THE DEVELOPER —</span></div>
-            <h2 class="developer-heading-title">About Godrej <em>Properties</em></h2>
-            <div class="developer-copy-text" id="developer-description"></div>
+        <div class="page-width">
+          <div class="developer-grid">
+            <div class="developer-copy reveal">
+              <div class="section-kicker"><span>— THE DEVELOPER —</span></div>
+              <h2 class="developer-heading-title">About Godrej <em>Properties</em></h2>
+              <div class="developer-copy-text" id="developer-description"></div>
+            </div>
+            <div class="developer-stats-grid reveal" id="developer-stats"></div>
           </div>
-          <div class="developer-stats-grid reveal" id="developer-stats"></div>
         </div>
       </section>
 
       <!-- Section 15: Private Site Experience (Exact match to Reference Screenshot) -->
       <section class="section visit-section" id="site-visit">
-        <div class="page-width visit-grid">
-          <div class="visit-copy reveal">
+        <div class="page-width">
+          <div class="visit-grid">
+            <div class="visit-copy reveal">
             <div class="section-kicker"><span>✦ SEE IT YOURSELF</span></div>
             <h2 class="visit-heading-title">Book a Site Visit at<br><em>Godrej Florenne</em></h2>
             <p class="visit-lead-text">
@@ -817,7 +822,8 @@
             <p class="form-feedback" aria-live="polite"></p>
           </form>
         </div>
-      </section>
+      </div>
+    </section>
 
       <!-- Section 16: Frequently Asked Questions (Exact match to Reference Screenshot) -->
       <section class="section faq-section" id="faq">
@@ -971,7 +977,7 @@
 
     <div class="modal" id="tour-modal" role="dialog" aria-modal="true" aria-labelledby="tour-title" hidden>
       <div class="modal-backdrop" data-close-modal></div>
-      <div class="modal-panel"><button class="modal-close" type="button" data-close-modal aria-label="Close video">×</button><p class="eyebrow">A glimpse of home</p><h2 id="tour-title">The Florenne lifestyle film</h2><video id="tour-video" controls preload="none" poster="assets/curved-clubhouse.webp"><source src="assets/lifestyle-film.mp4" type="video/mp4">Your browser does not support embedded video.</video><p class="video-note">Illustrative lifestyle footage. Replace with an official project film when available.</p></div>
+      <div class="modal-panel"><button class="modal-close" type="button" data-close-modal aria-label="Close video">×</button><p class="eyebrow">A glimpse of home</p><h2 id="tour-title">The Florenne lifestyle film</h2><video id="tour-video" controls preload="none" poster="assets/curved-clubhouse.webp" draggable="false"><source src="assets/property-tour.mp4" type="video/mp4">Your browser does not support embedded video.</video><p class="video-note">Illustrative lifestyle footage. Replace with an official project film when available.</p></div>
     </div>
     <div class="toast" id="site-toast" role="status" aria-live="polite"></div>
   </body>

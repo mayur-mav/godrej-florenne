@@ -28,15 +28,64 @@
   --page-width: 1220px;
 }
 
-* { box-sizing: border-box; }
+*, *::before, *::after { box-sizing: border-box; }
+html, body {
+  overflow-x: hidden !important;
+  max-width: 100vw !important;
+  width: 100% !important;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 html { scroll-behavior: smooth; scroll-padding-top: 90px; }
-body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
 body, button, input, select { font-family: var(--sans); }
 button, a, input, select { -webkit-tap-highlight-color: transparent; }
 button, input, select { font-size: inherit; }
 button { color: inherit; }
 a { color: inherit; text-decoration: none; }
-img { display: block; max-width: 100%; }
+img, video {
+  display: block;
+  max-width: 100%;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none !important;
+}
+iframe { display: block; max-width: 100%; }
+
+/* Protective non-pointer layers for background imagery so right-click / drag cannot target them */
+.hero-image,
+.brochure-stage-bg,
+.landscape-banner-img {
+  pointer-events: none !important;
+  -webkit-user-drag: none !important;
+  user-drag: none !important;
+  user-select: none !important;
+}
+
+/* Prevent image selection, dragging, and touch callouts across all media showcase frames */
+.showcase-stage,
+.amenities-showcase-frame,
+.virtual-tour-frame,
+.brochure-stage-wrapper,
+.location-map-frame,
+.masterplan-card-sheet,
+.floorplan-stage-card,
+.gallery-card,
+.residence-image {
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+  -webkit-touch-callout: none !important;
+}
 ::selection { color: #ffffff; background: #1d5ba5; }
 .page-width { width: min(var(--page-width), calc(100% - 48px)); margin-inline: auto; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; clip-path: inset(50%); }
@@ -53,22 +102,21 @@ img { display: block; max-width: 100%; }
   background: transparent;
   border: none;
   box-shadow: none;
-  transition: top 0.25s ease;
 }
 .site-header.is-scrolled {
-  top: 12px;
+  top: 18px;
 }
 .nav-shell {
   pointer-events: auto;
-  width: min(1080px, calc(100% - 48px));
-  height: 64px;
+  width: min(1200px, calc(100% - 48px));
+  height: 68px;
   margin: 0 auto;
-  padding: 0 10px 0 26px;
+  padding: 0 12px 0 28px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   border-radius: 9999px;
-  background: linear-gradient(135deg, rgba(14, 48, 86, 0.95) 0%, rgba(10, 32, 60, 0.96) 100%);
+  background: linear-gradient(135deg, rgba(14, 48, 86, 0.96) 0%, rgba(10, 32, 60, 0.98) 100%);
   border: 1.5px solid rgba(223, 183, 108, 0.45);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -76,16 +124,16 @@ img { display: block; max-width: 100%; }
     0 16px 44px rgba(6, 20, 38, 0.55),
     0 0 24px rgba(18, 62, 109, 0.35),
     inset 0 1px 0 rgba(255, 255, 255, 0.15);
-  transition: all 0.25s ease;
+  transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 }
 .site-header.is-scrolled .nav-shell {
-  height: 58px;
-  background: linear-gradient(135deg, rgba(12, 42, 76, 0.98) 0%, rgba(8, 28, 52, 0.98) 100%);
-  border-color: rgba(223, 183, 108, 0.6);
+  height: 68px;
+  background: linear-gradient(135deg, rgba(10, 34, 64, 0.98) 0%, rgba(7, 24, 46, 0.99) 100%);
+  border-color: rgba(223, 183, 108, 0.65);
   box-shadow:
-    0 18px 48px rgba(4, 15, 30, 0.75),
-    0 0 28px rgba(18, 62, 109, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    0 20px 48px rgba(4, 15, 30, 0.75),
+    0 0 28px rgba(18, 62, 109, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 .wordmark {
   display: inline-flex;
@@ -142,13 +190,21 @@ img { display: block; max-width: 100%; }
   color: #ffffff !important;
   font-size: 13px;
   font-weight: 600;
-  margin-left: 14px;
+  margin-left: 12px;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(59, 130, 246, 0.32);
   text-decoration: none;
   opacity: 1 !important;
-  transition: color 0.2s ease;
+  white-space: nowrap;
+  transition: all 0.2s ease;
 }
 .nav-phone:hover {
+  background: rgba(223, 183, 108, 0.16);
+  border-color: rgba(223, 183, 108, 0.55);
   color: #dfb76c !important;
+  transform: translateY(-1px);
 }
 .nav-phone .phone-icon {
   stroke: #dfb76c;
@@ -450,7 +506,6 @@ h1, h2, h3, p { margin-top: 0; }
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 600px;
 }
 .project-intro-section .project-intro-headline,
 .project-intro-headline,
@@ -2220,8 +2275,6 @@ figcaption#gallery-caption {
 
 @media (max-width: 1000px) {
   .page-width { width: min(var(--page-width), calc(100% - 48px)); }
-  .nav-shell { width: min(860px, calc(100% - 32px)); height: 50px; }
-  .primary-nav { gap: 19px; }
   .gallery-copy { padding-inline: 44px; }
   .neighbourhood-grid { gap: 6%; }
   .closing-grid { gap: 7%; }
@@ -4201,14 +4254,24 @@ figcaption#gallery-caption {
 @media (max-width: 1000px) {
   .hero-content { width: min(var(--page-width), calc(100% - 48px)); grid-template-columns: minmax(0, 1fr) 420px; gap: 30px; }
   .hero-title { font-size: clamp(36px, 4.2vw, 48px); }
-  .project-intro-grid { grid-template-columns: 1fr; gap: 36px; }
-  .project-overview-grid { grid-template-columns: 1fr; gap: 36px; }
-  .overview-image-frame { position: static; max-width: 600px; margin: 0 auto; width: 100%; }
-  .brochure-grid { grid-template-columns: 1fr; gap: 36px; }
+  .project-intro-section .page-width { width: calc(100% - 48px) !important; max-width: 100% !important; }
+  .project-intro-grid { grid-template-columns: 1fr; gap: 36px; width: 100% !important; }
+  .project-intro-copy { width: 100% !important; max-width: 100% !important; }
+  .project-intro-headline, .project-intro-copy h2 { width: 100% !important; max-width: 100% !important; }
+  .project-intro-copy p { width: 100% !important; max-width: 100% !important; }
+  .intro-lead-box { width: 100% !important; max-width: 100% !important; }
+  .project-specs-card { width: 100% !important; max-width: 100% !important; }
+  .project-overview-grid { grid-template-columns: 1fr; gap: 36px; width: 100% !important; }
+  .overview-image-frame { position: static; max-width: 100%; margin: 0 auto; width: 100%; }
 }
 @media (max-width: 860px) {
   .hero-content { grid-template-columns: 1fr; gap: 36px; padding-top: 110px; }
   .hero-enquiry-card { max-width: 480px; margin-inline: auto; }
+  .neighbourhood-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+  .masterplan-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+  .developer-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+  .visit-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+  .approval-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 14px !important; }
 }
 @media (max-width: 760px) {
   .site-header {
@@ -4219,10 +4282,13 @@ figcaption#gallery-caption {
     width: 100%;
     z-index: 1000;
   }
+  .site-header.is-scrolled {
+    top: 10px !important;
+  }
   .nav-shell {
     width: calc(100% - 20px);
-    max-width: 500px;
-    height: 54px;
+    max-width: 520px;
+    height: 58px !important;
     margin: 0 auto;
     padding: 0 8px 0 16px;
     border-radius: 9999px;
@@ -4235,6 +4301,11 @@ figcaption#gallery-caption {
     align-items: center;
     justify-content: space-between;
   }
+  .site-header.is-scrolled .nav-shell {
+    height: 58px !important;
+    border-color: rgba(223, 183, 108, 0.6) !important;
+    box-shadow: 0 12px 34px rgba(4, 16, 32, 0.75), 0 0 18px rgba(18, 62, 109, 0.4) !important;
+  }
   .wordmark-brand {
     display: flex;
     flex-direction: column;
@@ -4245,11 +4316,11 @@ figcaption#gallery-caption {
     font-weight: 700;
     letter-spacing: 0.12em;
     color: #ffffff;
-    line-height: 1.1;
+    line-height: 1.15;
   }
   .brand-subtitle {
-    font-size: 6.5px;
-    letter-spacing: 0.18em;
+    font-size: 6.8px;
+    letter-spacing: 0.15em;
     color: #dfb76c;
   }
   .nav-actions {
@@ -4258,10 +4329,11 @@ figcaption#gallery-caption {
     gap: 6px;
   }
   .button-gold-pill.nav-cta {
-    height: 38px;
-    padding: 0 14px;
+    height: 40px;
+    padding: 0 15px;
     font-size: 11.5px;
-    gap: 6px;
+    font-weight: 700;
+    gap: 7px;
     color: #08213d !important;
   }
   .button-gold-pill.nav-cta .nav-arrow-circle {
@@ -4334,14 +4406,17 @@ figcaption#gallery-caption {
     max-width: 100% !important;
     padding-inline: 16px !important;
     box-sizing: border-box !important;
-    margin-inline: 0 !important;
+    margin-inline: auto !important;
   }
   .hero {
     min-height: auto;
-    overflow: visible;
+    overflow: hidden !important;
+    width: 100% !important;
+    max-width: 100vw !important;
     display: block;
-    padding-top: 66px;
+    padding-top: 78px !important;
     padding-bottom: 24px;
+    box-sizing: border-box !important;
   }
   .hero-shade {
     background:
@@ -4548,119 +4623,350 @@ figcaption#gallery-caption {
     font-size: 26px !important;
     line-height: 1.25 !important;
   }
-  .floorplans-tabs-wrap { gap: 8px; margin-bottom: 22px; }
-  .floorplan-pill-tab { padding: 8px 18px; font-size: 12px; }
-  .floorplan-showcase-panel { grid-template-columns: 1fr; gap: 26px; padding: 22px 16px; border-radius: 14px; }
-  .floorplan-stage-card { min-height: 320px; padding: 16px 12px; }
-  .floorplan-stage-img { max-height: 280px; }
-  .plan-metrics-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 20px; }
-  .metric-box { padding: 12px 6px; }
-  .metric-val { font-size: 18px; }
-  .metric-lbl { font-size: 7.5px; }
-  .button-download-plan-main { width: 100%; }
-  .project-overview-grid { grid-template-columns: 1fr; gap: 22px; }
-  .overview-image, .overview-image > img { height: 270px; min-height: 270px; }
-  .pricing-table-header { display: none; }
+  /* Section 3: Overview */
+  .project-overview-grid { grid-template-columns: 1fr !important; gap: 22px !important; width: 100% !important; }
+  .overview-image, .overview-image > img { height: 270px; min-height: 270px; width: 100% !important; }
+
+  /* Section 4: Brochure */
+  .brochure-section { padding-block: 56px 64px !important; }
+  .brochure-grid { grid-template-columns: 1fr !important; gap: 24px !important; width: 100% !important; }
+  .brochure-copy { width: 100% !important; max-width: 100% !important; }
+  .brochure-copy .section-intro { max-width: 100% !important; }
+  .brochure-art { width: 100% !important; max-width: 100% !important; }
+  .brochure-stage-wrapper {
+    height: 300px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    border-radius: 16px !important;
+  }
+  .brochure-sheet-underlay {
+    width: calc(100% - 28px) !important;
+    max-width: 290px !important;
+    right: 14px !important;
+    bottom: 18px !important;
+    height: auto !important;
+    padding: 10px !important;
+    grid-template-columns: 1.25fr 1fr !important;
+    transform: rotate(1.5deg) !important;
+  }
+  .brochure-book-cover {
+    width: 200px !important;
+    height: 125px !important;
+    top: 18px !important;
+    left: 14px !important;
+    padding: 8px !important;
+    transform: rotate(-2deg) !important;
+  }
+  .button-brochure-download {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  /* Section 5: Pricing */
+  .pricing-section { padding-block: 56px 64px !important; }
+  .pricing-table-header { display: none !important; }
+  .pricing-table-card { width: 100% !important; max-width: 100% !important; overflow: hidden !important; }
   .pricing-table-row {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 8px;
-    padding: 18px 20px;
-    border-bottom: 1px solid #f0ece5;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
+    padding: 18px 20px !important;
+    border-bottom: 1px solid #f0ece5 !important;
   }
   .pricing-table-row .col-cell {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
   }
   .pricing-table-row .col-cell.col-config {
-    display: block;
-    margin-bottom: 4px;
-    padding-bottom: 6px;
-    border-bottom: 1px dashed #f0ece5;
+    display: block !important;
+    margin-bottom: 4px !important;
+    padding-bottom: 6px !important;
+    border-bottom: 1px dashed #f0ece5 !important;
   }
   .pricing-table-row .col-cell.col-cta {
-    display: block;
-    margin-top: 6px;
+    display: block !important;
+    margin-top: 6px !important;
   }
   .button-get-price {
-    width: 100%;
-    height: 38px;
+    width: 100% !important;
+    height: 38px !important;
   }
   .cell-mobile-label {
-    display: inline-block;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: #8c887f;
+    display: inline-block !important;
+    font-size: 10px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase !important;
+    color: #8c887f !important;
   }
   .payment-plan-strip {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-    padding: 14px 16px;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 8px !important;
+    padding: 14px 16px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
   .button-complete-costing {
-    width: 100%;
-    justify-content: center;
+    width: 100% !important;
+    justify-content: center !important;
   }
-  .amenities-section { padding-block: 56px 64px; }
-  .amenities-showcase-frame { height: 270px; border-radius: 14px; }
-  .amenities-groups-grid { grid-template-columns: 1fr; gap: 16px; margin-top: 24px; }
-  .amenity-pill-card { padding: 20px 18px 22px; border-radius: 14px; }
-  .amenity-nav { width: 36px; height: 36px; }
-  .amenity-prev { left: 14px; }
-  .amenity-next { right: 14px; }
-  .amenity-slide-pill { bottom: 14px; left: 14px; font-size: 10.5px; padding: 6px 14px; }
-  .amenity-art-credit { bottom: 14px; right: 14px; font-size: 7.5px; }
-  .amenity-pill-item { font-size: 11px; padding: 6px 12px; }
-  .project-gallery-section { padding-block: 56px 64px; }
-  .project-gallery-grid { grid-template-columns: 1fr; gap: 14px; margin-top: 20px; }
-  .gallery-card { height: 220px; border-radius: 14px; }
-  .gallery-card-tag { bottom: 13px; left: 14px; font-size: 9.5px; }
-  .gallery-card-credit { bottom: 13px; right: 14px; font-size: 7.5px; }
-  .virtual-tour-section { padding-block: 56px 64px; }
-  .virtual-tour-frame { height: 260px; border-radius: 14px; }
-  .tour-play-button { width: 52px; height: 52px; }
-  .tour-play-button svg { width: 18px; height: 18px; }
-  .tour-slide-pill { bottom: 14px; left: 14px; font-size: 9.5px; padding: 5px 12px; }
-  .tour-art-credit { bottom: 14px; right: 14px; font-size: 7.5px; }
-  .tour-features-grid { grid-template-columns: 1fr; gap: 12px; margin-top: 18px; }
-  .tour-feature-card { padding: 16px 18px; border-radius: 12px; }
-  .tour-feature-text { font-size: 12px; }
-  .masterplan-section { padding-block: 56px 64px; }
-  .masterplan-grid { grid-template-columns: 1fr; gap: 28px; }
-  .masterplan-card { padding: 14px; border-radius: 14px; }
-  .masterplan-card-sheet { padding: 14px 14px 20px; }
-  .sheet-body { grid-template-columns: 1fr; gap: 10px; }
-  .sheet-legend-col { display: none; }
-  .sheet-map-col { height: 190px; }
-  .plan-point-text { font-size: 12px; }
-  .specifications-section { padding-block: 56px 64px; }
-  .specification-grid { grid-template-columns: 1fr; gap: 14px; margin-top: 20px; }
-  .specification-card { padding: 22px 18px 24px; border-radius: 14px; }
-  .spec-card-kicker { font-size: 10px; margin-bottom: 10px; }
-  .spec-card-desc { font-size: 12px; }
-  .developer-section { padding-block: 56px 64px; }
-  .developer-grid { grid-template-columns: 1fr; gap: 28px; }
-  .developer-stats-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-  .dev-stat-card { padding: 18px 14px; border-radius: 12px; }
-  .dev-stat-number { font-size: 24px; }
-  .dev-stat-label { font-size: 8.5px; }
-  .visit-section { padding-block: 56px 64px; }
-  .visit-grid { grid-template-columns: 1fr; gap: 25px; }
-  .visit-form-card { padding: 22px 18px; border-radius: 14px; }
-  .visit-perks-list { gap: 10px; }
-  .visit-perks-list li { font-size: 12.5px; gap: 10px; }
-  .faq-section { padding-block: 56px 64px; }
-  .faq-accordion-summary { padding: 16px 16px; }
-  .faq-accordion-question { font-size: 13.5px; }
-  .faq-accordion-body { padding: 0 16px 16px; }
-  .faq-accordion-answer { font-size: 12.5px; }
-  .site-footer { padding-block: 48px calc(80px + env(safe-area-inset-bottom)); }
-  .footer-top-grid { grid-template-columns: 1fr; gap: 28px; }
-  .footer-bottom-bar { flex-direction: column; align-items: flex-start; gap: 10px; }
+
+  /* Section 6: Neighbourhood & Location (Fixes horizontal blowout on mobile) */
+  .neighbourhood-section { padding-block: 56px 64px !important; }
+  .neighbourhood-grid {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+    width: 100% !important;
+  }
+  .location-cards-col,
+  .location-visual-col {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  .transit-card {
+    padding: 16px 14px 10px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .transit-row {
+    font-size: 12.5px !important;
+    padding: 9px 0 !important;
+  }
+  .transit-name {
+    font-size: 12px !important;
+    line-height: 1.35 !important;
+  }
+  .transit-time {
+    font-size: 11px !important;
+    margin-left: 8px !important;
+    white-space: nowrap !important;
+  }
+  .location-map-frame {
+    width: 100% !important;
+    height: 240px !important;
+    border-radius: 12px !important;
+  }
+  .location-map-frame img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+  .map-caption {
+    font-size: 7.5px !important;
+    padding: 8px 10px !important;
+  }
+  .location-highlights-list {
+    gap: 10px !important;
+    padding: 4px 0 !important;
+  }
+  .location-check-item {
+    font-size: 12px !important;
+    line-height: 1.45 !important;
+    gap: 8px !important;
+  }
+  .location-gmap-wrap {
+    width: 100% !important;
+    height: 220px !important;
+    border-radius: 12px !important;
+  }
+  .location-gmap {
+    width: 100% !important;
+    height: 100% !important;
+  }
+  .location-disclaimer {
+    font-size: 8px !important;
+    line-height: 1.4 !important;
+    margin-top: 14px !important;
+  }
+
+  /* Section 7: Full-Width Landscape Band */
+  .landscape-band {
+    min-height: 320px !important;
+  }
+  .landscape-copy {
+    padding: 36px 16px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .landscape-copy h2 {
+    font-size: clamp(23px, 6vw, 30px) !important;
+  }
+  .landscape-copy p {
+    font-size: 12.5px !important;
+    line-height: 1.6 !important;
+  }
+
+  /* Section 8: Launch Status & Approvals */
+  .approvals-section { padding-block: 56px 64px !important; }
+  .approval-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+    width: 100% !important;
+    margin: 22px 0 18px !important;
+  }
+  .approval-card {
+    min-height: auto !important;
+    padding: 14px 10px !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+  }
+  .approval-val {
+    font-size: 16.5px !important;
+  }
+  .approval-lbl {
+    font-size: 8.5px !important;
+    word-break: break-all !important;
+    overflow-wrap: anywhere !important;
+    line-height: 1.35 !important;
+  }
+  .approval-status-banner {
+    padding: 12px 14px !important;
+    font-size: 11.5px !important;
+    gap: 8px !important;
+    margin-bottom: 18px !important;
+  }
+  .status-banner-text {
+    font-size: 11.5px !important;
+    line-height: 1.4 !important;
+  }
+
+  /* Section 9: Floor Plans & Unit Sizes */
+  .floorplans-section { padding-block: 56px 64px !important; }
+  .floorplans-tabs-wrap {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    width: 100% !important;
+    margin-bottom: 20px !important;
+  }
+  .floorplan-pill-tab {
+    flex: 1 1 calc(50% - 8px) !important;
+    text-align: center !important;
+    padding: 9px 10px !important;
+    font-size: 11.5px !important;
+    box-sizing: border-box !important;
+  }
+  .floorplan-showcase-panel {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+    padding: 20px 16px !important;
+    border-radius: 14px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .floorplan-stage-card { min-height: 300px !important; padding: 14px 10px !important; width: 100% !important; }
+  .floorplan-stage-img { max-height: 260px !important; }
+  .plan-metrics-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 8px !important; margin-bottom: 20px !important; }
+  .metric-box { padding: 10px 4px !important; }
+  .metric-val { font-size: 17px !important; }
+  .metric-lbl { font-size: 7.5px !important; }
+  .button-download-plan-main { width: 100% !important; }
+
+  /* Section 10: Amenities */
+  .amenities-section { padding-block: 56px 64px !important; }
+  .amenities-showcase-frame { height: 260px !important; border-radius: 14px !important; width: 100% !important; }
+  .amenities-groups-grid { grid-template-columns: 1fr !important; gap: 16px !important; margin-top: 24px !important; width: 100% !important; }
+  .amenity-pill-card { padding: 20px 18px 22px !important; border-radius: 14px !important; width: 100% !important; box-sizing: border-box !important; }
+  .amenity-nav { width: 36px !important; height: 36px !important; }
+  .amenity-prev { left: 14px !important; }
+  .amenity-next { right: 14px !important; }
+  .amenity-slide-pill { bottom: 14px !important; left: 14px !important; font-size: 10.5px !important; padding: 6px 14px !important; }
+  .amenity-art-credit { bottom: 14px !important; right: 14px !important; font-size: 7.5px !important; }
+  .amenity-pill-item { font-size: 11px !important; padding: 6px 12px !important; }
+
+  /* Section 11: Gallery */
+  .project-gallery-section { padding-block: 56px 64px !important; }
+  .project-gallery-grid { grid-template-columns: 1fr !important; gap: 14px !important; margin-top: 20px !important; width: 100% !important; }
+  .gallery-card { height: 220px !important; border-radius: 14px !important; width: 100% !important; }
+  .gallery-card-tag { bottom: 13px !important; left: 14px !important; font-size: 9.5px !important; }
+  .gallery-card-credit { bottom: 13px !important; right: 14px !important; font-size: 7.5px !important; }
+
+  /* Section 12: Virtual Tour Walkthrough */
+  .virtual-tour-section { padding-block: 56px 64px !important; }
+  .virtual-tour-frame { height: 260px !important; border-radius: 14px !important; width: 100% !important; }
+  .tour-play-button { width: 52px !important; height: 52px !important; }
+  .tour-play-button svg { width: 18px !important; height: 18px !important; }
+  .tour-slide-pill { bottom: 14px !important; left: 14px !important; font-size: 9.5px !important; padding: 5px 12px !important; }
+  .tour-art-credit { bottom: 14px !important; right: 14px !important; font-size: 7.5px !important; }
+  .tour-features-grid { grid-template-columns: 1fr !important; gap: 12px !important; margin-top: 18px !important; width: 100% !important; }
+  .tour-feature-card { padding: 16px 18px !important; border-radius: 12px !important; width: 100% !important; box-sizing: border-box !important; }
+  .tour-feature-text { font-size: 12px !important; }
+
+  /* Section 13: Master Plan */
+  .masterplan-section { padding-block: 56px 64px !important; }
+  .masterplan-grid { grid-template-columns: 1fr !important; gap: 28px !important; width: 100% !important; }
+  .masterplan-card { padding: 14px !important; border-radius: 14px !important; width: 100% !important; box-sizing: border-box !important; }
+  .masterplan-card-sheet { padding: 14px 14px 20px !important; }
+  .sheet-body { grid-template-columns: 1fr !important; gap: 10px !important; }
+  .sheet-legend-col { display: none !important; }
+  .sheet-map-col { height: 190px !important; width: 100% !important; }
+  .plan-point-text { font-size: 12px !important; }
+
+  /* Section 14: Specifications */
+  .specifications-section { padding-block: 56px 64px !important; }
+  .specification-grid { grid-template-columns: 1fr !important; gap: 14px !important; margin-top: 20px !important; width: 100% !important; }
+  .specification-card { padding: 22px 18px 24px !important; border-radius: 14px !important; width: 100% !important; box-sizing: border-box !important; }
+  .spec-card-kicker { font-size: 10px !important; margin-bottom: 10px !important; }
+  .spec-card-desc { font-size: 12px !important; }
+
+  /* Section 15: Developer */
+  .developer-section { padding-block: 56px 64px !important; }
+  .developer-grid { grid-template-columns: 1fr !important; gap: 28px !important; width: 100% !important; }
+  .developer-stats-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 12px !important; width: 100% !important; }
+  .dev-stat-card { padding: 18px 14px !important; border-radius: 12px !important; }
+  .dev-stat-number { font-size: 24px !important; }
+  .dev-stat-label { font-size: 8.5px !important; }
+
+  /* Section 16: Private Site Experience */
+  .visit-section { padding-block: 56px 64px !important; }
+  .visit-grid { grid-template-columns: 1fr !important; gap: 25px !important; width: 100% !important; }
+  .visit-form-card { padding: 22px 18px !important; border-radius: 14px !important; width: 100% !important; box-sizing: border-box !important; }
+  .visit-perks-list { gap: 10px !important; }
+  .visit-perks-list li { font-size: 12.5px !important; gap: 10px !important; }
+
+  /* Section 17: FAQ */
+  .faq-section { padding-block: 56px 64px !important; }
+  .faq-accordion-summary { padding: 16px 16px !important; }
+  .faq-accordion-question { font-size: 13.5px !important; }
+  .faq-accordion-body { padding: 0 16px 16px !important; }
+  .faq-accordion-answer { font-size: 12.5px !important; }
+
+  /* Section 18: Footer */
+  .site-footer { padding-block: 48px calc(80px + env(safe-area-inset-bottom)) !important; }
+  .footer-top-grid { grid-template-columns: 1fr !important; gap: 28px !important; width: 100% !important; }
+  .footer-bottom-bar { flex-direction: column !important; align-items: flex-start !important; gap: 10px !important; }
+  .footer-rera-number,
+  .rera-value,
+  .spec-value.rera-value {
+    word-break: break-all !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  /* Global Popup Modal Responsiveness */
+  .modal,
+  .enquiry-popup-modal {
+    z-index: 2000 !important;
+  }
+  .popup-modal-card {
+    width: calc(100% - 24px) !important;
+    max-width: 420px !important;
+    padding: 24px 18px 20px !important;
+    border-radius: 16px !important;
+    margin: auto !important;
+    box-sizing: border-box !important;
+  }
+  .popup-title {
+    font-size: 20px !important;
+  }
+  .popup-subtitle {
+    font-size: 11.5px !important;
+  }
+  .popup-input, .popup-select, .popup-country-select {
+    height: 42px !important;
+    font-size: 13.5px !important;
+  }
 
   /* Mobile Fixed Bottom Action Bar (3-Button Layout from Reference Screenshot) */
   .mobile-action-bar {
@@ -4717,19 +5023,283 @@ figcaption#gallery-caption {
     padding-bottom: calc(66px + env(safe-area-inset-bottom));
   }
 }
+@media (max-width: 440px) {
+  .approval-grid {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+}
 @media (max-width: 390px) {
+  .site-header {
+    top: 8px !important;
+  }
+  .site-header.is-scrolled {
+    top: 8px !important;
+  }
+  .nav-shell {
+    width: calc(100% - 14px) !important;
+    height: 56px !important;
+    padding: 0 6px 0 12px !important;
+  }
+  .site-header.is-scrolled .nav-shell {
+    height: 56px !important;
+  }
+  .hero {
+    padding-top: 74px !important;
+  }
   .hero-title { font-size: 21px !important; }
-  .price-val { font-size: 19px; }
-  .brand-title { font-size: 11.5px; }
-  .button-gold-pill.nav-cta { font-size: 10px; padding: 5px 9px; }
-  .mobile-bar-btn { font-size: 11px; gap: 4px; }
-  .stat-val { font-size: 15px; }
-  .overview-heading h2 { font-size: 28px !important; }
+  .price-val { font-size: 19px !important; }
+  .brand-title { font-size: 12px !important; letter-spacing: 0.1em; line-height: 1.1; }
+  .brand-subtitle { font-size: 6.2px !important; letter-spacing: 0.12em; color: #dfb76c; max-width: 155px !important; white-space: nowrap !important; overflow: hidden !important; text-overflow: ellipsis !important; }
+  .button-gold-pill.nav-cta { font-size: 10.5px !important; padding: 0 11px !important; height: 38px !important; font-weight: 700; gap: 5px !important; }
+  .button-gold-pill.nav-cta .nav-arrow-circle { width: 16px !important; height: 16px !important; font-size: 9px !important; }
+  .mobile-bar-btn { font-size: 10.5px !important; gap: 4px !important; height: 38px !important; }
+  .stat-val { font-size: 15px !important; }
+  .stat-lbl { font-size: 7.5px !important; }
+  .overview-heading-title,
+  .brochure-copy h2,
+  .pricing-heading-title,
+  .neighbourhood-heading-title,
+  .approvals-heading-title,
+  .floorplans-heading-title,
+  .amenities-heading-title,
+  .gallery-heading-title,
+  .virtual-tour-heading-title,
+  .masterplan-heading-title,
+  .specifications-heading-title,
+  .developer-heading-title,
+  .visit-heading-title,
+  .faq-heading-title {
+    font-size: 22px !important;
+  }
 }
 
 /* Tablet Responsive Navigation (Clean alignment from 761px to 1040px) */
 @media (min-width: 761px) and (max-width: 1040px) {
-  .primary-nav { gap: 14px; font-size: 12px; }
-  .nav-phone { display: none !important; }
-  .button-gold-pill.nav-cta { padding: 7px 14px; font-size: 11.5px; }
+  .site-header {
+    top: 14px !important;
+  }
+  .site-header.is-scrolled {
+    top: 14px !important;
+  }
+  .nav-shell {
+    width: calc(100% - 32px) !important;
+    max-width: 980px !important;
+    height: 64px !important;
+    padding: 0 10px 0 20px !important;
+  }
+  .site-header.is-scrolled .nav-shell {
+    height: 64px !important;
+  }
+  .wordmark-brand .brand-title {
+    font-size: 14px !important;
+    letter-spacing: 0.12em !important;
+  }
+  .wordmark-brand .brand-subtitle {
+    font-size: 7px !important;
+    letter-spacing: 0.18em !important;
+  }
+  .primary-nav {
+    gap: clamp(10px, 1.6vw, 18px) !important;
+    font-size: 12.5px !important;
+  }
+  .primary-nav > a:not(.button):not(.nav-phone) {
+    font-size: 12.5px !important;
+  }
+  .nav-phone {
+    font-size: 12px !important;
+    padding: 5px 12px !important;
+    margin-left: 6px !important;
+    display: inline-flex !important;
+  }
+  .button-gold-pill.nav-cta {
+    height: 42px !important;
+    padding: 0 16px !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    gap: 6px !important;
+  }
+  .button-gold-pill.nav-cta .nav-arrow-circle {
+    width: 18px !important;
+    height: 18px !important;
+    font-size: 10px !important;
+  }
+
+  /* Tablet Full-Width Layout: Second Section Below Hero (#overview / .project-intro-section) */
+  .project-intro-section .page-width {
+    width: calc(100% - 48px) !important;
+    max-width: 100% !important;
+  }
+  .project-intro-grid {
+    grid-template-columns: 1fr !important;
+    gap: 36px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  .project-intro-copy {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  .project-intro-headline,
+  .project-intro-copy h2 {
+    width: 100% !important;
+    max-width: 100% !important;
+    font-size: clamp(23px, 2.8vw, 28px) !important;
+    line-height: 1.4 !important;
+  }
+  .project-intro-copy p {
+    width: 100% !important;
+    max-width: 100% !important;
+    font-size: 14.5px !important;
+    line-height: 1.75 !important;
+  }
+  .intro-chateau-badges {
+    width: 100% !important;
+    max-width: 100% !important;
+    gap: 10px !important;
+  }
+  .intro-badge {
+    font-size: 12px !important;
+    padding: 6px 14px !important;
+  }
+  .intro-lead-box {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    margin-top: 24px !important;
+    padding: 24px 28px 22px !important;
+  }
+  .project-specs-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .spec-row {
+    grid-template-columns: 180px 1fr !important;
+    gap: 20px !important;
+    padding: 14px 24px !important;
+  }
+
+  /* Section 4: E-Brochure Section on Tablet */
+  .brochure-section {
+    padding-block: 64px 76px !important;
+  }
+  .brochure-section .page-width {
+    width: calc(100% - 48px) !important;
+    max-width: 100% !important;
+    margin-inline: auto !important;
+  }
+  .brochure-grid {
+    display: grid !important;
+    grid-template-columns: 1.05fr 0.95fr !important;
+    gap: clamp(24px, 3.2vw, 44px) !important;
+    align-items: center !important;
+    width: 100% !important;
+  }
+  .brochure-copy {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  .brochure-copy h2 {
+    font-size: clamp(24px, 2.8vw, 32px) !important;
+    line-height: 1.25 !important;
+    margin-bottom: 14px !important;
+  }
+  .brochure-copy .section-intro {
+    max-width: 100% !important;
+    font-size: 13.5px !important;
+    line-height: 1.68 !important;
+  }
+  .brochure-items-list {
+    margin: 18px 0 22px !important;
+    gap: 10px !important;
+  }
+  .brochure-bullet-item {
+    font-size: 13px !important;
+    gap: 8px !important;
+  }
+  .button-brochure-download {
+    padding: 12px 24px !important;
+    font-size: 13px !important;
+  }
+  .brochure-art {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  .brochure-stage-wrapper {
+    width: 100% !important;
+    height: clamp(380px, 42vw, 440px) !important;
+    border-radius: 20px !important;
+  }
+  .brochure-book-cover {
+    width: clamp(200px, 23vw, 255px) !important;
+    height: clamp(125px, 14.5vw, 155px) !important;
+    top: clamp(24px, 3vw, 36px) !important;
+    left: clamp(16px, 2vw, 24px) !important;
+    padding: 8px !important;
+  }
+  .cover-brand-title {
+    font-size: clamp(16px, 1.9vw, 20px) !important;
+  }
+  .cover-brand-sub {
+    font-size: clamp(6.2px, 0.75vw, 7.5px) !important;
+  }
+  .brochure-sheet-underlay {
+    width: clamp(240px, 27vw, 305px) !important;
+    height: clamp(175px, 20vw, 220px) !important;
+    right: clamp(14px, 1.8vw, 22px) !important;
+    bottom: clamp(26px, 3.2vw, 36px) !important;
+    padding: 10px !important;
+  }
+  .sheet-legend-col {
+    font-size: 6.8px !important;
+    padding-left: 8px !important;
+  }
+  .sheet-legend-title {
+    font-size: 7.5px !important;
+  }
+  .brochure-bottom-pill {
+    font-size: 8.5px !important;
+    padding: 5px 14px !important;
+    bottom: 12px !important;
+  }
+
+  /* Sections 14 & 15: Developer and Site Visit on Tablet */
+  .developer-section .page-width,
+  .visit-section .page-width {
+    width: calc(100% - 48px) !important;
+    max-width: 100% !important;
+    margin-inline: auto !important;
+  }
+  .developer-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: clamp(24px, 3vw, 40px) !important;
+    align-items: center !important;
+    width: 100% !important;
+  }
+  .visit-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: clamp(24px, 3vw, 40px) !important;
+    align-items: center !important;
+    width: 100% !important;
+  }
+}
+
+@media (min-width: 761px) and (max-width: 880px) {
+  .primary-nav {
+    gap: 10px !important;
+  }
+  .nav-phone span {
+    display: none !important;
+  }
+  .nav-phone {
+    padding: 7px 9px !important;
+    margin-left: 4px !important;
+  }
+  .button-gold-pill.nav-cta {
+    padding: 0 13px !important;
+    font-size: 11.5px !important;
+  }
 }
