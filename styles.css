@@ -51,7 +51,6 @@ img, video {
   -khtml-user-drag: none;
   -moz-user-drag: none;
   -o-user-drag: none;
-  user-drag: none;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -66,7 +65,6 @@ iframe { display: block; max-width: 100%; }
 .landscape-banner-img {
   pointer-events: none !important;
   -webkit-user-drag: none !important;
-  user-drag: none !important;
   user-select: none !important;
 }
 
@@ -109,7 +107,7 @@ iframe { display: block; max-width: 100%; }
 .nav-shell {
   pointer-events: auto;
   width: min(1200px, calc(100% - 48px));
-  height: 68px;
+  height: 60px;
   margin: 0 auto;
   padding: 0 12px 0 28px;
   display: flex;
@@ -127,13 +125,13 @@ iframe { display: block; max-width: 100%; }
   transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 }
 .site-header.is-scrolled .nav-shell {
-  height: 68px;
-  background: linear-gradient(135deg, rgba(10, 34, 64, 0.98) 0%, rgba(7, 24, 46, 0.99) 100%);
-  border-color: rgba(223, 183, 108, 0.65);
+  height: 60px;
+  background: linear-gradient(135deg, rgba(14, 48, 86, 0.96) 0%, rgba(10, 32, 60, 0.98) 100%);
+  border: 1.5px solid rgba(223, 183, 108, 0.45);
   box-shadow:
-    0 20px 48px rgba(4, 15, 30, 0.75),
-    0 0 28px rgba(18, 62, 109, 0.45),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    0 16px 44px rgba(6, 20, 38, 0.55),
+    0 0 24px rgba(18, 62, 109, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 .wordmark {
   display: inline-flex;
@@ -216,40 +214,56 @@ iframe { display: block; max-width: 100%; }
   flex-shrink: 0;
 }
 .button-gold-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  height: 44px;
-  padding: 0 22px;
-  border-radius: 9999px;
-  background: linear-gradient(135deg, #dfb76c 0%, #c59b4e 100%);
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  height: 36px !important;
+  min-height: 0 !important;
+  max-height: 36px !important;
+  box-sizing: border-box !important;
+  padding: 0 16px !important;
+  border-radius: 9999px !important;
+  background: linear-gradient(135deg, #f5d491 0%, #dfb76c 50%, #c59b4e 100%) !important;
   color: #08213d !important;
-  font-size: 12.5px;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  border: none;
-  cursor: pointer;
-  box-shadow: 0 4px 16px rgba(197, 155, 78, 0.42);
-  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
-  text-decoration: none;
-  white-space: nowrap;
+  font-family: var(--sans) !important;
+  font-size: 11.5px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.025em !important;
+  line-height: 1 !important;
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
+  cursor: pointer !important;
+  box-shadow: 0 3px 12px rgba(197, 155, 78, 0.38), inset 0 1px 0 rgba(255, 255, 255, 0.45) !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease !important;
+  text-decoration: none !important;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
 }
 .button-gold-pill:hover {
-  transform: translateY(-1px);
-  filter: brightness(1.08);
-  box-shadow: 0 6px 22px rgba(197, 155, 78, 0.55);
+  transform: translateY(-1px) !important;
+  filter: brightness(1.06) !important;
+  box-shadow: 0 5px 18px rgba(197, 155, 78, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.55) !important;
 }
 .nav-arrow-circle {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: rgba(8, 33, 61, 0.2);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 11px;
-  color: #08213d;
-  font-weight: bold;
+  width: 18px !important;
+  height: 18px !important;
+  border-radius: 50% !important;
+  background: rgba(8, 33, 61, 0.18) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: #08213d !important;
+  flex-shrink: 0 !important;
+  transition: transform 0.2s ease !important;
+}
+.button-gold-pill:hover .nav-arrow-circle {
+  transform: translateX(2px) !important;
+  background: rgba(8, 33, 61, 0.26) !important;
+}
+.nav-arrow-circle svg {
+  display: block !important;
+  width: 9.5px !important;
+  height: 9.5px !important;
 }
 .button { min-height: 50px; display: inline-flex; align-items: center; justify-content: center; gap: 22px; padding: 0 23px; border: 1px solid transparent; border-radius: 3px; cursor: pointer; font-size: 12px; font-weight: 600; letter-spacing: .02em; transition: background .2s ease, color .2s ease, border-color .2s ease, transform .2s ease; }
 .button:hover { transform: translateY(-2px); }
@@ -4077,20 +4091,25 @@ figcaption#gallery-caption {
 }
 
 .faq-header-block .section-kicker {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 14px;
+  border-radius: 9999px;
+  background: #f5efe6;
+  border: none;
   margin-bottom: 14px;
 }
 
 .faq-header-block .section-kicker span {
   display: inline-block;
-  padding: 4px 12px;
-  border-radius: 9999px;
-  font-size: 10px;
+  font-size: 10.5px;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: #9d783e;
-  background: #fbf7ee;
-  border: 1px solid #ebd8b3;
+  background: transparent;
+  border: none;
+  padding: 0;
 }
 
 .faq-heading-title {
@@ -4122,9 +4141,10 @@ figcaption#gallery-caption {
 }
 
 .faq-accordion-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px 20px;
+  align-items: start;
   width: 100%;
 }
 
@@ -4148,11 +4168,11 @@ figcaption#gallery-caption {
 }
 
 .faq-accordion-summary {
-  padding: 18px 24px;
+  padding: 18px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
+  gap: 16px;
   list-style: none;
   cursor: pointer;
   user-select: none;
@@ -4165,7 +4185,7 @@ figcaption#gallery-caption {
 
 .faq-accordion-question {
   font-family: var(--sans);
-  font-size: 14px;
+  font-size: 13.5px;
   font-weight: 600;
   color: #1e293b;
   line-height: 1.45;
@@ -4201,7 +4221,7 @@ figcaption#gallery-caption {
 }
 
 .faq-accordion-body {
-  padding: 0 24px 20px;
+  padding: 0 20px 18px;
   border-top: 1px solid #f5f2eb;
   margin-top: 2px;
   padding-top: 14px;
@@ -4209,14 +4229,17 @@ figcaption#gallery-caption {
 
 .faq-accordion-answer {
   font-family: var(--sans);
-  font-size: 13.5px;
-  line-height: 1.75;
+  font-size: 13px;
+  line-height: 1.72;
   color: #4b5563;
   margin: 0;
-  max-width: 960px;
 }
 
 @media (max-width: 760px) {
+  .faq-accordion-list {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
   .faq-accordion-summary {
     padding: 16px 18px;
   }
@@ -4231,7 +4254,7 @@ figcaption#gallery-caption {
     font-size: 12.5px;
   }
 }
-.nav-cta { border-radius: 99px; }
+.nav-cta { border-radius: 9999px !important; min-height: 0 !important; box-sizing: border-box !important; }
 .floating-whatsapp { position: fixed; bottom: 24px; left: 24px; z-index: 100; width: 52px; height: 52px; border-radius: 50%; background: #25d366; color: #ffffff; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 20px rgba(37, 211, 102, 0.45); transition: transform 0.2s ease, box-shadow 0.2s ease; text-decoration: none; }
 .floating-whatsapp:hover { transform: scale(1.08); box-shadow: 0 8px 25px rgba(37, 211, 102, 0.55); }
 .floating-enquire-tab { position: fixed; top: 50%; right: 0; transform: translateY(-50%); z-index: 99; background: #dfb76c; color: #111827; padding: 14px 7px; writing-mode: vertical-rl; text-orientation: mixed; font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; border-radius: 6px 0 0 6px; box-shadow: -3px 4px 16px rgba(0, 0, 0, 0.22); text-decoration: none; cursor: pointer; transition: background 0.2s ease, transform 0.2s ease; }
@@ -4286,61 +4309,71 @@ figcaption#gallery-caption {
     top: 10px !important;
   }
   .nav-shell {
-    width: calc(100% - 20px);
-    max-width: 520px;
-    height: 58px !important;
-    margin: 0 auto;
-    padding: 0 8px 0 16px;
-    border-radius: 9999px;
-    background: linear-gradient(135deg, rgba(14, 48, 86, 0.98) 0%, rgba(10, 34, 62, 0.98) 100%);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1.5px solid rgba(223, 183, 108, 0.45);
-    box-shadow: 0 10px 30px rgba(6, 20, 38, 0.6), 0 0 16px rgba(18, 62, 109, 0.3);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    width: calc(100% - 20px) !important;
+    max-width: 520px !important;
+    height: 48px !important;
+    margin: 0 auto !important;
+    padding: 0 8px 0 16px !important;
+    border-radius: 9999px !important;
+    background: linear-gradient(135deg, rgba(14, 48, 86, 0.96) 0%, rgba(10, 32, 60, 0.98) 100%) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    border: 1.5px solid rgba(223, 183, 108, 0.45) !important;
+    box-shadow: 0 14px 36px rgba(6, 20, 38, 0.55), 0 0 20px rgba(18, 62, 109, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
   }
   .site-header.is-scrolled .nav-shell {
-    height: 58px !important;
-    border-color: rgba(223, 183, 108, 0.6) !important;
-    box-shadow: 0 12px 34px rgba(4, 16, 32, 0.75), 0 0 18px rgba(18, 62, 109, 0.4) !important;
+    height: 48px !important;
+    background: linear-gradient(135deg, rgba(14, 48, 86, 0.96) 0%, rgba(10, 32, 60, 0.98) 100%) !important;
+    border: 1.5px solid rgba(223, 183, 108, 0.45) !important;
+    box-shadow: 0 14px 36px rgba(6, 20, 38, 0.55), 0 0 20px rgba(18, 62, 109, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
   }
   .wordmark-brand {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
   }
   .brand-title {
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    color: #ffffff;
-    line-height: 1.15;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.12em !important;
+    color: #ffffff !important;
+    line-height: 1 !important;
+    white-space: nowrap !important;
   }
   .brand-subtitle {
-    font-size: 6.8px;
-    letter-spacing: 0.15em;
-    color: #dfb76c;
+    display: none !important;
   }
   .nav-actions {
-    display: flex;
-    align-items: center;
-    gap: 6px;
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
   }
   .button-gold-pill.nav-cta {
-    height: 40px;
-    padding: 0 15px;
-    font-size: 11.5px;
-    font-weight: 700;
-    gap: 7px;
+    height: 30px !important;
+    min-height: 0 !important;
+    max-height: 30px !important;
+    padding: 0 12px !important;
+    font-size: 10.5px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.02em !important;
+    gap: 5px !important;
     color: #08213d !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
   .button-gold-pill.nav-cta .nav-arrow-circle {
-    width: 18px;
-    height: 18px;
-    font-size: 10px;
-    color: #08213d;
+    width: 15px !important;
+    height: 15px !important;
+    font-size: 9px !important;
+    color: #08213d !important;
+  }
+  .button-gold-pill.nav-cta .nav-arrow-circle svg {
+    width: 8.5px !important;
+    height: 8.5px !important;
   }
   .menu-toggle {
     display: none !important;
@@ -5038,21 +5071,42 @@ figcaption#gallery-caption {
   }
   .nav-shell {
     width: calc(100% - 14px) !important;
-    height: 56px !important;
+    height: 44px !important;
     padding: 0 6px 0 12px !important;
+    background: linear-gradient(135deg, rgba(14, 48, 86, 0.96) 0%, rgba(10, 32, 60, 0.98) 100%) !important;
+    border: 1.5px solid rgba(223, 183, 108, 0.45) !important;
+    box-shadow: 0 12px 30px rgba(6, 20, 38, 0.55), 0 0 18px rgba(18, 62, 109, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
   }
   .site-header.is-scrolled .nav-shell {
-    height: 56px !important;
+    height: 44px !important;
+    background: linear-gradient(135deg, rgba(14, 48, 86, 0.96) 0%, rgba(10, 32, 60, 0.98) 100%) !important;
+    border: 1.5px solid rgba(223, 183, 108, 0.45) !important;
+    box-shadow: 0 12px 30px rgba(6, 20, 38, 0.55), 0 0 18px rgba(18, 62, 109, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
   }
   .hero {
-    padding-top: 74px !important;
+    padding-top: 64px !important;
   }
   .hero-title { font-size: 21px !important; }
   .price-val { font-size: 19px !important; }
-  .brand-title { font-size: 12px !important; letter-spacing: 0.1em; line-height: 1.1; }
-  .brand-subtitle { font-size: 6.2px !important; letter-spacing: 0.12em; color: #dfb76c; max-width: 155px !important; white-space: nowrap !important; overflow: hidden !important; text-overflow: ellipsis !important; }
-  .button-gold-pill.nav-cta { font-size: 10.5px !important; padding: 0 11px !important; height: 38px !important; font-weight: 700; gap: 5px !important; }
-  .button-gold-pill.nav-cta .nav-arrow-circle { width: 16px !important; height: 16px !important; font-size: 9px !important; }
+  .brand-title { font-size: 11.5px !important; letter-spacing: 0.09em !important; line-height: 1 !important; white-space: nowrap !important; }
+  .brand-subtitle { display: none !important; }
+  .button-gold-pill.nav-cta {
+    font-size: 9.5px !important;
+    padding: 0 9px !important;
+    height: 28px !important;
+    min-height: 0 !important;
+    max-height: 28px !important;
+    font-weight: 700 !important;
+    gap: 4px !important;
+  }
+  .button-gold-pill.nav-cta .nav-arrow-circle {
+    width: 14px !important;
+    height: 14px !important;
+  }
+  .button-gold-pill.nav-cta .nav-arrow-circle svg {
+    width: 8px !important;
+    height: 8px !important;
+  }
   .mobile-bar-btn { font-size: 10.5px !important; gap: 4px !important; height: 38px !important; }
   .stat-val { font-size: 15px !important; }
   .stat-lbl { font-size: 7.5px !important; }
@@ -5085,44 +5139,58 @@ figcaption#gallery-caption {
   .nav-shell {
     width: calc(100% - 32px) !important;
     max-width: 980px !important;
-    height: 64px !important;
+    height: 56px !important;
     padding: 0 10px 0 20px !important;
+    background: linear-gradient(135deg, rgba(14, 48, 86, 0.96) 0%, rgba(10, 32, 60, 0.98) 100%) !important;
+    border: 1.5px solid rgba(223, 183, 108, 0.45) !important;
+    box-shadow: 0 16px 44px rgba(6, 20, 38, 0.55), 0 0 24px rgba(18, 62, 109, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
   }
   .site-header.is-scrolled .nav-shell {
-    height: 64px !important;
+    height: 56px !important;
+    background: linear-gradient(135deg, rgba(14, 48, 86, 0.96) 0%, rgba(10, 32, 60, 0.98) 100%) !important;
+    border: 1.5px solid rgba(223, 183, 108, 0.45) !important;
+    box-shadow: 0 16px 44px rgba(6, 20, 38, 0.55), 0 0 24px rgba(18, 62, 109, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
   }
   .wordmark-brand .brand-title {
-    font-size: 14px !important;
+    font-size: 13.5px !important;
     letter-spacing: 0.12em !important;
   }
   .wordmark-brand .brand-subtitle {
-    font-size: 7px !important;
+    font-size: 6.8px !important;
     letter-spacing: 0.18em !important;
   }
   .primary-nav {
-    gap: clamp(10px, 1.6vw, 18px) !important;
-    font-size: 12.5px !important;
+    gap: clamp(8px, 1.4vw, 16px) !important;
+    font-size: 12px !important;
   }
   .primary-nav > a:not(.button):not(.nav-phone) {
-    font-size: 12.5px !important;
+    font-size: 12px !important;
+  }
+  .nav-phone span {
+    display: none !important;
   }
   .nav-phone {
     font-size: 12px !important;
-    padding: 5px 12px !important;
-    margin-left: 6px !important;
+    padding: 6px 10px !important;
+    margin-left: 4px !important;
     display: inline-flex !important;
   }
   .button-gold-pill.nav-cta {
-    height: 42px !important;
-    padding: 0 16px !important;
-    font-size: 12px !important;
+    height: 34px !important;
+    min-height: 0 !important;
+    max-height: 34px !important;
+    padding: 0 14px !important;
+    font-size: 11px !important;
     font-weight: 700 !important;
     gap: 6px !important;
   }
   .button-gold-pill.nav-cta .nav-arrow-circle {
-    width: 18px !important;
-    height: 18px !important;
-    font-size: 10px !important;
+    width: 17px !important;
+    height: 17px !important;
+  }
+  .button-gold-pill.nav-cta .nav-arrow-circle svg {
+    width: 9px !important;
+    height: 9px !important;
   }
 
   /* Tablet Full-Width Layout: Second Section Below Hero (#overview / .project-intro-section) */
@@ -5285,21 +5353,56 @@ figcaption#gallery-caption {
     align-items: center !important;
     width: 100% !important;
   }
+
+  /* Section 16: FAQ 2-Column Grid on Tablet */
+  .faq-accordion-list {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 14px 16px !important;
+    align-items: start !important;
+    width: 100% !important;
+  }
+  .faq-accordion-summary {
+    padding: 16px 18px !important;
+    gap: 12px !important;
+  }
+  .faq-accordion-question {
+    font-size: 13px !important;
+  }
+  .faq-accordion-body {
+    padding: 0 18px 16px !important;
+    padding-top: 12px !important;
+  }
+  .faq-accordion-answer {
+    font-size: 12.5px !important;
+    line-height: 1.68 !important;
+  }
 }
 
 @media (min-width: 761px) and (max-width: 880px) {
   .primary-nav {
-    gap: 10px !important;
+    gap: 8px !important;
   }
   .nav-phone span {
     display: none !important;
   }
   .nav-phone {
-    padding: 7px 9px !important;
-    margin-left: 4px !important;
+    padding: 6px 9px !important;
+    margin-left: 2px !important;
   }
   .button-gold-pill.nav-cta {
-    padding: 0 13px !important;
-    font-size: 11.5px !important;
+    height: 32px !important;
+    min-height: 0 !important;
+    max-height: 32px !important;
+    padding: 0 11px !important;
+    font-size: 10.5px !important;
+  }
+  .button-gold-pill.nav-cta .nav-arrow-circle {
+    width: 15px !important;
+    height: 15px !important;
+  }
+  .button-gold-pill.nav-cta .nav-arrow-circle svg {
+    width: 8.5px !important;
+    height: 8.5px !important;
   }
 }
