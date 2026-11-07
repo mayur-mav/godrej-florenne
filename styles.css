@@ -4927,8 +4927,7 @@ figcaption#gallery-caption {
 .nav-cta { border-radius: 9999px !important; min-height: 0 !important; box-sizing: border-box !important; }
 .floating-whatsapp { position: fixed; bottom: 24px; left: 24px; z-index: 100; width: 52px; height: 52px; border-radius: 50%; background: #25d366; color: #ffffff; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 20px rgba(37, 211, 102, 0.45); transition: transform 0.2s ease, box-shadow 0.2s ease; text-decoration: none; }
 .floating-whatsapp:hover { transform: scale(1.08); box-shadow: 0 8px 25px rgba(37, 211, 102, 0.55); }
-.floating-enquire-tab { position: fixed; top: 50%; right: 0; transform: translateY(-50%); z-index: 99; background: #dfb76c; color: #111827; padding: 14px 7px; writing-mode: vertical-rl; text-orientation: mixed; font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; border-radius: 6px 0 0 6px; box-shadow: -3px 4px 16px rgba(0, 0, 0, 0.22); text-decoration: none; cursor: pointer; transition: background 0.2s ease, transform 0.2s ease; }
-.floating-enquire-tab:hover { background: #e6c581; transform: translateY(-50%) translateX(-2px); }
+.floating-enquire-tab { display: none !important; }
 
 @media (max-width: 1100px) {
   .stats-ribbon-inner {
