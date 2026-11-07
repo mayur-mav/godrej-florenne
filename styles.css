@@ -4959,9 +4959,80 @@ figcaption#gallery-caption {
   .project-overview-grid { grid-template-columns: 1fr; gap: 36px; width: 100% !important; }
   .overview-image-frame { position: static; max-width: 100%; margin: 0 auto; width: 100%; }
 }
-@media (max-width: 860px) {
-  .hero-content { grid-template-columns: 1fr; gap: 36px; padding-top: 110px; }
-  .hero-enquiry-card { max-width: 480px; margin-inline: auto; }
+@media (max-width: 1024px) {
+  .hero-content {
+    grid-template-columns: 1fr !important;
+    gap: 36px !important;
+    padding-top: 110px !important;
+    width: min(var(--page-width), calc(100% - 48px)) !important;
+    margin-inline: auto !important;
+  }
+  .hero-copy {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    margin-inline: auto !important;
+    width: 100% !important;
+    max-width: 640px !important;
+  }
+  .hero-launch-pill {
+    margin-inline: auto !important;
+    text-align: center !important;
+    justify-content: center !important;
+  }
+  .hero-title {
+    text-align: center !important;
+    margin-inline: auto !important;
+    width: 100% !important;
+  }
+  .hero-description {
+    text-align: center !important;
+    margin-inline: auto !important;
+    max-width: 580px !important;
+  }
+  .hero-price-glass {
+    margin-inline: auto !important;
+    text-align: center !important;
+    width: 100% !important;
+    max-width: 540px !important;
+  }
+  .price-glass-eyebrow {
+    text-align: center !important;
+  }
+  .price-glass-main {
+    justify-content: center !important;
+    align-items: baseline !important;
+    text-align: center !important;
+  }
+  .price-config-note {
+    width: 100% !important;
+    margin: 4px 0 0 0 !important;
+    text-align: center !important;
+    margin-left: 0 !important;
+  }
+  .hero-badges {
+    justify-content: center !important;
+    align-items: center !important;
+    margin-inline: auto !important;
+    max-width: 580px !important;
+  }
+  .badge-pill {
+    justify-content: center !important;
+    text-align: center !important;
+  }
+  .hero-brochure-btn {
+    margin-inline: auto !important;
+    justify-content: center !important;
+  }
+  .hero-credit-line {
+    text-align: center !important;
+    margin-inline: auto !important;
+  }
+  .hero-enquiry-card {
+    max-width: 480px !important;
+    margin-inline: auto !important;
+  }
   .neighbourhood-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
   .masterplan-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
   .developer-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
@@ -5143,6 +5214,11 @@ figcaption#gallery-caption {
   .hero-copy {
     width: 100% !important;
     max-width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    margin-inline: auto !important;
   }
   .hero-launch-pill {
     max-width: 100%;
@@ -5150,6 +5226,9 @@ figcaption#gallery-caption {
     font-size: clamp(11px, 3.2vw, 13px);
     line-height: 1.45;
     margin-bottom: 10px;
+    margin-inline: auto !important;
+    text-align: center !important;
+    justify-content: center !important;
   }
   .hero-title {
     font-size: clamp(23px, 6.6vw, 29px) !important;
@@ -5157,6 +5236,9 @@ figcaption#gallery-caption {
     letter-spacing: -0.015em !important;
     margin-bottom: 10px !important;
     word-break: normal !important;
+    text-align: center !important;
+    margin-inline: auto !important;
+    width: 100% !important;
   }
   .hero-description {
     font-size: 13.5px !important;
@@ -5165,6 +5247,8 @@ figcaption#gallery-caption {
     color: rgba(255, 255, 255, 0.92) !important;
     width: 100% !important;
     max-width: 100% !important;
+    text-align: center !important;
+    margin-inline: auto !important;
   }
   .hero-price-glass {
     width: 100% !important;
@@ -5172,15 +5256,20 @@ figcaption#gallery-caption {
     box-sizing: border-box !important;
     padding: 12px 14px !important;
     margin-bottom: 12px !important;
+    margin-inline: auto !important;
+    text-align: center !important;
   }
   .price-glass-eyebrow {
     font-size: 8.5px;
+    text-align: center !important;
   }
   .price-glass-main {
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
+    justify-content: center !important;
     gap: 4px 8px;
+    text-align: center !important;
   }
   .price-val {
     font-size: 23px !important;
@@ -5195,6 +5284,7 @@ figcaption#gallery-caption {
     color: #93c5fd !important;
     white-space: normal !important;
     word-break: normal !important;
+    text-align: center !important;
   }
   /* Never truncate badges on mobile - full width clean pills */
   .hero-badges {
@@ -5204,6 +5294,7 @@ figcaption#gallery-caption {
     width: 100% !important;
     max-width: 100% !important;
     margin-bottom: 14px !important;
+    align-items: center !important;
   }
   .badge-pill {
     width: 100% !important;
@@ -5213,9 +5304,10 @@ figcaption#gallery-caption {
     border-radius: 8px !important;
     background: rgba(14, 45, 80, 0.75) !important;
     border: 1px solid rgba(59, 130, 246, 0.35) !important;
-    justify-content: flex-start !important;
+    justify-content: center !important;
     gap: 8px !important;
     white-space: normal !important;
+    text-align: center !important;
   }
   .badge-pill span {
     white-space: normal !important;
@@ -5228,10 +5320,10 @@ figcaption#gallery-caption {
   .hero-credit-line { display: none; }
   .hero-enquiry-card {
     width: 100% !important;
-    max-width: 100% !important;
+    max-width: 480px !important;
     box-sizing: border-box !important;
     margin-top: 6px;
-    margin-inline: 0 !important;
+    margin-inline: auto !important;
     padding: 20px 16px 16px !important;
     border-radius: 14px !important;
   }

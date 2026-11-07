@@ -279,13 +279,28 @@
 
     const initializeLocationMap = () => {
       if (locationMapInitialized) return;
-      locationMapInitialized = true;
 
       if (!window.L) {
+        const leafletScript = document.querySelector('script[src*="leaflet"]');
+        if (leafletScript && !leafletScript.dataset.loaded && !leafletScript.dataset.failed) {
+          leafletScript.addEventListener("load", () => {
+            leafletScript.dataset.loaded = "true";
+            initializeLocationMap();
+          }, { once: true });
+          leafletScript.addEventListener("error", () => {
+            leafletScript.dataset.failed = "true";
+            locationMapInitialized = true;
+            locationMapElement.innerHTML = '<p class="location-map-error" role="alert">The interactive map could not be loaded. Please refresh the page to try again.</p>';
+          }, { once: true });
+          return;
+        }
+
+        locationMapInitialized = true;
         locationMapElement.innerHTML = '<p class="location-map-error" role="alert">The interactive map could not be loaded. Please refresh the page to try again.</p>';
-        console.error("Leaflet failed to load; the interactive location map is unavailable.");
         return;
       }
+
+      locationMapInitialized = true;
 
       const location = [12.9924594, 77.8068603];
       const map = window.L.map(locationMapElement, { scrollWheelZoom: false }).setView(location, 15);
@@ -301,30 +316,17 @@
       }).addTo(map).bindPopup("<strong>Godrej Florenne</strong><br>Hemmandahalli, Bengaluru").openPopup();
     };
 
-    const initializeMapWhenNearViewport = () => {
-      if (locationMapElement.getBoundingClientRect().top > window.innerHeight + 200) return;
-
-      locationMapObserver?.disconnect();
-      window.removeEventListener("scroll", initializeMapWhenNearViewport);
-      window.removeEventListener("resize", initializeMapWhenNearViewport);
-      initializeLocationMap();
-    };
-
     if ("IntersectionObserver" in window) {
-      locationMapObserver = new IntersectionObserver((entries) => {
+      const locationMapObserver = new IntersectionObserver((entries) => {
         if (entries.some((entry) => entry.isIntersecting)) {
-          window.removeEventListener("scroll", initializeMapWhenNearViewport);
-          window.removeEventListener("resize", initializeMapWhenNearViewport);
-          initializeLocationMap();
           locationMapObserver.disconnect();
+          initializeLocationMap();
         }
-      }, { rootMargin: "200px" });
+      }, { rootMargin: "300px" });
       locationMapObserver.observe(locationMapElement);
+    } else {
+      setTimeout(initializeLocationMap, 2000);
     }
-
-    window.addEventListener("scroll", initializeMapWhenNearViewport, { passive: true });
-    window.addEventListener("resize", initializeMapWhenNearViewport, { passive: true });
-    initializeMapWhenNearViewport();
   }
 
   if (Array.isArray(data.locations)) {
@@ -1225,7 +1227,8 @@
 
   const updateCaptionsToggle = () => {
     if (!virtualTourVideo || !videoCaptionsToggle) return;
-    const captionsTrack = Array.from(virtualTourVideo.textTracks).find((track) => track.kind === "captions");
+    const tracks = virtualTourVideo.textTracks ? Array.from(virtualTourVideo.textTracks) : [];
+    const captionsTrack = tracks.find((track) => track.kind === "captions");
     const captionsEnabled = captionsTrack?.mode === "showing";
     videoCaptionsToggle.setAttribute("aria-pressed", String(captionsEnabled));
     videoCaptionsToggle.setAttribute("aria-label", captionsEnabled ? "Turn captions off" : "Turn captions on");
@@ -1234,13 +1237,14 @@
   if (videoCaptionsToggle && virtualTourVideo) {
     videoCaptionsToggle.addEventListener("click", (event) => {
       event.stopPropagation();
-      const captionsTrack = Array.from(virtualTourVideo.textTracks).find((track) => track.kind === "captions");
+      const tracks = virtualTourVideo.textTracks ? Array.from(virtualTourVideo.textTracks) : [];
+      const captionsTrack = tracks.find((track) => track.kind === "captions");
       if (!captionsTrack) return;
       captionsTrack.mode = captionsTrack.mode === "showing" ? "disabled" : "showing";
       updateCaptionsToggle();
     });
     virtualTourVideo.addEventListener("loadedmetadata", updateCaptionsToggle);
-    virtualTourVideo.textTracks.addEventListener("change", updateCaptionsToggle);
+    virtualTourVideo.textTracks?.addEventListener?.("change", updateCaptionsToggle);
   }
 
   const toggleVideoPlayback = () => {
@@ -1436,15 +1440,22 @@
   // Fixed Navbar Scroll Effect
   const siteHeader = document.querySelector(".site-header");
   if (siteHeader) {
-    const handleScroll = () => {
-      if (window.scrollY > 20) {
-        siteHeader.classList.add("is-scrolled");
-      } else {
-        siteHeader.classList.remove("is-scrolled");
+    let isScrolled = false;
+    let ticking = false;
+    const updateHeader = () => {
+      const scrolled = window.scrollY > 20;
+      if (scrolled !== isScrolled) {
+        isScrolled = scrolled;
+        siteHeader.classList.toggle("is-scrolled", isScrolled);
       }
+      ticking = false;
     };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
+    window.addEventListener("scroll", () => {
+      if (!ticking) {
+        requestAnimationFrame(updateHeader);
+        ticking = true;
+      }
+    }, { passive: true });
   }
 
   // ==========================================================================
