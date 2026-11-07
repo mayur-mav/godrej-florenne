@@ -1173,6 +1173,7 @@
   const videoControls = document.querySelector("#video-controls");
   const videoToggleButton = document.querySelector("#video-toggle");
   const videoProgress = document.querySelector("#video-progress");
+  const videoCaptionsToggle = document.querySelector("#video-captions-toggle");
   const videoCurrentTime = document.querySelector("#video-current-time");
   const videoDuration = document.querySelector("#video-duration");
   const videoLeadForm = document.querySelector("#video-lead-form");
@@ -1221,6 +1222,26 @@
       if (tourFrame) tourFrame.classList.toggle("is-paused", paused && tourFrame.classList.contains("is-playing"));
     }
   };
+
+  const updateCaptionsToggle = () => {
+    if (!virtualTourVideo || !videoCaptionsToggle) return;
+    const captionsTrack = Array.from(virtualTourVideo.textTracks).find((track) => track.kind === "captions");
+    const captionsEnabled = captionsTrack?.mode === "showing";
+    videoCaptionsToggle.setAttribute("aria-pressed", String(captionsEnabled));
+    videoCaptionsToggle.setAttribute("aria-label", captionsEnabled ? "Turn captions off" : "Turn captions on");
+  };
+
+  if (videoCaptionsToggle && virtualTourVideo) {
+    videoCaptionsToggle.addEventListener("click", (event) => {
+      event.stopPropagation();
+      const captionsTrack = Array.from(virtualTourVideo.textTracks).find((track) => track.kind === "captions");
+      if (!captionsTrack) return;
+      captionsTrack.mode = captionsTrack.mode === "showing" ? "disabled" : "showing";
+      updateCaptionsToggle();
+    });
+    virtualTourVideo.addEventListener("loadedmetadata", updateCaptionsToggle);
+    virtualTourVideo.textTracks.addEventListener("change", updateCaptionsToggle);
+  }
 
   const toggleVideoPlayback = () => {
     if (!virtualTourVideo) return;

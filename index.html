@@ -8,13 +8,20 @@
     <title>Godrej Florenne Bengaluru | Homes, Plans &amp; Amenities</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" media="print" onload="this.media='all'">
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap">
+    </noscript>
     <link rel="preload" as="image" href="assets/villa-hero.webp" type="image/webp" fetchpriority="high">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
-    <link rel="stylesheet" href="styles.css?v=5.6">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" media="print" onload="this.media='all'">
+    <noscript>
+      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+    </noscript>
+    <link rel="stylesheet" href="styles.css?v=6.2">
     <script src="data.js" defer></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="" defer></script>
-    <script src="script.js?v=5.6" defer></script>
+    <script src="script.js?v=6.2" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -22,7 +29,7 @@
       <div class="nav-shell">
         <a class="wordmark" href="#top" aria-label="Godrej Florenne home">
           <div class="wordmark-brand">
-            <span class="brand-title"><img class="brand-godrej-logo" src="assets/godrej-signature.svg" alt="" aria-hidden="true"><span class="brand-florenne">FLORENNE</span></span>
+            <span class="brand-title"><img class="brand-godrej-logo" src="assets/godrej-signature.svg" alt="" aria-hidden="true" width="58" height="28"><span class="brand-florenne">FLORENNE</span></span>
             <span class="brand-subtitle">OFF SOUKYA ROAD · WHITEFIELD, BENGALURU</span>
           </div>
         </a>
@@ -32,7 +39,7 @@
           <a href="#location">Location</a>
           <a href="#life">Amenities</a>
           <a href="#faq">FAQ</a>
-          <a href="tel:+917411662228" class="nav-phone">
+          <a href="tel:+917411662228" class="nav-phone" aria-label="Call Authorized Channel Partner M&A Ventures sales at +91 74116 62228">
             <svg class="phone-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
             <span>+91 74116 62228</span>
           </a>
@@ -53,7 +60,7 @@
 
     <main id="main">
       <section class="hero" aria-labelledby="hero-title">
-        <img class="hero-image" src="assets/villa-hero.webp" alt="Godrej Florenne luxury French row house residences in Bengaluru" fetchpriority="high" loading="eager" decoding="async" draggable="false">
+        <img class="hero-image" src="assets/villa-hero.webp" alt="Godrej Florenne luxury French row house residences in Bengaluru" width="1200" height="820" fetchpriority="high" loading="eager" decoding="sync" draggable="false">
         <div class="hero-shade"></div>
         <div class="hero-content page-width">
           <div class="hero-copy">
@@ -625,6 +632,7 @@
           <div class="virtual-tour-frame video-container reveal" id="tour-frame">
             <video class="virtual-tour-video" id="virtual-tour-video" playsinline disablepictureinpicture preload="none" poster="assets/rowhouses-street.webp" draggable="false">
               <source data-src="assets/property-tour.mp4" type="video/mp4">
+              <track kind="captions" src="assets/property-tour.en.vtt" srclang="en" label="English" default>
               Your browser does not support HTML5 video playback.
             </video>
             <div class="virtual-tour-overlay" id="tour-overlay"></div>
@@ -657,6 +665,7 @@
               <span class="video-current-time" id="video-current-time">0:00</span>
               <input class="video-progress" id="video-progress" type="range" min="0" max="1000" value="0" step="1" aria-label="Seek video">
               <span class="video-duration" id="video-duration">0:00</span>
+              <button class="video-captions-toggle" id="video-captions-toggle" type="button" aria-label="Turn captions off" aria-pressed="true">CC</button>
             </div>
             <div class="tour-slide-pill" id="tour-pill">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -1039,7 +1048,7 @@
 
     <div class="modal" id="tour-modal" role="dialog" aria-modal="true" aria-labelledby="tour-title" hidden>
       <div class="modal-backdrop" data-close-modal></div>
-      <div class="modal-panel"><button class="modal-close" type="button" data-close-modal aria-label="Close video">×</button><p class="eyebrow">A glimpse of home</p><h2 id="tour-title">The Florenne lifestyle film</h2><video id="tour-video" controls preload="none" poster="assets/curved-clubhouse.webp" draggable="false"><source src="assets/property-tour.mp4" type="video/mp4">Your browser does not support embedded video.</video><p class="video-note">Illustrative lifestyle footage. Replace with an official project film when available.</p></div>
+      <div class="modal-panel"><button class="modal-close" type="button" data-close-modal aria-label="Close video">×</button><p class="eyebrow">A glimpse of home</p><h2 id="tour-title">The Florenne lifestyle film</h2><video id="tour-video" controls preload="none" poster="assets/curved-clubhouse.webp" draggable="false"><source src="assets/property-tour.mp4" type="video/mp4"><track kind="captions" src="assets/property-tour.en.vtt" srclang="en" label="English" default>Your browser does not support embedded video.</video><p class="video-note">Illustrative lifestyle footage. Replace with an official project film when available.</p></div>
     </div>
     <div class="toast" id="site-toast" role="status" aria-live="polite"></div>
   </body>
