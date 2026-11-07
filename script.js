@@ -1155,52 +1155,7 @@
     }
   });
 
-  // Popup Form Submission with WhatsApp Handover
-  if (popupForm) {
-    popupForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const formData = new FormData(popupForm);
-      const name = formData.get("name") || "";
-      const phone = formData.get("phone") || "";
-      const code = formData.get("countryCode") || "+91";
-      const email = formData.get("email") || "";
-      const homeType = formData.get("homeType") || "4 BHK Optima";
-      const source = formData.get("sourceContext") || "Popup Modal";
 
-      const submitBtn = popupForm.querySelector("button[type='submit']");
-      const feedback = popupForm.querySelector(".form-feedback");
-
-      if (submitBtn) {
-        submitBtn.disabled = true;
-        submitBtn.style.opacity = "0.7";
-      }
-
-      const msg = encodeURIComponent(
-        `Hi, I am interested in Godrej Florenne. Name: ${name}, Phone: ${code} ${phone}${email ? `, Email: ${email}` : ""}, Looking For: ${homeType}, Request: ${source}`
-      );
-
-      if (feedback) {
-        feedback.textContent = "Thank you! Opening WhatsApp to share your request...";
-        feedback.className = "form-feedback is-visible form-success";
-      }
-
-      setTimeout(() => {
-        window.open(`https://wa.me/${salesWhatsappNumber}?text=${msg}`, "_blank", "noopener,noreferrer");
-        setTimeout(() => {
-          closeEnquiryModal();
-          popupForm.reset();
-          if (submitBtn) {
-            submitBtn.disabled = false;
-            submitBtn.style.opacity = "";
-          }
-          if (feedback) {
-            feedback.textContent = "";
-            feedback.className = "form-feedback";
-          }
-        }, 1200);
-      }, 600);
-    });
-  }
 
   // ==========================================================================
   // Direct In-Place Walkthrough Video Player
@@ -1390,19 +1345,6 @@
     });
   }
 
-  if (videoLeadForm && videoLeadPhone) {
-    videoLeadForm.addEventListener("submit", (event) => {
-      event.preventDefault();
-      if (!validateForm(videoLeadForm)) return;
-
-      const phone = videoLeadPhone.value.trim();
-      const message = `Hi, I was watching the Godrej Florenne walkthrough video. My phone number is ${phone}. Please share the official cost sheet & 4/5 BHK layouts.`;
-      const whatsappUrl = `https://wa.me/${salesWhatsappNumber}?text=${encodeURIComponent(message)}`;
-      window.open(whatsappUrl, "_blank", "noopener,noreferrer");
-      collapseVideoLeadCard();
-    });
-  }
-
   // Backup tour modal for secondary triggers if present
   const tourModal = document.querySelector("#tour-modal");
   const tourVideo = document.querySelector("#tour-video");
@@ -1426,35 +1368,153 @@
     });
   }
 
-  // Forms & Feedback
-  const toast = document.querySelector("#site-toast");
-  let toastTimeout;
-  document.querySelectorAll("[data-enquiry-form]").forEach((form) => {
+  // ==========================================================================
+  // Centralized Lead Capture API & Exact Success Modal Integration
+  // ==========================================================================
+  const LEAD_API_ENDPOINT = window.FLORENNE_LEAD_API || "";
+
+  const successModal = document.querySelector("#lead-success-modal");
+  const successNameEl = document.querySelector("#success-modal-name");
+  const successProjectEl = document.querySelector("#success-project-name");
+  const successBhkEl = document.querySelector("#success-bhk-val");
+  const successPhoneEl = document.querySelector("#success-phone-val");
+  const successWhatsappBtn = document.querySelector("#success-modal-whatsapp-btn");
+
+  function showSuccessModal(payload) {
+    if (typeof closeEnquiryModal === "function") {
+      closeEnquiryModal();
+    }
+
+    const displayName = payload.name && payload.name.trim() ? payload.name.trim() : "";
+    if (successNameEl) {
+      successNameEl.textContent = displayName ? `Thank you, ${displayName}.` : "Thank you.";
+    }
+    if (successProjectEl) {
+      successProjectEl.textContent = "Godrej Florenne";
+    }
+    if (successBhkEl) {
+      successBhkEl.textContent = payload.bhk || "4 BHK Optima";
+    }
+    if (successPhoneEl) {
+      successPhoneEl.textContent = payload.phone || "";
+    }
+    if (successWhatsappBtn) {
+      const msg = encodeURIComponent(
+        `Hi, I have submitted an enquiry for Godrej Florenne.${displayName ? " Name: " + displayName + "." : ""} Phone: ${payload.phone}. BHK Preference: ${payload.bhk || "4 BHK Optima"}. Please share the price list and details.`
+      );
+      successWhatsappBtn.href = `https://wa.me/${salesWhatsappNumber}?text=${msg}`;
+    }
+
+    if (successModal) {
+      successModal.removeAttribute("hidden");
+      document.body.classList.add("modal-open");
+      const closeBtn = successModal.querySelector(".success-modal-close");
+      if (closeBtn) closeBtn.focus();
+    }
+  }
+
+  function closeSuccessModal() {
+    if (successModal) {
+      successModal.setAttribute("hidden", "");
+      document.body.classList.remove("modal-open");
+    }
+  }
+
+  if (successModal) {
+    successModal.addEventListener("click", (e) => {
+      if (e.target.matches("[data-close-success], .success-modal-backdrop, .success-modal-close, .success-modal-close *")) {
+        closeSuccessModal();
+      }
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && !successModal.hasAttribute("hidden")) {
+        closeSuccessModal();
+      }
+    });
+  }
+
+  function submitLeadCapture(payload, showModal = true) {
+    if (LEAD_API_ENDPOINT) {
+      fetch(LEAD_API_ENDPOINT, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify(payload)
+      })
+        .then((res) => res.json())
+        .then((data) => console.log("[Lead Capture]: API response:", data))
+        .catch((err) => console.warn("[Lead Capture]: API submission error:", err));
+    } else {
+      console.log("[Lead Capture - Local Mode]: API endpoint not set yet. Ready to send exact payload:", payload);
+    }
+
+    if (showModal) {
+      showSuccessModal(payload);
+    }
+  }
+
+  // Unified Lead Form Submission for All Forms on the Page
+  document.querySelectorAll("form[data-enquiry-form], #video-lead-form").forEach((form) => {
     form.addEventListener("submit", (event) => {
       event.preventDefault();
       if (!validateForm(form)) return;
 
-      const isIntro = form.getAttribute("data-enquiry-form") === "intro";
-      const name = form.elements.name ? form.elements.name.value.trim() : "Valued Guest";
-      const phone = form.elements.phone ? form.elements.phone.value.trim() : "";
-      const feedback = form.querySelector(".form-feedback");
-      if (feedback) {
-        feedback.textContent = `Thank you${name !== "Valued Guest" ? ", " + name : ""}. Your Godrej Florenne cost sheet & floor plans are on the way!`;
+      const isIntro = form.id === "intro-lead-form" || form.getAttribute("data-enquiry-form") === "intro";
+      const isVideo = form.id === "video-lead-form";
+
+      const name = form.elements.name ? form.elements.name.value.trim() : "";
+      const code = form.elements.countryCode ? form.elements.countryCode.value.trim() : "+91";
+      const phoneInput = form.elements.phone ? form.elements.phone.value.trim() : "";
+      const cleanPhone = phoneInput.replace(/\D/g, "");
+      const cleanCode = code.startsWith("+") ? code : "+" + code;
+      const fullPhone = `${cleanCode}${cleanPhone}`;
+
+      let bhk = "";
+      if (form.elements.homeType) {
+        const sel = form.elements.homeType;
+        if (sel.options && sel.selectedIndex >= 0) {
+          bhk = sel.options[sel.selectedIndex].text.trim() || sel.value.trim();
+        } else {
+          bhk = sel.value.trim();
+        }
       }
+      if (!bhk) bhk = "4 BHK Optima";
+
+      const email = form.elements.email ? form.elements.email.value.trim() : "";
+
+      const payload = {
+        bhk: bhk,
+        email: email,
+        name: name,
+        phone: fullPhone,
+        projectId: "godrej-florenne"
+      };
+
+      if (isVideo && typeof collapseVideoLeadCard === "function") {
+        collapseVideoLeadCard();
+      }
+
       form.reset();
 
-      if (toast) {
-        toast.textContent = isIntro
-          ? "Thank you! The Godrej Florenne cost sheet & unit plans have been dispatched to WhatsApp."
-          : "Thank you! Your enquiry for Godrej Florenne has been registered.";
-        toast.classList.add("is-visible");
-        window.clearTimeout(toastTimeout);
-        toastTimeout = window.setTimeout(() => toast.classList.remove("is-visible"), 5000);
-      }
-
-      if (isIntro && phone) {
-        const msg = encodeURIComponent(`Hi, I am interested in Godrej Florenne and would like to receive the official cost sheet and floor plans. My mobile number is ${phone}.`);
+      if (isIntro) {
+        // Send payload without showing popup; open WhatsApp directly
+        submitLeadCapture(payload, false);
+        const msg = encodeURIComponent(
+          `Hi, I am interested in Godrej Florenne and would like to receive the official cost sheet and floor plans. My mobile number is ${fullPhone}.`
+        );
         window.open(`https://wa.me/${salesWhatsappNumber}?text=${msg}`, "_blank", "noopener,noreferrer");
+      } else if (isVideo) {
+        // Send payload without showing popup; open WhatsApp directly
+        submitLeadCapture(payload, false);
+        const msg = encodeURIComponent(
+          `Hi, I was watching the Godrej Florenne walkthrough video. My phone number is ${fullPhone}. Please share the official cost sheet & 4/5 BHK layouts.`
+        );
+        window.open(`https://wa.me/${salesWhatsappNumber}?text=${msg}`, "_blank", "noopener,noreferrer");
+      } else {
+        // Full enquiry forms (Hero, Visit, Popup modal): submit payload & show Success Modal
+        submitLeadCapture(payload, true);
       }
     });
   });

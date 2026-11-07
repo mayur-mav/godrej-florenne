@@ -20,10 +20,10 @@
     <noscript>
       <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
     </noscript>
-    <link rel="stylesheet" href="styles.css?v=7.1">
+    <link rel="stylesheet" href="styles.css?v=7.3">
     <script src="data.js" defer></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="" defer></script>
-    <script src="script.js?v=7.0" defer></script>
+    <script src="script.js?v=7.3" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -948,6 +948,11 @@
     </a>
 
 
+    <!-- Floating ENQUIRE NOW Vertical Tab -->
+    <a class="floating-enquire-tab" aria-label="Enquire Now" data-open-modal>
+      <span>ENQUIRE NOW</span>
+    </a>
+
     <!-- Mobile Fixed Lead Action Bar (Call, WhatsApp, Enquire) -->
     <div class="mobile-action-bar" aria-label="Quick actions">
       <a href="tel:+917411662228" class="mobile-bar-btn mobile-bar-call" aria-label="Call Sales Desk">
@@ -1042,6 +1047,66 @@
           </p>
           <div class="form-feedback" aria-live="polite"></div>
         </form>
+      </div>
+    </div>
+
+    <!-- Global Lead Success Modal (Exact match to Reference Screenshot) -->
+    <div class="lead-success-modal" id="lead-success-modal" role="dialog" aria-modal="true" aria-labelledby="success-modal-heading" hidden>
+      <div class="success-modal-backdrop" data-close-success></div>
+      <div class="success-modal-card">
+        <button class="success-modal-close" type="button" data-close-success aria-label="Close dialog">&times;</button>
+
+        <div class="success-badge-pill">
+          <span>AUTHORISED CHANNEL PARTNER - M&A VENTURES</span>
+        </div>
+
+        <h2 class="success-modal-title" id="success-modal-heading">Enquiry Successfully Submitted!</h2>
+        <p class="success-modal-sub" id="success-modal-name">Thank you.</p>
+
+        <div class="success-details-card">
+          <div class="success-detail-row">
+            <span class="success-detail-label">
+              <svg class="detail-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M3 21h18M9 8h1M9 12h1M9 16h1M14 8h1M14 12h1M14 16h1M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16"></path>
+              </svg>
+              <span>Project:</span>
+            </span>
+            <strong class="success-detail-val" id="success-project-name">Godrej Florenne</strong>
+          </div>
+
+          <div class="success-detail-row">
+            <span class="success-detail-label">
+              <svg class="detail-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M2 4v16M2 8h18a2 2 0 0 1 2 2v10M2 17h20M6 8v9"></path>
+              </svg>
+              <span>BHK Preference:</span>
+            </span>
+            <strong class="success-detail-val" id="success-bhk-val">4 BHK Optima</strong>
+          </div>
+
+          <div class="success-detail-row">
+            <span class="success-detail-label">
+              <svg class="detail-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+              </svg>
+              <span>Contact:</span>
+            </span>
+            <strong class="success-detail-val" id="success-phone-val">+91 74116 62228</strong>
+          </div>
+        </div>
+
+        <p class="success-modal-message">
+          Your enquiry has been received by M&A Ventures, the Authorised Channel Partner for Godrej Properties. Our dedicated property advisor will contact you within 15 minutes.
+        </p>
+
+        <p class="success-modal-prompt">Need immediate consultation?</p>
+
+        <a class="success-modal-whatsapp" id="success-modal-whatsapp-btn" href="https://wa.me/917411662228" target="_blank" rel="noopener noreferrer">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm0 18.15c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.16 8.16 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.83c.02 4.54-3.68 8.23-8.22 8.23zm4.52-6.17c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.43s-.56-1.34-.76-1.84c-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.44.06-.66.31-.23.25-.86.84-.86 2.05 0 1.21.88 2.38 1 2.54.12.17 1.74 2.66 4.22 3.73.59.25 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.07-.1-.23-.17-.48-.29z"></path>
+          </svg>
+          <span>WhatsApp Sales Desk</span>
+        </a>
       </div>
     </div>
 
