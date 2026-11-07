@@ -2,6 +2,7 @@
   "use strict";
 
   const data = window.florenneData;
+  const salesWhatsappNumber = "917411662228";
   if (!data) {
     console.error("Florenne page data could not be loaded.");
     return;
@@ -623,6 +624,338 @@
   const popupConfigSelect = document.querySelector("#popup-config");
   const popupForm = document.querySelector("#popup-enquiry-form");
   let previousFocusEl = null;
+  const phoneLengthsByCountry = {
+    "+1": { min: 10, max: 10 },
+    "+44": { min: 10, max: 10 },
+    "+49": { min: 10, max: 11 },
+    "+60": { min: 9, max: 10 },
+    "+61": { min: 9, max: 9 },
+    "+64": { min: 9, max: 9 },
+    "+65": { min: 8, max: 8 },
+    "+852": { min: 8, max: 8 },
+    "+91": { min: 10, max: 10 },
+    "+965": { min: 8, max: 8 },
+    "+966": { min: 9, max: 9 },
+    "+968": { min: 8, max: 8 },
+    "+971": { min: 9, max: 9 },
+    "+973": { min: 8, max: 8 },
+    "+974": { min: 8, max: 8 }
+  };
+  const leadForms = document.querySelectorAll("form[data-enquiry-form], #video-lead-form");
+  const getFieldError = (control) => {
+    const wrapper = control.closest(".phone-field-group, .visit-phone-row, .popup-phone-row, .intro-tel-group, .video-lead-phone-field, .custom-select-wrap, .visit-select-box, .popup-select-box") || control;
+    const error = wrapper.parentElement.querySelector(`.field-error[data-for="${control.id || control.name}"]`);
+    if (error && error.dataset.control === (control.id || control.name)) return error;
+    const message = document.createElement("span");
+    message.className = "field-error";
+    message.dataset.for = control.id || control.name;
+    message.dataset.control = control.id || control.name;
+    message.id = `${control.id || control.name}-error`;
+    message.setAttribute("role", "alert");
+    message.setAttribute("aria-live", "polite");
+    message.hidden = true;
+    wrapper.insertAdjacentElement("afterend", message);
+    control.setAttribute("aria-describedby", [...new Set([...(control.getAttribute("aria-describedby") || "").split(/\s+/), message.id].filter(Boolean))].join(" "));
+    return message;
+  };
+
+  const getPhoneError = (input) => {
+    const form = input.form;
+    const wrapper = input.closest(".intro-input-row") ||
+      input.closest(".phone-field-group, .visit-phone-row, .popup-phone-row, .intro-tel-group, .video-lead-phone-field");
+    const parent = wrapper || input.parentElement;
+    const key = input.id || input.name;
+    let error = parent.parentElement.querySelector(`.field-error[data-for="${key}"]`);
+    if (!error) {
+      error = document.createElement("span");
+      error.className = "field-error";
+      error.dataset.for = key;
+      error.dataset.control = key;
+      error.id = `${key}-error`;
+      error.setAttribute("role", "alert");
+      error.setAttribute("aria-live", "polite");
+      error.hidden = true;
+      parent.insertAdjacentElement("afterend", error);
+    }
+    input.setAttribute("aria-describedby", [...new Set([...(input.getAttribute("aria-describedby") || "").split(/\s+/), error.id].filter(Boolean))].join(" "));
+    if (form) {
+      const countrySelect = form.querySelector('select[name="countryCode"]');
+      const countryCode = countrySelect ? countrySelect.value : "+91";
+      const lengths = phoneLengthsByCountry[countryCode] || { min: 10, max: 10 };
+      input.maxLength = lengths.max;
+      input.placeholder = lengths.min === lengths.max
+        ? `${lengths.max}-digit mobile number`
+        : `${lengths.min}-${lengths.max}-digit mobile number`;
+      input.inputMode = "numeric";
+      input.dataset.phoneMinLength = String(lengths.min);
+      input.dataset.phoneMaxLength = String(lengths.max);
+    }
+    return error;
+  };
+
+  const getFieldLabel = (control) => {
+    const label = control.labels?.[0]?.textContent.trim()
+      || control.getAttribute("aria-label")
+      || control.placeholder
+      || control.name
+      || "this field";
+    return label.replace(/\s+/g, " ").replace(/:$/, "").toLowerCase();
+  };
+
+  const getValidationMessage = (control) => {
+    const value = control.value.trim();
+    if (control.type === "tel" || control.name === "phone") {
+      const minLength = Number(control.dataset.phoneMinLength) || 10;
+      const maxLength = Number(control.dataset.phoneMaxLength) || minLength;
+      if (!value) return "Please enter your phone number.";
+      if (!new RegExp(`^\\d{${minLength},${maxLength}}$`).test(value)) {
+        return minLength === maxLength
+          ? `Enter a valid ${minLength}-digit phone number.`
+          : `Enter a valid ${minLength}-${maxLength}-digit phone number.`;
+      }
+      return "";
+    }
+    if (control.type === "email") {
+      if (control.required && !value) return "Please enter your email address.";
+      if (value && control.validity.typeMismatch) return "Enter a valid email address.";
+      return "";
+    }
+    if (control.required && !value) {
+      if (control.tagName === "SELECT") {
+        const label = getFieldLabel(control);
+        return `Please select ${label === "looking for" ? "a home type" : `your ${label}`}.`;
+      }
+      return `Please enter your ${getFieldLabel(control)}.`;
+    }
+    if (control.name === "name" && value && value.length < 2) {
+      return "Enter at least 2 characters.";
+    }
+    return "";
+  };
+
+  const validateControl = (control) => {
+    const isPhone = control.type === "tel" || control.name === "phone";
+    const error = isPhone ? getPhoneError(control) : getFieldError(control);
+    const message = getValidationMessage(control);
+    error.textContent = message;
+    error.hidden = !message;
+    control.classList.toggle("is-invalid", Boolean(message));
+    control.setAttribute("aria-invalid", message ? "true" : "false");
+    if (control.tagName === "SELECT") {
+      const shell = control.closest(".custom-dropdown-shell");
+      const trigger = shell?.querySelector(".custom-dropdown-trigger");
+      if (trigger) {
+        trigger.classList.toggle("is-invalid", Boolean(message));
+        trigger.setAttribute("aria-invalid", message ? "true" : "false");
+        const errorId = error.id;
+        trigger.setAttribute("aria-describedby", errorId);
+      }
+    }
+    return !message;
+  };
+
+  const validateForm = (form) => {
+    let valid = true;
+    let firstInvalid = null;
+    form.querySelectorAll("input:not([type='hidden']), select, textarea").forEach((control) => {
+      if (!validateControl(control)) {
+        valid = false;
+        if (!firstInvalid) firstInvalid = control;
+      }
+    });
+    if (!valid) {
+      const shell = firstInvalid.closest(".custom-dropdown-shell");
+      (shell?.querySelector(".custom-dropdown-trigger") || firstInvalid).focus();
+    }
+    return valid;
+  };
+
+  const syncCustomSelect = (select, trigger) => {
+    const selectedOption = select.options[select.selectedIndex];
+    trigger.textContent = selectedOption ? selectedOption.textContent.trim() : "Select an option";
+    trigger.setAttribute("aria-label", select.getAttribute("aria-label") || select.labels?.[0]?.textContent.trim() || "Choose an option");
+    trigger.dataset.value = select.value;
+    select.closest(".custom-dropdown-shell")?.querySelectorAll('[role="option"]').forEach((option) => {
+      const selected = option.dataset.value === select.value;
+      option.setAttribute("aria-selected", selected ? "true" : "false");
+      option.classList.toggle("is-selected", selected);
+    });
+  };
+
+  const closeCustomDropdowns = (except) => {
+    document.querySelectorAll(".custom-dropdown-shell.is-open").forEach((shell) => {
+      if (shell === except) return;
+      shell.classList.remove("is-open");
+      shell.querySelector(".custom-dropdown-trigger")?.setAttribute("aria-expanded", "false");
+      shell.querySelector(".custom-dropdown-list")?.setAttribute("hidden", "");
+    });
+  };
+
+  document.querySelectorAll("form[data-enquiry-form], #video-lead-form").forEach((form) => {
+    form.noValidate = true;
+    form.querySelectorAll("input[type='tel'], input[name='phone']").forEach((input) => {
+      getPhoneError(input);
+      input.addEventListener("input", () => {
+        const code = form.querySelector('select[name="countryCode"]')?.value || "+91";
+        const lengths = phoneLengthsByCountry[code] || { min: 10, max: 10 };
+        let digits = input.value.replace(/\D/g, "");
+        const dialDigits = code.slice(1);
+        if (digits.startsWith(dialDigits) && digits.length > lengths.max) digits = digits.slice(dialDigits.length);
+        input.value = digits.slice(0, lengths.max);
+        if (input.getAttribute("aria-invalid") === "true") validateControl(input);
+      });
+    });
+    form.querySelectorAll("input:not([type='hidden']), select, textarea").forEach((control) => {
+      control.addEventListener("input", () => {
+        if (control.getAttribute("aria-invalid") === "true") validateControl(control);
+      });
+      control.addEventListener("change", () => {
+        if (control.getAttribute("aria-invalid") === "true") validateControl(control);
+      });
+    });
+    form.addEventListener("reset", () => {
+      window.setTimeout(() => {
+        form.querySelectorAll(".field-error").forEach((error) => {
+          error.textContent = "";
+          error.hidden = true;
+        });
+        form.querySelectorAll(".is-invalid").forEach((control) => {
+          control.classList.remove("is-invalid");
+          control.removeAttribute("aria-invalid");
+        });
+        form.querySelectorAll("select").forEach((select) => {
+          const shell = select.closest(".custom-dropdown-shell");
+          const trigger = shell?.querySelector(".custom-dropdown-trigger");
+          if (trigger) syncCustomSelect(select, trigger);
+        });
+        form.querySelectorAll("input[type='tel'], input[name='phone']").forEach(getPhoneError);
+      }, 0);
+    });
+  });
+
+  document.addEventListener("submit", (event) => {
+    const form = event.target;
+    if (!form.matches("form[data-enquiry-form], #video-lead-form")) return;
+    closeCustomDropdowns();
+    if (!validateForm(form)) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+    }
+  }, true);
+
+  document.querySelectorAll("select").forEach((select, selectIndex) => {
+    const shell = document.createElement("div");
+    const countryVariant = select.classList.contains("phone-country-select")
+      ? " is-hero-country"
+      : select.classList.contains("visit-country-select")
+        ? " is-visit-country"
+        : select.classList.contains("popup-country-select")
+          ? " is-popup-country"
+          : "";
+    shell.className = `custom-dropdown-shell${select.name === "countryCode" ? " is-country" : ""}${countryVariant}`;
+    const parent = select.parentElement;
+    parent.insertBefore(shell, select);
+    shell.appendChild(select);
+    select.classList.add("custom-dropdown-native");
+    select.tabIndex = -1;
+    select.setAttribute("aria-hidden", "true");
+    parent.querySelectorAll(":scope > .country-arrow-icon, :scope > .popup-select-arrow, :scope > .select-arrow-icon").forEach((arrow) => arrow.remove());
+
+    const trigger = document.createElement("button");
+    trigger.type = "button";
+    trigger.className = `custom-dropdown-trigger ${Array.from(select.classList).filter((className) => className !== "custom-dropdown-native").join(" ")}`;
+    trigger.setAttribute("aria-haspopup", "listbox");
+    trigger.setAttribute("aria-expanded", "false");
+    trigger.setAttribute("aria-controls", `custom-select-list-${selectIndex}`);
+
+    const list = document.createElement("div");
+    list.className = "custom-dropdown-list";
+    list.id = `custom-select-list-${selectIndex}`;
+    list.setAttribute("role", "listbox");
+    list.setAttribute("hidden", "");
+
+    Array.from(select.options).forEach((option, optionIndex) => {
+      const item = document.createElement("button");
+      item.type = "button";
+      item.className = "custom-dropdown-option";
+      item.setAttribute("role", "option");
+      item.setAttribute("aria-selected", option.selected ? "true" : "false");
+      item.dataset.value = option.value;
+      item.textContent = option.textContent.trim();
+      item.tabIndex = -1;
+      item.addEventListener("click", () => {
+        select.selectedIndex = optionIndex;
+        select.dispatchEvent(new Event("change", { bubbles: true }));
+        syncCustomSelect(select, trigger);
+        shell.classList.remove("is-open");
+        trigger.setAttribute("aria-expanded", "false");
+        list.hidden = true;
+        trigger.focus();
+      });
+      list.appendChild(item);
+    });
+
+    const openList = (last = false) => {
+      closeCustomDropdowns(shell);
+      shell.classList.add("is-open");
+      trigger.setAttribute("aria-expanded", "true");
+      list.hidden = false;
+      const options = Array.from(list.querySelectorAll('[role="option"]'));
+      (last ? options[options.length - 1] : options[select.selectedIndex])?.focus();
+    };
+
+    trigger.addEventListener("click", () => {
+      if (shell.classList.contains("is-open")) {
+        closeCustomDropdowns();
+      } else {
+        openList();
+      }
+    });
+    trigger.addEventListener("keydown", (event) => {
+      if (["ArrowDown", "ArrowUp", "Enter", " "].includes(event.key)) {
+        event.preventDefault();
+        openList(event.key === "ArrowUp");
+      }
+    });
+    list.addEventListener("keydown", (event) => {
+      const options = Array.from(list.querySelectorAll('[role="option"]'));
+      const currentIndex = options.indexOf(document.activeElement);
+      let nextIndex = currentIndex;
+      if (event.key === "ArrowDown") nextIndex = Math.min(options.length - 1, currentIndex + 1);
+      else if (event.key === "ArrowUp") nextIndex = Math.max(0, currentIndex - 1);
+      else if (event.key === "Home") nextIndex = 0;
+      else if (event.key === "End") nextIndex = options.length - 1;
+      else if (event.key === "Escape") {
+        closeCustomDropdowns();
+        trigger.focus();
+        event.preventDefault();
+        return;
+      } else if (event.key === "Enter" || event.key === " ") {
+        document.activeElement.click();
+        event.preventDefault();
+        return;
+      } else {
+        return;
+      }
+      event.preventDefault();
+      options[nextIndex]?.focus();
+    });
+    select.addEventListener("change", () => {
+      syncCustomSelect(select, trigger);
+      const phone = select.form?.querySelector('input[type="tel"], input[name="phone"]');
+      if (phone) {
+        getPhoneError(phone);
+        if (phone.value && phone.getAttribute("aria-invalid") === "true") validateControl(phone);
+      }
+    });
+
+    shell.append(trigger, list);
+    syncCustomSelect(select, trigger);
+  });
+
+  document.addEventListener("click", (event) => {
+    if (!event.target.closest(".custom-dropdown-shell")) closeCustomDropdowns();
+  });
 
   function openEnquiryModal(opts = {}) {
     if (!enquiryModal) return;
@@ -810,7 +1143,7 @@
       }
 
       setTimeout(() => {
-        window.open(`https://wa.me/919342333197?text=${msg}`, "_blank", "noopener,noreferrer");
+        window.open(`https://wa.me/${salesWhatsappNumber}?text=${msg}`, "_blank", "noopener,noreferrer");
         setTimeout(() => {
           closeEnquiryModal();
           popupForm.reset();
@@ -850,6 +1183,12 @@
     if (!virtualTourVideo || !tourFrame) return;
     tourFrame.classList.add("is-playing");
     if (videoControls) videoControls.hidden = false;
+    const videoSource = virtualTourVideo.querySelector("source[data-src]");
+    if (videoSource) {
+      videoSource.src = videoSource.dataset.src;
+      delete videoSource.dataset.src;
+      virtualTourVideo.load();
+    }
     virtualTourVideo.play().catch(() => {});
   };
 
@@ -925,8 +1264,15 @@
       virtualTourVideo.addEventListener(eventName, updateVideoControls);
     });
 
+    virtualTourVideo.addEventListener("play", () => {
+      if (virtualTourVideo.currentTime < 0.5) {
+        hasTriggeredVideoLead = false;
+      }
+    });
+
     virtualTourVideo.addEventListener("ended", () => {
       hasTriggeredVideoLead = true;
+      virtualTourVideo.currentTime = 0;
       showVideoLeadCard();
     });
   }
@@ -982,11 +1328,11 @@
   if (videoLeadForm && videoLeadPhone) {
     videoLeadForm.addEventListener("submit", (event) => {
       event.preventDefault();
-      if (!videoLeadForm.reportValidity()) return;
+      if (!validateForm(videoLeadForm)) return;
 
       const phone = videoLeadPhone.value.trim();
       const message = `Hi, I was watching the Godrej Florenne walkthrough video. My phone number is ${phone}. Please share the official cost sheet & 4/5 BHK layouts.`;
-      const whatsappUrl = `https://wa.me/917411662228?text=${encodeURIComponent(message)}`;
+      const whatsappUrl = `https://wa.me/${salesWhatsappNumber}?text=${encodeURIComponent(message)}`;
       window.open(whatsappUrl, "_blank", "noopener,noreferrer");
       collapseVideoLeadCard();
     });
@@ -1021,7 +1367,7 @@
   document.querySelectorAll("[data-enquiry-form]").forEach((form) => {
     form.addEventListener("submit", (event) => {
       event.preventDefault();
-      if (!form.reportValidity()) return;
+      if (!validateForm(form)) return;
 
       const isIntro = form.getAttribute("data-enquiry-form") === "intro";
       const name = form.elements.name ? form.elements.name.value.trim() : "Valued Guest";
@@ -1042,8 +1388,8 @@
       }
 
       if (isIntro && phone) {
-        const msg = encodeURIComponent(`Hi, I am interested in Godrej Florenne and would like to receive the official cost sheet and floor plans. My mobile is ${phone}.`);
-        window.open(`https://wa.me/919342333197?text=${msg}`, "_blank", "noopener,noreferrer");
+        const msg = encodeURIComponent(`Hi, I am interested in Godrej Florenne and would like to receive the official cost sheet and floor plans. My mobile number is ${phone}.`);
+        window.open(`https://wa.me/${salesWhatsappNumber}?text=${msg}`, "_blank", "noopener,noreferrer");
       }
     });
   });
