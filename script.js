@@ -406,8 +406,12 @@
   }
 
   if (Array.isArray(data.faqs)) {
-    render("#faq-list", data.faqs.map((item) => `
-      <details class="faq-accordion-item">
+    const leftFaqs = [];
+    const rightFaqs = [];
+    data.faqs.forEach((item, index) => {
+      const isLeft = index % 2 === 0;
+      const cardHtml = `
+      <details class="faq-accordion-item" name="${isLeft ? 'faq-col-left' : 'faq-col-right'}" style="order: ${index};">
         <summary class="faq-accordion-summary">
           <span class="faq-accordion-question">${escapeHtml(item.question)}</span>
           <span class="faq-accordion-toggle" aria-hidden="true">+</span>
@@ -415,8 +419,35 @@
         <div class="faq-accordion-body">
           <p class="faq-accordion-answer">${escapeHtml(item.answer)}</p>
         </div>
-      </details>
-    `).join(""));
+      </details>`;
+      if (isLeft) {
+        leftFaqs.push(cardHtml);
+      } else {
+        rightFaqs.push(cardHtml);
+      }
+    });
+
+    render(
+      "#faq-list",
+      `<div class="faq-column faq-column-left">${leftFaqs.join("")}</div>` +
+      `<div class="faq-column faq-column-right">${rightFaqs.join("")}</div>`
+    );
+
+    const faqContainer = document.querySelector("#faq-list");
+    if (faqContainer && !faqContainer.dataset.boundAccordion) {
+      faqContainer.dataset.boundAccordion = "true";
+      faqContainer.addEventListener("toggle", (event) => {
+        const target = event.target;
+        if (!target.open || !target.classList.contains("faq-accordion-item")) return;
+        const col = target.closest(".faq-column");
+        if (!col) return;
+        col.querySelectorAll(".faq-accordion-item[open]").forEach((item) => {
+          if (item !== target) {
+            item.removeAttribute("open");
+          }
+        });
+      }, true);
+    }
   }
 
   // ==========================================================================
@@ -1016,18 +1047,27 @@
       return;
     }
 
-    // 2. Scroll to virtual tour if explicitly requested
-    const tourScrollTrigger = event.target.closest("[data-scroll-virtual-tour]");
-    if (tourScrollTrigger && !tourScrollTrigger.classList.contains("button-schedule-tour")) {
+    // 2. Scroll to virtual tour if requested (e.g. Schedule a Virtual Tour CTA)
+    const tourScrollTrigger = event.target.closest("[data-scroll-virtual-tour], .button-schedule-tour");
+    if (tourScrollTrigger) {
       event.preventDefault();
       const target = document.querySelector("#virtual-tour");
-      if (target) target.scrollIntoView({ behavior: "smooth" });
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth" });
+        const playBtn = target.querySelector("#open-tour");
+        const video = target.querySelector("#virtualTourVideo");
+        if (video && video.paused && playBtn) {
+          setTimeout(() => {
+            playBtn.click();
+          }, 600);
+        }
+      }
       return;
     }
 
     // 3. CTA Buttons triggering the Popup Modal
     const btn = event.target.closest(
-      "[data-scroll-enquire], [data-open-modal], .nav-cta, .mobile-bar-enquire, .floating-enquire-tab, .spec-quote-btn, .button-brochure-download, .button-complete-costing, .button-download-masterplan, .button-download-plan-card, .button-download-plan-main, .intro-pdf-download-btn, .button-get-price, .button-schedule-tour, .button-launch-details"
+      "[data-scroll-enquire], [data-open-modal], .nav-cta, .mobile-bar-enquire, .floating-enquire-tab, .spec-quote-btn, .button-brochure-download, .button-complete-costing, .button-download-masterplan, .button-download-plan-card, .button-download-plan-main, .intro-pdf-download-btn, .button-get-price, .button-launch-details"
     );
 
     if (btn) {
