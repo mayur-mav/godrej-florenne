@@ -1369,10 +1369,12 @@
   }
 
   // ==========================================================================
-  // Centralized Lead Capture API & Exact Success Modal Integration
+  // Centralized Lead Capture API, Success Modal & Heavy-Traffic Fallback Modal
+  // Put your API URL in data.js (leadApiUrl) or set window.FLORENNE_LEAD_API
   // ==========================================================================
-  const LEAD_API_ENDPOINT = window.FLORENNE_LEAD_API || "";
+  const LEAD_API_ENDPOINT = (data && data.leadApiUrl) || window.FLORENNE_LEAD_API || "";
 
+  // Success Modal Elements
   const successModal = document.querySelector("#lead-success-modal");
   const successNameEl = document.querySelector("#success-modal-name");
   const successProjectEl = document.querySelector("#success-project-name");
@@ -1380,27 +1382,24 @@
   const successPhoneEl = document.querySelector("#success-phone-val");
   const successWhatsappBtn = document.querySelector("#success-modal-whatsapp-btn");
 
+  // Fallback / Failure Modal Elements (Unable to Submit Online)
+  const fallbackModal = document.querySelector("#lead-fallback-modal");
+  const fallbackMessageEl = document.querySelector("#fallback-modal-message");
+  const fallbackWhatsappBtn = document.querySelector("#fallback-modal-whatsapp-btn");
+
   function showSuccessModal(payload) {
-    if (typeof closeEnquiryModal === "function") {
-      closeEnquiryModal();
-    }
+    if (typeof closeEnquiryModal === "function") closeEnquiryModal();
+    if (typeof closeFallbackModal === "function") closeFallbackModal();
 
     const displayName = payload.name && payload.name.trim() ? payload.name.trim() : "";
-    if (successNameEl) {
-      successNameEl.textContent = displayName ? `Thank you, ${displayName}.` : "Thank you.";
-    }
-    if (successProjectEl) {
-      successProjectEl.textContent = "Godrej Florenne";
-    }
-    if (successBhkEl) {
-      successBhkEl.textContent = payload.bhk || "4 BHK Optima";
-    }
-    if (successPhoneEl) {
-      successPhoneEl.textContent = payload.phone || "";
-    }
+    const projectDisplayName = payload.projectId || payload.project || "Godrej Florenne";
+    if (successNameEl) successNameEl.textContent = displayName ? `Thank you, ${displayName}.` : "Thank you.";
+    if (successProjectEl) successProjectEl.textContent = projectDisplayName;
+    if (successBhkEl) successBhkEl.textContent = payload.bhk || "4 BHK Optima";
+    if (successPhoneEl) successPhoneEl.textContent = payload.phone || "";
     if (successWhatsappBtn) {
       const msg = encodeURIComponent(
-        `Hi, I have submitted an enquiry for Godrej Florenne.${displayName ? " Name: " + displayName + "." : ""} Phone: ${payload.phone}. BHK Preference: ${payload.bhk || "4 BHK Optima"}. Please share the price list and details.`
+        `Hi, I have submitted an enquiry for ${projectDisplayName}.${displayName ? " Name: " + displayName + "." : ""} Phone: ${payload.phone}. BHK Preference: ${payload.bhk || "4 BHK Optima"}. Please share the price list and details.`
       );
       successWhatsappBtn.href = `https://wa.me/${salesWhatsappNumber}?text=${msg}`;
     }
@@ -1420,6 +1419,41 @@
     }
   }
 
+  function showFallbackModal(payload = {}, errorMsg = "") {
+    if (typeof closeEnquiryModal === "function") closeEnquiryModal();
+    if (typeof closeSuccessModal === "function") closeSuccessModal();
+
+    const displayName = payload && payload.name && payload.name.trim() ? payload.name.trim() : "";
+    const projectDisplayName = (payload && (payload.projectId || payload.project)) || "Godrej Florenne";
+    const phoneVal = (payload && payload.phone) || "";
+    const bhkVal = (payload && payload.bhk) || "";
+
+    if (fallbackWhatsappBtn) {
+      let msgText = `Hi, I tried submitting an enquiry for ${projectDisplayName}.`;
+      if (displayName) msgText += ` My name is ${displayName}.`;
+      if (phoneVal) msgText += ` Phone: ${phoneVal}.`;
+      if (bhkVal) msgText += ` BHK Preference: ${bhkVal}.`;
+      msgText += ` Please connect me with a property advisor.`;
+
+      const msg = encodeURIComponent(msgText);
+      fallbackWhatsappBtn.href = `https://wa.me/${salesWhatsappNumber}?text=${msg}`;
+    }
+
+    if (fallbackModal) {
+      fallbackModal.removeAttribute("hidden");
+      document.body.classList.add("modal-open");
+      const closeBtn = fallbackModal.querySelector(".fallback-modal-close");
+      if (closeBtn) closeBtn.focus();
+    }
+  }
+
+  function closeFallbackModal() {
+    if (fallbackModal) {
+      fallbackModal.setAttribute("hidden", "");
+      document.body.classList.remove("modal-open");
+    }
+  }
+
   if (successModal) {
     successModal.addEventListener("click", (e) => {
       if (e.target.matches("[data-close-success], .success-modal-backdrop, .success-modal-close, .success-modal-close *")) {
@@ -1433,23 +1467,100 @@
     });
   }
 
-  function submitLeadCapture(payload, showModal = true) {
-    if (LEAD_API_ENDPOINT) {
-      fetch(LEAD_API_ENDPOINT, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json"
-        },
-        body: JSON.stringify(payload)
-      })
-        .then((res) => res.json())
-        .then((data) => console.log("[Lead Capture]: API response:", data))
-        .catch((err) => console.warn("[Lead Capture]: API submission error:", err));
+  if (fallbackModal) {
+    fallbackModal.addEventListener("click", (e) => {
+      if (e.target.matches("[data-close-fallback], .fallback-modal-backdrop, .fallback-modal-close, .fallback-modal-close *")) {
+        closeFallbackModal();
+      }
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && !fallbackModal.hasAttribute("hidden")) {
+        closeFallbackModal();
+      }
+    });
+  }
+
+  // Developer Testing Helpers (Callable from browser console)
+  window.showEnquiryStatusModal = function (status, leadData = {}, errorMsg = "") {
+    const normalized = {
+      name: leadData.fullName || leadData.name || "Mayur",
+      phone: leadData.phone || leadData.contact || "+91 74116 62228",
+      bhk: leadData.bhkPreference || leadData.bhk || "4 BHK Optima",
+      email: leadData.email || "",
+      projectId: leadData.project || leadData.projectId || "Godrej Florenne"
+    };
+
+    if (status === "failure" || status === "error" || status === "fallback") {
+      if (errorMsg) {
+        console.warn(`[Lead Capture - Status Modal (Failure)]: ${errorMsg}`);
+      }
+      showFallbackModal(normalized, errorMsg);
     } else {
-      console.log("[Lead Capture - Local Mode]: API endpoint not set yet. Ready to send exact payload:", payload);
+      showSuccessModal(normalized);
+    }
+  };
+
+  window.testFallbackModal = (customPayload) => {
+    window.showEnquiryStatusModal("failure", customPayload);
+  };
+
+  window.testSuccessModal = (customPayload) => {
+    window.showEnquiryStatusModal("success", customPayload);
+  };
+
+  async function submitLeadCapture(payload, showModal = true) {
+    const activeApi = (data && data.leadApiUrl) || window.FLORENNE_LEAD_API || LEAD_API_ENDPOINT;
+
+    // 1. Forced downtime test simulation (window.FLORENNE_TEST_SERVER_DOWN = true or leadApiUrl: "fail")
+    if (window.FLORENNE_TEST_SERVER_DOWN === true || activeApi === "fail") {
+      console.warn("[Lead Capture - Test Mode]: Simulating server failure/downtime. Triggering WhatsApp Fallback Modal:", payload);
+      if (showModal) {
+        showFallbackModal(payload);
+      }
+      return;
     }
 
+    // 2. Real API configured
+    if (activeApi) {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 6000); // 6s timeout
+
+      try {
+        const res = await fetch(activeApi, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          body: JSON.stringify(payload),
+          signal: controller.signal
+        });
+        clearTimeout(timeoutId);
+
+        if (res.ok) {
+          const resData = await res.json().catch(() => ({}));
+          console.log("[Lead Capture]: API submission successful:", resData);
+          if (showModal) {
+            showSuccessModal(payload);
+          }
+        } else {
+          console.warn(`[Lead Capture - API Error]: Server returned HTTP ${res.status}. Displaying WhatsApp Fallback Modal.`);
+          if (showModal) {
+            showFallbackModal(payload);
+          }
+        }
+      } catch (err) {
+        clearTimeout(timeoutId);
+        console.warn("[Lead Capture - Fallback]: Network/timeout error reaching server. Displaying WhatsApp Fallback Modal:", err);
+        if (showModal) {
+          showFallbackModal(payload);
+        }
+      }
+      return;
+    }
+
+    // 3. Local Mode (no API endpoint set yet)
+    console.log("[Lead Capture - Local Mode]: API endpoint not set yet. Ready to send exact payload:", payload);
     if (showModal) {
       showSuccessModal(payload);
     }

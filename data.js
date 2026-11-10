@@ -1,4 +1,10 @@
 window.florenneData = {
+  // ==========================================================================
+  // Lead Capture API Endpoint (paste your API URL here when ready)
+  // e.g. leadApiUrl: "https://your-backend.com/api/leads",
+  // ==========================================================================
+  leadApiUrl: "",
+
   facts: [
     { value: "20 Acres", label: "Residential Parcel" },
     { value: "242", label: "Elite Row Houses" },
