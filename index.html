@@ -20,10 +20,10 @@
     <noscript>
       <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
     </noscript>
-    <link rel="stylesheet" href="styles.css?v=7.5">
+    <link rel="stylesheet" href="styles.css?v=7.9">
     <script src="data.js" defer></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="" defer></script>
-    <script src="script.js?v=7.5" defer></script>
+    <script src="script.js?v=7.9" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -151,7 +151,7 @@
                   <option value="+852">HK +852</option>
                   <option value="+60">MY +60</option>
                 </select>
-                <input id="hero-phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="10-digit mobile number" pattern="[0-9]{10}" required>
+                <input id="hero-phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="10-digit mobile number" pattern="[6-9][0-9]{9}" maxlength="10" required>
               </div>
             </div>
 
@@ -235,8 +235,27 @@
                 <form class="intro-lead-form" id="intro-lead-form" data-enquiry-form="intro">
                   <div class="intro-input-row">
                     <div class="intro-tel-group">
-                      <span class="intro-tel-prefix">+91</span>
-                      <input type="tel" name="phone" class="intro-tel-input" placeholder="Enter WhatsApp Number" pattern="[0-9]{10}" maxlength="10" required aria-label="Enter 10-digit WhatsApp Number">
+                      <div class="intro-country-box">
+                        <select name="countryCode" aria-label="Country calling code" class="intro-country-select">
+                          <option value="+91" selected>IN +91</option>
+                          <option value="+971">AE +971</option>
+                          <option value="+1">US +1</option>
+                          <option value="+44">UK +44</option>
+                          <option value="+65">SG +65</option>
+                          <option value="+61">AU +61</option>
+                          <option value="+966">SA +966</option>
+                          <option value="+974">QA +974</option>
+                          <option value="+968">OM +968</option>
+                          <option value="+965">KW +965</option>
+                          <option value="+973">BH +973</option>
+                          <option value="+64">NZ +64</option>
+                          <option value="+49">DE +49</option>
+                          <option value="+852">HK +852</option>
+                          <option value="+60">MY +60</option>
+                        </select>
+                        <span class="country-arrow-icon" aria-hidden="true">&#9662;</span>
+                      </div>
+                      <input type="tel" name="phone" class="intro-tel-input" id="intro-phone" placeholder="10-digit mobile number" pattern="[6-9][0-9]{9}" maxlength="10" required aria-label="Enter 10-digit WhatsApp Number">
                     </div>
                     <button class="button-intro-lead" type="submit">
                       <span>Get on WhatsApp</span>
@@ -647,7 +666,7 @@
                 <label class="sr-only" for="video-lead-phone">Phone number</label>
                 <div class="video-lead-phone-field">
                   <span aria-hidden="true">+91</span>
-                  <input id="video-lead-phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="Phone Number" pattern="[0-9]{10}" maxlength="10" required>
+                  <input id="video-lead-phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="10-digit mobile number" pattern="[6-9][0-9]{9}" maxlength="10" required>
                 </div>
                 <button class="video-lead-submit" type="submit">Send on WhatsApp <span aria-hidden="true">&rarr;</span></button>
               </form>
@@ -762,7 +781,7 @@
                     </select>
                     <span class="country-arrow-icon" aria-hidden="true">&#9662;</span>
                   </div>
-                  <input class="visit-input visit-phone-input" id="visit-phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="10-digit mobile number" pattern="[0-9]{10}" required>
+                  <input class="visit-input visit-phone-input" id="visit-phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="10-digit mobile number" pattern="[6-9][0-9]{9}" maxlength="10" required>
                 </div>
               </div>
 
@@ -1015,7 +1034,7 @@
                 </select>
                 <span class="popup-select-arrow" aria-hidden="true">&#9662;</span>
               </div>
-              <input class="popup-input popup-phone-input" id="popup-phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="10-digit mobile number" pattern="[0-9]{10}" maxlength="10" required>
+              <input class="popup-input popup-phone-input" id="popup-phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="10-digit mobile number" pattern="[6-9][0-9]{9}" maxlength="10" required>
             </div>
           </div>
 

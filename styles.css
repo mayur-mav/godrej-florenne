@@ -501,7 +501,8 @@ h1, h2, h3, p { margin-top: 0; }
 }
 .custom-dropdown-shell.is-hero-country { width: 100px; }
 .custom-dropdown-shell.is-visit-country,
-.custom-dropdown-shell.is-popup-country { width: 105px; }
+.custom-dropdown-shell.is-popup-country,
+.custom-dropdown-shell.is-intro-country { width: 105px; }
 .custom-dropdown-native {
   position: absolute !important;
   width: 1px !important;
@@ -585,6 +586,11 @@ h1, h2, h3, p { margin-top: 0; }
   height: 7px;
 }
 .custom-dropdown-shell.is-open { z-index: 40; }
+.custom-dropdown-shell.is-country .custom-dropdown-list {
+  left: 0;
+  right: auto;
+  min-width: 140px;
+}
 .custom-dropdown-list {
   position: absolute;
   z-index: 50;
@@ -883,12 +889,46 @@ h2.project-intro-headline,
   background: #ffffff;
   border: 1px solid rgba(197, 155, 78, 0.4);
   border-radius: 8px;
-  overflow: hidden;
+  overflow: visible;
+  position: relative;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 .intro-tel-group:focus-within {
   border-color: #dfb76c;
   box-shadow: 0 0 0 3px rgba(223, 183, 108, 0.2);
+}
+.intro-tel-group:has(.is-invalid),
+.intro-tel-group.has-error {
+  border-color: #d14343 !important;
+  box-shadow: 0 0 0 3px rgba(209, 67, 67, 0.12) !important;
+}
+.intro-country-box {
+  display: flex;
+  align-items: center;
+  position: relative;
+  flex-shrink: 0;
+}
+.custom-dropdown-shell.is-intro-country {
+  width: 105px;
+  flex: 0 0 105px;
+}
+.custom-dropdown-shell.is-intro-country > .custom-dropdown-trigger {
+  height: 44px;
+  border: none !important;
+  border-right: 1px solid rgba(197, 155, 78, 0.3) !important;
+  border-radius: 7px 0 0 7px !important;
+  background-color: #f8fafc !important;
+  color: #111827;
+  font-family: var(--sans);
+  font-size: 12.5px;
+  font-weight: 600;
+  padding: 0 26px 0 10px !important;
+  box-shadow: none !important;
+}
+.custom-dropdown-shell.is-intro-country > .custom-dropdown-trigger::after {
+  right: 10px;
+  width: 7px;
+  height: 7px;
 }
 .intro-tel-prefix {
   padding: 0 10px;
@@ -908,11 +948,12 @@ h2.project-intro-headline,
   height: 44px;
   border: none;
   outline: none;
-  padding: 0 12px;
+  padding: 0 14px;
   font-family: var(--sans);
   font-size: 13.5px;
   color: #0a203a;
   background: transparent;
+  min-width: 0;
 }
 .intro-tel-input::placeholder {
   color: #64748b;
