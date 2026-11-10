@@ -614,6 +614,22 @@
     }
   });
 
+  // Scroll to Top on Godrej Florenne Logo Click (without #top in URL)
+  if (window.location.hash === "#top") {
+    history.replaceState(null, document.title, window.location.pathname + window.location.search);
+  }
+
+  document.querySelectorAll(".wordmark, .footer-brand-title").forEach((logo) => {
+    logo.style.cursor = "pointer";
+    logo.addEventListener("click", (e) => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      if (window.location.hash) {
+        history.replaceState(null, document.title, window.location.pathname + window.location.search);
+      }
+    });
+  });
+
   // Navigation Toggle
   const menuToggle = document.querySelector(".menu-toggle");
   const primaryNav = document.querySelector("#primary-nav");
