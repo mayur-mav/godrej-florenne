@@ -227,10 +227,18 @@
   }
 
   if (Array.isArray(data.projectGallery)) {
-    render("#project-gallery-grid", data.projectGallery.map((photo) => `
-      <div class="gallery-card reveal">
+    render("#project-gallery-grid", data.projectGallery.map((photo, index) => `
+      <div class="gallery-card reveal" role="button" tabindex="0" data-gallery-index="${index}" aria-label="View ${escapeHtml(photo.tag)} photograph in full size">
         <img src="${escapeHtml(photo.src)}" alt="${escapeHtml(photo.alt || photo.tag)}" loading="lazy" decoding="async" draggable="false">
         <div class="gallery-card-overlay"></div>
+        <div class="gallery-card-zoom-badge" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            <line x1="11" y1="8" x2="11" y2="14"></line>
+            <line x1="8" y1="11" x2="14" y2="11"></line>
+          </svg>
+        </div>
         <span class="gallery-card-tag">${escapeHtml(photo.tag)}</span>
         <span class="gallery-card-credit">${escapeHtml(photo.credit || "ARTIST'S IMPRESSION")}</span>
       </div>
@@ -661,6 +669,181 @@
       }
     });
   }
+
+  // ==========================================================================
+  // Section 10: Project Gallery Lightbox Modal
+  // ==========================================================================
+  const galleryLightboxModal = document.querySelector("#gallery-lightbox-modal");
+  const galleryModalImg = document.querySelector("#gallery-modal-img");
+  const galleryModalTag = document.querySelector("#gallery-modal-tag");
+  const galleryModalTitle = document.querySelector("#gallery-modal-title");
+  const galleryModalCaption = document.querySelector("#gallery-modal-caption");
+  const galleryModalCounter = document.querySelector("#gallery-modal-counter");
+  const galleryModalCredit = document.querySelector("#gallery-modal-credit");
+  const galleryModalWhatsapp = document.querySelector("#gallery-modal-whatsapp");
+  const galleryModalPrev = document.querySelector("#gallery-modal-prev");
+  const galleryModalNext = document.querySelector("#gallery-modal-next");
+  const galleryLightboxStage = document.querySelector("#gallery-lightbox-stage");
+  let currentGalleryIndex = 0;
+  let galleryLastFocusedEl = null;
+
+  function updateGalleryModalContent(index) {
+    if (!Array.isArray(data.projectGallery) || !data.projectGallery.length) return;
+    currentGalleryIndex = (index + data.projectGallery.length) % data.projectGallery.length;
+    const item = data.projectGallery[currentGalleryIndex];
+
+    if (galleryModalImg) {
+      galleryModalImg.classList.add("is-switching");
+      galleryModalImg.src = item.src;
+      galleryModalImg.alt = item.alt || item.tag || "Godrej Florenne Gallery photograph";
+      setTimeout(() => {
+        galleryModalImg.classList.remove("is-switching");
+      }, 150);
+    }
+    if (galleryModalTag) galleryModalTag.textContent = item.tag || "GALLERY";
+    if (galleryModalTitle) galleryModalTitle.textContent = "Godrej Florenne — Soukya Road, Whitefield";
+    if (galleryModalCaption) galleryModalCaption.textContent = item.alt || item.tag;
+    if (galleryModalCredit) galleryModalCredit.textContent = item.credit || "ARTIST'S IMPRESSION";
+    if (galleryModalCounter) galleryModalCounter.textContent = `${currentGalleryIndex + 1} / ${data.projectGallery.length}`;
+    if (galleryModalWhatsapp) {
+      const salesPhone = "917411662228";
+      const text = encodeURIComponent(`Hi Godrej Florenne team, I am viewing the "${item.tag}" photograph in your project gallery (${item.alt || item.tag}). Please share more details, pricing and high-res brochure.`);
+      galleryModalWhatsapp.href = `https://wa.me/${salesPhone}?text=${text}`;
+    }
+  }
+
+  function openGalleryLightbox(index = 0) {
+    if (!galleryLightboxModal) return;
+    galleryLastFocusedEl = document.activeElement;
+    updateGalleryModalContent(index);
+    galleryLightboxModal.hidden = false;
+    document.body.style.overflow = "hidden";
+    const closeBtn = galleryLightboxModal.querySelector("#gallery-modal-close");
+    if (closeBtn) closeBtn.focus();
+  }
+
+  function closeGalleryLightbox() {
+    if (!galleryLightboxModal || galleryLightboxModal.hidden) return;
+    galleryLightboxModal.hidden = true;
+    document.body.style.overflow = "";
+    if (galleryLastFocusedEl && typeof galleryLastFocusedEl.focus === "function") {
+      galleryLastFocusedEl.focus();
+    }
+  }
+
+  // Click on gallery cards
+  const projectGalleryGrid = document.querySelector("#project-gallery-grid");
+  if (projectGalleryGrid) {
+    projectGalleryGrid.addEventListener("click", (event) => {
+      const card = event.target.closest(".gallery-card");
+      if (!card) return;
+      event.preventDefault();
+      const idx = parseInt(card.getAttribute("data-gallery-index") || "0", 10);
+      openGalleryLightbox(isNaN(idx) ? 0 : idx);
+    });
+
+    // Keyboard support: Enter or Space on card
+    projectGalleryGrid.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        const card = event.target.closest(".gallery-card");
+        if (card) {
+          event.preventDefault();
+          const idx = parseInt(card.getAttribute("data-gallery-index") || "0", 10);
+          openGalleryLightbox(isNaN(idx) ? 0 : idx);
+        }
+      }
+    });
+  }
+
+  // Section 2 showcase image click opens gallery modal
+  const overviewGalleryImg = document.querySelector("#gallery-image");
+  if (overviewGalleryImg) {
+    overviewGalleryImg.style.cursor = "pointer";
+    overviewGalleryImg.setAttribute("title", "Click to enlarge in gallery modal");
+    overviewGalleryImg.addEventListener("click", () => {
+      openGalleryLightbox(0);
+    });
+  }
+
+  // Modal Next & Prev buttons
+  if (galleryModalPrev) {
+    galleryModalPrev.addEventListener("click", (e) => {
+      e.stopPropagation();
+      updateGalleryModalContent(currentGalleryIndex - 1);
+    });
+  }
+  if (galleryModalNext) {
+    galleryModalNext.addEventListener("click", (e) => {
+      e.stopPropagation();
+      updateGalleryModalContent(currentGalleryIndex + 1);
+    });
+  }
+
+  // Modal Close buttons & backdrop click
+  if (galleryLightboxModal) {
+    galleryLightboxModal.addEventListener("click", (e) => {
+      if (e.target.closest("[data-close-gallery-modal]") || e.target === galleryLightboxModal) {
+        e.preventDefault();
+        closeGalleryLightbox();
+      }
+    });
+
+    // Enquire CTA inside lightbox
+    const galleryEnquireBtn = galleryLightboxModal.querySelector("#gallery-modal-enquire-btn");
+    if (galleryEnquireBtn) {
+      galleryEnquireBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        const currentItem = (data.projectGallery && data.projectGallery[currentGalleryIndex]) || {};
+        closeGalleryLightbox();
+        if (typeof openEnquiryModal === "function") {
+          openEnquiryModal({
+            title: `Enquire for ${currentItem.tag || "Gallery Residences"}`,
+            subtitle: `Connect with our sales desk for floor plans & pricing on WhatsApp.`,
+            source: `Gallery Lightbox — ${currentItem.tag || "Photo"}`
+          });
+        }
+      });
+    }
+
+    // Touch Swipe gestures inside lightbox stage
+    if (galleryLightboxStage) {
+      let touchStartX = 0;
+      let touchStartY = 0;
+      galleryLightboxStage.addEventListener("touchstart", (e) => {
+        if (!e.touches || !e.touches[0]) return;
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+      }, { passive: true });
+
+      galleryLightboxStage.addEventListener("touchend", (e) => {
+        if (!e.changedTouches || !e.changedTouches[0]) return;
+        const diffX = e.changedTouches[0].clientX - touchStartX;
+        const diffY = e.changedTouches[0].clientY - touchStartY;
+        if (Math.abs(diffX) > 40 && Math.abs(diffX) > Math.abs(diffY)) {
+          if (diffX < 0) {
+            updateGalleryModalContent(currentGalleryIndex + 1);
+          } else {
+            updateGalleryModalContent(currentGalleryIndex - 1);
+          }
+        }
+      }, { passive: true });
+    }
+  }
+
+  // Keyboard navigation when gallery lightbox is open
+  document.addEventListener("keydown", (event) => {
+    if (!galleryLightboxModal || galleryLightboxModal.hidden) return;
+    if (event.key === "Escape") {
+      event.preventDefault();
+      closeGalleryLightbox();
+    } else if (event.key === "ArrowLeft") {
+      event.preventDefault();
+      updateGalleryModalContent(currentGalleryIndex - 1);
+    } else if (event.key === "ArrowRight") {
+      event.preventDefault();
+      updateGalleryModalContent(currentGalleryIndex + 1);
+    }
+  });
 
   // ==========================================================================
   // Global Lead Capture Popup Modal (Dynamic Per-Button Content)
