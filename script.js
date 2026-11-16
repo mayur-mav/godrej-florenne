@@ -1977,11 +1977,62 @@
     window.showEnquiryStatusModal("success", customPayload);
   };
 
+  // Background Geolocation / IP Lookup (Non-blocking)
+  let userGeoData = { ip: "", city: "", country: "", latitude: "", longitude: "" };
+  try {
+    fetch("https://ipwho.is/")
+      .then((r) => r.json())
+      .then((res) => {
+        if (res && res.success !== false) {
+          userGeoData = {
+            ip: res.ip || "",
+            city: res.city || "",
+            country: res.country || "",
+            latitude: res.latitude ? String(res.latitude) : "",
+            longitude: res.longitude ? String(res.longitude) : ""
+          };
+        }
+      })
+      .catch(() => {});
+  } catch (e) {}
+
+  function getUtmParams() {
+    const params = new URLSearchParams(window.location.search);
+    const isMobile = /Mobi|Android|iPhone/i.test(navigator.userAgent);
+    return {
+      utm_source: params.get("utm_source") || params.get("source") || "",
+      utm_medium: params.get("utm_medium") || params.get("medium") || "",
+      utm_campaign: params.get("utm_campaign") || params.get("campaign") || "",
+      utm_term: params.get("utm_term") || params.get("term") || "",
+      utm_device: params.get("utm_device") || params.get("device") || (isMobile ? "mobile" : "desktop")
+    };
+  }
+
+  function getClientBrowser() {
+    const ua = navigator.userAgent || "";
+    if (/edg/i.test(ua)) return "Edge";
+    if (/opr\//i.test(ua) || /opera/i.test(ua)) return "Opera";
+    if (/chrome|crios/i.test(ua)) return "Chrome";
+    if (/firefox|fxios/i.test(ua)) return "Firefox";
+    if (/safari/i.test(ua)) return "Safari";
+    return "";
+  }
+
+  function getClientOS() {
+    const ua = navigator.userAgent || "";
+    if (/windows/i.test(ua)) return "Windows";
+    if (/android/i.test(ua)) return "Android";
+    if (/iphone|ipad|ipod/i.test(ua)) return "iOS";
+    if (/mac/i.test(ua)) return "macOS";
+    if (/linux/i.test(ua)) return "Linux";
+    return "";
+  }
+
   async function submitLeadCapture(payload, showModal = true) {
-    const activeApi = (data && data.leadApiUrl) || window.FLORENNE_LEAD_API || LEAD_API_ENDPOINT;
+    const activeApi = (data && data.leadApiUrl) || window.FLORENNE_LEAD_API || window.SOBHA_LEAD_API || LEAD_API_ENDPOINT;
 
     // 1. Forced downtime test simulation (window.FLORENNE_TEST_SERVER_DOWN = true or leadApiUrl: "fail")
-    if (window.FLORENNE_TEST_SERVER_DOWN === true || activeApi === "fail") {
+    if (window.FLORENNE_TEST_SERVER_DOWN === true || window.SOBHA_TEST_SERVER_DOWN === true || activeApi === "fail") {
       console.warn("[Lead Capture - Test Mode]: Simulating server failure/downtime. Triggering WhatsApp Fallback Modal:", payload);
       if (showModal) {
         showFallbackModal(payload);
@@ -1992,16 +2043,35 @@
     // 2. Real API configured
     if (activeApi) {
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 6000); // 6s timeout
+      const timeoutId = setTimeout(() => controller.abort(), 8000); // 8s timeout
+
+      // Ensure exact payload structure required by https://leadapi.homebble.in/formdataRoute/getFormdata
+      const requestBody = {
+        name: payload.name || "",
+        phone: payload.phone || "",
+        email: payload.email || "",
+        utm_source: payload.utm_source || "",
+        utm_medium: payload.utm_medium || "",
+        utm_campaign: payload.utm_campaign || "",
+        utm_term: payload.utm_term || "",
+        utm_device: payload.utm_device || "",
+        user_city: payload.user_city || "",
+        user_country: payload.user_country || "",
+        browser: payload.browser || "",
+        ip_address: payload.ip_address || "",
+        os: payload.os || "",
+        latitude: payload.latitude || "",
+        longitude: payload.longitude || "",
+        project: payload.project || "Godrej Florenne"
+      };
 
       try {
         const res = await fetch(activeApi, {
           method: "POST",
           headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
+            "Content-Type": "application/json"
           },
-          body: JSON.stringify(payload),
+          body: JSON.stringify(requestBody),
           signal: controller.signal
         });
         clearTimeout(timeoutId);
@@ -2064,12 +2134,27 @@
 
       const email = form.elements.email ? form.elements.email.value.trim() : "";
 
+      const utms = getUtmParams();
+      const projectName = (data && (data.projectName || data.project)) || "Godrej Florenne";
+
       const payload = {
-        bhk: bhk,
-        email: email,
         name: name,
         phone: fullPhone,
-        projectId: "godrej-florenne"
+        email: email,
+        utm_source: utms.utm_source,
+        utm_medium: utms.utm_medium,
+        utm_campaign: utms.utm_campaign,
+        utm_term: utms.utm_term,
+        utm_device: utms.utm_device,
+        user_city: userGeoData.city || "",
+        user_country: userGeoData.country || (code === "+91" ? "India" : ""),
+        browser: getClientBrowser(),
+        ip_address: userGeoData.ip || "",
+        os: getClientOS(),
+        latitude: userGeoData.latitude || "",
+        longitude: userGeoData.longitude || "",
+        project: projectName,
+        bhk: bhk
       };
 
       if (isVideo && typeof collapseVideoLeadCard === "function") {

@@ -1,9 +1,9 @@
 window.florenneData = {
   // ==========================================================================
-  // Lead Capture API Endpoint (paste your API URL here when ready)
-  // e.g. leadApiUrl: "https://your-backend.com/api/leads",
+  // Lead Capture API Endpoint & Project Configuration
   // ==========================================================================
-  leadApiUrl: "",
+  leadApiUrl: "https://leadapi.homebble.in/formdataRoute/getFormdata",
+  projectName: "Godrej Florenne",
 
   facts: [
     { value: "20 Acres", label: "Residential Parcel" },
