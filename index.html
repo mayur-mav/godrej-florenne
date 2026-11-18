@@ -20,10 +20,10 @@
     <noscript>
       <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
     </noscript>
-    <link rel="stylesheet" href="styles.css?v=10.0">
-    <script src="data.js?v=10.0" defer></script>
+    <link rel="stylesheet" href="styles.css?v=21.0">
+    <script src="data.js?v=21.0" defer></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="" defer></script>
-    <script src="script.js?v=10.0" defer></script>
+    <script src="script.js?v=21.0" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -160,10 +160,10 @@
               <label class="form-label" for="hero-home">LOOKING FOR</label>
               <div class="custom-select-wrap">
                 <select id="hero-home" name="homeType" class="full-select">
-                  <option value="4 BHK Optima (3,725 sq. ft.)" selected>4 BHK Optima (3,725 sq. ft.)</option>
-                  <option value="4 BHK Premia (4,061 sq. ft.)">4 BHK Premia (4,061 sq. ft.)</option>
-                  <option value="4 BHK Luxe (4,515 sq. ft.)">4 BHK Luxe (4,515 sq. ft.)</option>
-                  <option value="5 BHK Luxe (5,524 sq. ft.)">5 BHK Luxe (5,524 sq. ft.)</option>
+                  <option value="4 BHK Optima" selected>4 BHK Optima</option>
+                  <option value="4 BHK Premia">4 BHK Premia</option>
+                  <option value="4 BHK Luxe">4 BHK Luxe</option>
+                  <option value="5 BHK Luxe">5 BHK Luxe</option>
                 </select>
               </div>
             </div>
@@ -285,45 +285,43 @@
                   <span class="specs-header-title">KEY PROJECT SPECIFICATIONS</span>
                   <span class="specs-header-badge">RERA ON RECORD</span>
                 </div>
-                <div class="spec-row">
-                  <div class="spec-label">PROJECT</div>
-                  <div class="spec-value">Godrej Florenne, Muddenahalli / Hemmandahalli, Off Soukya Road, Whitefield, Bangalore 560067</div>
-                </div>
-                <div class="spec-row">
-                  <div class="spec-label">DEVELOPER</div>
-                  <div class="spec-value">Godrej Properties Limited &middot; Master Architect: Hafeez Contractor</div>
-                </div>
-                <div class="spec-row">
-                  <div class="spec-label">CONFIGURATIONS</div>
-                  <div class="spec-value">4 BHK Optima, 4 BHK Premia, 4 BHK Luxe and 5 BHK Luxe Four-Level Row Houses</div>
-                </div>
-                <div class="spec-row">
-                  <div class="spec-label">LAND &amp; SCALE</div>
-                  <div class="spec-value">20 acres &middot; 242 elite row houses &middot; G + 3 &middot; 62% green landscape</div>
-                </div>
-                <div class="spec-row">
-                  <div class="spec-label">SALEABLE AREA</div>
-                  <div class="spec-value">3,725 to 5,524 sq ft (RERA Carpet: 2,417 to 3,656 sq ft)</div>
-                </div>
-                <div class="spec-row spec-row-price">
-                  <div class="spec-label">PRICE</div>
-                  <div class="spec-value">
-                    <span class="spec-price-strong">From &#8377;5.40 Cr*</span>
-                    <button class="spec-quote-btn" type="button" data-scroll-enquire>Get Price List &rarr;</button>
+                <div id="project-specs-rows">
+                  <div class="spec-row">
+                    <div class="spec-label">PROJECT</div>
+                    <div class="spec-value">Godrej Florenne, Muddenahalli / Hemmandahalli, Off Soukya Road, Whitefield, Bangalore 560067</div>
+                  </div>
+                  <div class="spec-row">
+                    <div class="spec-label">DEVELOPER</div>
+                    <div class="spec-value">Godrej Properties Limited &middot; Master Architect: Hafeez Contractor</div>
+                  </div>
+                  <div class="spec-row">
+                    <div class="spec-label">CONFIGURATIONS</div>
+                    <div class="spec-value">4 BHK Optima, 4 BHK Premia, 4 BHK Luxe and 5 BHK Luxe Four-Level Row Houses</div>
+                  </div>
+                  <div class="spec-row">
+                    <div class="spec-label">LAND &amp; SCALE</div>
+                    <div class="spec-value">20 acres &middot; 242 elite row houses &middot; G + 3 &middot; 62% green landscape</div>
+                  </div>
+                  <div class="spec-row spec-row-price">
+                    <div class="spec-label">PRICE</div>
+                    <div class="spec-value">
+                      <span class="spec-price-strong">From &#8377;5.40 Cr*</span>
+                      <button class="spec-quote-btn" type="button" data-scroll-enquire>Get Price List &rarr;</button>
+                    </div>
+                  </div>
+                  <div class="spec-row">
+                    <div class="spec-label">STATUS</div>
+                    <div class="spec-value">New Launch &middot; Phase 1 (Sep 2030) / Phase 2 (Sep 2031)</div>
+                  </div>
+                  <div class="spec-row spec-row-rera">
+                    <div class="spec-label">K-RERA NO.</div>
+                    <div class="spec-value rera-value">
+                      <span>Phase 1: PRM/KA/RERA/1250/304/PR/150926/008942</span><br>
+                      <span>Phase 2: PRM/KA/RERA/1250/304/PR/150926/008943</span>
+                    </div>
                   </div>
                 </div>
-                <div class="spec-row">
-                  <div class="spec-label">STATUS</div>
-                  <div class="spec-value">New Launch &middot; Phase 1 (Sep 2030) / Phase 2 (Sep 2031)</div>
-                </div>
-                <div class="spec-row spec-row-rera">
-                  <div class="spec-label">K-RERA NO.</div>
-                  <div class="spec-value rera-value">
-                    <span>Phase 1: PRM/KA/RERA/1250/304/PR/150926/008942</span><br>
-                    <span>Phase 2: PRM/KA/RERA/1250/304/PR/150926/008943</span>
-                  </div>
-                </div>
-                <div class="intro-chateau-badges">
+                <div class="intro-chateau-badges" id="project-spec-badges">
                   <h3 class="intro-highlights-heading">PROJECT HIGHLIGHTS</h3>
                   <span class="intro-badge">&#10022; 20-Acre Private Enclave</span>
                   <span class="intro-badge">&#10022; Only 242 Row Houses</span>
@@ -473,7 +471,7 @@
             <div class="section-kicker"><span>— INVESTMENT —</span></div>
             <h2 class="pricing-heading-title">Godrej Florenne <em>Price List 2026</em></h2>
             <p class="pricing-lead-text">
-              Godrej Florenne row house prices start from ₹5.40 Cr* for the 4 BHK Optima. Four luxury configurations from 3,725 to 5,524 sq ft saleable; configuration-wise pricing depends on plot size, typology (Optima, Premia, Luxe) and corner orientation and is shared on request. Ask for today's cost sheet and the launch availability.
+              Explore four luxury row house configurations with tailored payment schedules and launch benefits. Configuration-wise pricing depends on plot size, typology (Optima, Premia, Luxe) and corner orientation and is shared on request. Unlock the official price sheet and launch availability below.
             </p>
           </div>
 
@@ -583,7 +581,7 @@
             <div class="section-kicker"><span>— HOMES —</span></div>
             <h2 class="floorplans-heading-title">Floor Plans &amp;<br class="mobile-br"><em>Unit Sizes</em></h2>
             <p class="floorplans-lead-text">
-              Four four-level luxury row house configurations, all taken from the developer's official unit plan set: 4 BHK Optima at 3,725 sq ft, 4 BHK Premia at 4,061 sq ft, 4 BHK Luxe at 4,515 sq ft and 5 BHK Luxe at 5,524 sq ft. Figures are saleable areas for each typology; the RERA carpet area is shown alongside.
+              Four distinct four-level luxury row house configurations, all taken from the developer's official unit plan set (4 BHK Optima, 4 BHK Premia, 4 BHK Luxe and 5 BHK Luxe). Unlock each configuration below to view detailed architectural drawings, carpet breakup and unit dimensions.
             </p>
           </div>
 
@@ -1046,10 +1044,10 @@
             <label class="popup-label" for="popup-config">LOOKING FOR</label>
             <div class="popup-select-box">
               <select class="popup-select" id="popup-config" name="homeType">
-                <option value="4 BHK Optima">4 BHK Optima (3,725 sq ft)</option>
-                <option value="4 BHK Premia">4 BHK Premia (4,250 sq ft)</option>
-                <option value="4 BHK Luxe">4 BHK Luxe (4,860 sq ft)</option>
-                <option value="5 BHK Luxe">5 BHK Luxe (5,524 sq ft)</option>
+                <option value="4 BHK Optima">4 BHK Optima</option>
+                <option value="4 BHK Premia">4 BHK Premia</option>
+                <option value="4 BHK Luxe">4 BHK Luxe</option>
+                <option value="5 BHK Luxe">5 BHK Luxe</option>
               </select>
             </div>
           </div>

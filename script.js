@@ -23,6 +23,16 @@
     return element;
   };
 
+  if (data.pricingLeadText) {
+    const el = document.querySelector(".pricing-lead-text");
+    if (el) el.textContent = data.pricingLeadText;
+  }
+
+  if (data.floorplansLeadText) {
+    const el = document.querySelector(".floorplans-lead-text");
+    if (el) el.textContent = data.floorplansLeadText;
+  }
+
   if (Array.isArray(data.facts)) {
     render("#quick-facts", data.facts.map((fact) => `
       <div class="fact-item">
@@ -33,9 +43,55 @@
   }
 
   if (Array.isArray(data.projectDetails)) {
-    render("#project-details", data.projectDetails.map((detail) => `
-      <div class="project-table-row"><strong>${escapeHtml(detail.label)}</strong><span>${escapeHtml(detail.value)}</span></div>
-    `).join(""));
+    render("#project-specs-rows, #project-details", data.projectDetails.map((detail) => {
+      const label = escapeHtml(detail.label || "");
+      const isPrice = Boolean(detail.isPrice || label.toUpperCase() === "PRICE");
+      const isRera = Boolean(detail.isRera || label.toUpperCase().includes("RERA"));
+
+      if (isPrice) {
+        return `
+          <div class="spec-row spec-row-price">
+            <div class="spec-label">${label}</div>
+            <div class="spec-value">
+              <span class="spec-price-strong">${escapeHtml(detail.value)}</span>
+              <button class="spec-quote-btn" type="button" data-scroll-enquire>${escapeHtml(detail.buttonText || "Get Price List →")}</button>
+            </div>
+          </div>
+        `;
+      }
+
+      if (isRera) {
+        const lines = String(detail.value || "").split(/\n|<br\s*\/?>/).map((line) => line.trim()).filter(Boolean);
+        const formattedRera = lines.map((l) => `<span>${escapeHtml(l)}</span>`).join("<br>");
+        return `
+          <div class="spec-row spec-row-rera">
+            <div class="spec-label">${label}</div>
+            <div class="spec-value rera-value">
+              ${formattedRera}
+            </div>
+          </div>
+        `;
+      }
+
+      return `
+        <div class="spec-row">
+          <div class="spec-label">${label}</div>
+          <div class="spec-value">${escapeHtml(detail.value)}</div>
+        </div>
+      `;
+    }).join(""));
+  }
+
+  if (Array.isArray(data.specHighlights)) {
+    const badgesContainer = document.querySelector("#project-spec-badges");
+    if (badgesContainer) {
+      badgesContainer.innerHTML = `
+        <h3 class="intro-highlights-heading">PROJECT HIGHLIGHTS</h3>
+        ${data.specHighlights.map((badge) => `
+          <span class="intro-badge">&#10022; ${escapeHtml(badge)}</span>
+        `).join("")}
+      `;
+    }
   }
 
   if (Array.isArray(data.highlights)) {
@@ -61,13 +117,23 @@
           <strong class="row-config-title">${escapeHtml(price.configuration)}</strong>
           <span class="row-price-sub">${escapeHtml(price.subLabel || "PRICE")}</span>
         </div>
-        <div class="col-cell col-area">
+        <div class="col-cell col-area" data-scroll-enquire role="button" tabindex="0" aria-label="Unlock saleable area for ${escapeHtml(price.configuration)}">
           <span class="cell-mobile-label">Saleable Area:</span>
-          <span class="row-area-val">${escapeHtml(price.area)}</span>
+          <div class="table-locked-val-wrap">
+            <span class="row-area-val blur-locked">${escapeHtml(price.area)}</span>
+            <div class="lock-circle-badge table-lock-circle" aria-hidden="true">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            </div>
+          </div>
         </div>
-        <div class="col-cell col-price">
+        <div class="col-cell col-price" data-scroll-enquire role="button" tabindex="0" aria-label="Unlock starting price for ${escapeHtml(price.configuration)}">
           <span class="cell-mobile-label">Starting Price*:</span>
-          <span class="row-price-val">${escapeHtml(price.startingPrice || price.starting)}</span>
+          <div class="table-locked-val-wrap">
+            <span class="row-price-val blur-locked">${escapeHtml(price.startingPrice || price.starting)}</span>
+            <div class="lock-circle-badge table-lock-circle" aria-hidden="true">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            </div>
+          </div>
         </div>
         <div class="col-cell col-cta">
           <button class="button-get-price" type="button" data-scroll-enquire aria-label="Get Price for ${escapeHtml(price.configuration)}">
@@ -131,16 +197,31 @@
             <p class="plan-details-desc">${escapeHtml(plan.description)}</p>
 
             <div class="plan-metrics-grid">
-              <div class="metric-box">
-                <strong class="metric-val">${escapeHtml(plan.saleable || "3,725")}</strong>
+              <div class="metric-box metric-box-locked" data-scroll-enquire role="button" tabindex="0" aria-label="Unlock SQ FT SALEABLE">
+                <div class="metric-locked-wrap">
+                  <strong class="metric-val blur-locked">${escapeHtml(plan.saleable || "3,725")}</strong>
+                  <div class="lock-circle-badge metric-lock-circle" aria-hidden="true">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                  </div>
+                </div>
                 <span class="metric-lbl">SQ FT SALEABLE</span>
               </div>
-              <div class="metric-box">
-                <strong class="metric-val">${escapeHtml(plan.carpet || "2,417")}</strong>
+              <div class="metric-box metric-box-locked" data-scroll-enquire role="button" tabindex="0" aria-label="Unlock SQ FT RERA CARPET">
+                <div class="metric-locked-wrap">
+                  <strong class="metric-val blur-locked">${escapeHtml(plan.carpet || "2,417")}</strong>
+                  <div class="lock-circle-badge metric-lock-circle" aria-hidden="true">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                  </div>
+                </div>
                 <span class="metric-lbl">SQ FT RERA CARPET</span>
               </div>
-              <div class="metric-box">
-                <strong class="metric-val">${escapeHtml(plan.price || "₹5.40 Cr*")}</strong>
+              <div class="metric-box metric-box-locked" data-scroll-enquire role="button" tabindex="0" aria-label="Unlock ONWARDS price">
+                <div class="metric-locked-wrap">
+                  <strong class="metric-val blur-locked">${escapeHtml(plan.price || "₹5.40 Cr*")}</strong>
+                  <div class="lock-circle-badge metric-lock-circle" aria-hidden="true">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                  </div>
+                </div>
                 <span class="metric-lbl">ONWARDS</span>
               </div>
             </div>
@@ -1197,6 +1278,47 @@
     });
   };
 
+  const selectDropdownOption = (select, targetConfig) => {
+    if (!select) return;
+    const shell = select.closest(".custom-dropdown-shell") || select.parentElement;
+    const trigger = shell?.querySelector(".custom-dropdown-trigger");
+    const normTarget = String(targetConfig || "").toLowerCase().replace(/[^a-z0-9]/g, "");
+
+    let targetIndex = 0; // Default to first option (4 BHK Optima in normal case)
+
+    if (normTarget) {
+      // 1. Exact normalized match first (e.g. "4bhkluxe" === "4bhkluxe")
+      let idx = Array.from(select.options).findIndex((opt) => {
+        const normVal = opt.value.toLowerCase().replace(/[^a-z0-9]/g, "");
+        const normText = opt.textContent.toLowerCase().replace(/[^a-z0-9]/g, "");
+        return normVal === normTarget || normText === normTarget;
+      });
+
+      // 2. Substring match fallback if exact match wasn't found
+      if (idx === -1) {
+        idx = Array.from(select.options).findIndex((opt) => {
+          const normVal = opt.value.toLowerCase().replace(/[^a-z0-9]/g, "");
+          const normText = opt.textContent.toLowerCase().replace(/[^a-z0-9]/g, "");
+          return normVal.includes(normTarget) || normTarget.includes(normVal) ||
+                 normText.includes(normTarget) || normTarget.includes(normText);
+        });
+      }
+
+      if (idx > -1) {
+        targetIndex = idx;
+      }
+    }
+
+    select.selectedIndex = targetIndex;
+    Array.from(select.options).forEach((opt, i) => {
+      opt.selected = (i === targetIndex);
+    });
+
+    if (trigger) {
+      syncCustomSelect(select, trigger);
+    }
+  };
+
   const closeCustomDropdowns = (except) => {
     document.querySelectorAll(".custom-dropdown-shell.is-open").forEach((shell) => {
       if (shell === except) return;
@@ -1474,11 +1596,8 @@
     if (popupSubmitLabel) popupSubmitLabel.textContent = submitText;
     if (popupSourceContext) popupSourceContext.value = source;
 
-    if (popupConfigSelect && config) {
-      const matchOpt = Array.from(popupConfigSelect.options).find(
-        (o) => o.value.toLowerCase().includes(config.toLowerCase()) || config.toLowerCase().includes(o.value.toLowerCase())
-      );
-      if (matchOpt) popupConfigSelect.value = matchOpt.value;
+    if (popupConfigSelect) {
+      selectDropdownOption(popupConfigSelect, config);
     }
 
     enquiryModal.hidden = false;
@@ -1559,13 +1678,21 @@
         subtitle = "High-resolution architectural brochure by Hafeez Contractor on WhatsApp within minutes.";
         submitText = "Download Brochure PDF";
         source = "Brochure Download";
+      } else if (btn.closest(".metric-box-locked")) {
+        const activeTab = document.querySelector(".floorplan-pill-tab.is-active, .floorplan-pill-tab[aria-selected='true']");
+        const cfgTitle = activeTab ? activeTab.textContent.trim() : "";
+        config = cfgTitle || "";
+        title = cfgTitle ? `Unlock Details for ${cfgTitle}` : "Unlock Floor Plan & Pricing Details";
+        subtitle = "Enter your details to receive unmasked square footage, carpet area & official price breakdown on WhatsApp.";
+        submitText = "Unlock Details";
+        source = `Floor Plan Metric Lock - ${cfgTitle || "General"}`;
       } else if (btn.classList.contains("button-get-price") || btn.closest(".pricing-table-row")) {
         const row = btn.closest(".pricing-table-row");
         const cfgTitle = row ? row.querySelector(".row-config-title")?.textContent.trim() : "";
         config = cfgTitle || "";
-        title = cfgTitle ? `Get Price For ${cfgTitle}` : "Get Official Price List";
+        title = cfgTitle ? `Unlock Price & Area for ${cfgTitle}` : "Unlock Official Price & Area";
         subtitle = "All-inclusive pricing, floor-rise options, and payment plans on WhatsApp within minutes.";
-        submitText = cfgTitle ? `Get ${cfgTitle} Price` : "Get Price List";
+        submitText = cfgTitle ? `Unlock ${cfgTitle} Price` : "Unlock Price";
         source = `Pricing Table - ${cfgTitle || "General"}`;
       } else if (btn.classList.contains("button-complete-costing")) {
         title = "Request Detailed Cost Sheet";
@@ -1621,6 +1748,17 @@
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && enquiryModal && !enquiryModal.hidden) {
       closeEnquiryModal();
+    }
+  });
+
+  // Enter or Space key triggers locked role="button" elements
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      const lockedRoleBtn = e.target.closest && e.target.closest("[data-scroll-enquire][role='button']");
+      if (lockedRoleBtn && lockedRoleBtn.tagName !== "BUTTON" && lockedRoleBtn.tagName !== "A") {
+        e.preventDefault();
+        lockedRoleBtn.click();
+      }
     }
   });
 

@@ -5,6 +5,9 @@ window.florenneData = {
   leadApiUrl: "https://leadapi.homebble.in/formdataRoute/getFormdata",
   projectName: "Godrej Florenne",
 
+  pricingLeadText: "Explore four luxury row house configurations with tailored payment schedules and launch benefits. Configuration-wise pricing depends on plot size, typology (Optima, Premia, Luxe) and corner orientation and is shared on request. Unlock the official price sheet and launch availability below.",
+  floorplansLeadText: "Four distinct four-level luxury row house configurations, all taken from the developer's official unit plan set (4 BHK Optima, 4 BHK Premia, 4 BHK Luxe and 5 BHK Luxe). Unlock each configuration below to view detailed architectural drawings, carpet breakup and unit dimensions.",
+
   facts: [
     { value: "20 Acres", label: "Residential Parcel" },
     { value: "242", label: "Elite Row Houses" },
@@ -22,19 +25,23 @@ window.florenneData = {
     { value: "Godrej Properties", label: "HAFEEZ CONTRACTOR ARCHITECT" }
   ],
   projectDetails: [
-    { label: "Project", value: "Godrej Florenne, Whitefield, Bengaluru" },
-    { label: "Developer", value: "Godrej Properties Limited" },
-    { label: "Master Architect", value: "Hafeez Contractor (Classic European Design)" },
-    { label: "Location", value: "Off Soukya Road, Hemmandahalli, Whitefield, Bengaluru 560067" },
-    { label: "Land & Expanse", value: "20 Acres (62% Dedicated Open Landscape)" },
-    { label: "Total Units", value: "242 Elite Row Houses (Ultra-low density)" },
-    { label: "Structure", value: "G+3 Four-Level Layout with In-Home Private Elevator" },
-    { label: "Configurations", value: "4 BHK Optima, Premia, Luxe & 5 BHK Luxe" },
-    { label: "Saleable Area", value: "3,725 to 5,524 sq. ft. (RERA Carpet: 2,417 to 3,656 sq. ft.)" },
-    { label: "Indicative Pricing", value: "From ₹5.40 Cr* Onwards" },
-    { label: "Clubhouse", value: "Grand 22,000 Sq. Ft. Central Clubhouse" },
-    { label: "Possession Timeline", value: "Phase 1: Sept 2030 | Phase 2: Sept 2031" },
-    { label: "K-RERA Numbers", value: "Phase 1: PRM/KA/RERA/1250/304/PR/150926/008942 | Phase 2: PRM/KA/RERA/1250/304/PR/150926/008943" }
+    { label: "PROJECT", value: "Godrej Florenne, Muddenahalli / Hemmandahalli, Off Soukya Road, Whitefield, Bangalore 560067" },
+    { label: "DEVELOPER", value: "Godrej Properties Limited · Master Architect: Hafeez Contractor" },
+    { label: "CONFIGURATIONS", value: "4 BHK Optima, 4 BHK Premia, 4 BHK Luxe and 5 BHK Luxe Four-Level Row Houses" },
+    { label: "LAND & SCALE", value: "20 acres · 242 elite row houses · G + 3 · 62% green landscape" },
+    { label: "PRICE", value: "From ₹5.40 Cr*", isPrice: true, buttonText: "Get Price List →" },
+    { label: "STATUS", value: "New Launch · Phase 1 (Sep 2030) / Phase 2 (Sep 2031)" },
+    {
+      label: "K-RERA NO.",
+      value: "Phase 1: PRM/KA/RERA/1250/304/PR/150926/008942\nPhase 2: PRM/KA/RERA/1250/304/PR/150926/008943",
+      isRera: true
+    }
+  ],
+  specHighlights: [
+    "20-Acre Private Enclave",
+    "Only 242 Row Houses",
+    "In-Home Private Elevators",
+    "62% Open Garden Landscape"
   ],
   highlights: [
     "French-inspired four-level luxury living with ground parking & entertaining, upper sleeping suites, and sky pergola terrace.",
